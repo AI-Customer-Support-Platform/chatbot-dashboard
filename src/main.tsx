@@ -4,6 +4,7 @@ import "./assets/index.css";
 import { RouterProvider } from "react-router-dom";
 import router from "./config/routes";
 import { Auth0Provider } from "@auth0/auth0-react";
+import "react-loading-skeleton/dist/skeleton.css";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
