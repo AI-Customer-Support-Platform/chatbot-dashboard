@@ -9,7 +9,7 @@ const CollectionCard: React.FC<CollectionCardProps> = ({
   description,
 }) => {
   return (
-    <div className="flex flex-col justify-between rounded-lg bg-white p-4 shadow-lg transition-transform duration-300 hover:-translate-y-2">
+    <div className="flex flex-col justify-between rounded-lg bg-white/40 p-4 transition-transform duration-300 hover:-translate-y-2 hover:bg-white/60 hover:shadow-lg">
       <section className="mb-8">
         <h2 className="text-xl font-bold">{name}</h2>
         {description && (
@@ -17,8 +17,8 @@ const CollectionCard: React.FC<CollectionCardProps> = ({
         )}
       </section>
       <section>
-        <CollectionButton name="Config" className="bg-black/80" />
-        <CollectionButton name="Chat" className="bg-black/80" />
+        <CollectionButton name="Config" />
+        <CollectionButton name="Chat" />
       </section>
     </div>
   );
@@ -34,7 +34,7 @@ const CollectionButton: React.FC<CollectionButtonProps> = ({
 }) => {
   return (
     <button
-      className={`mb-2 flex w-full items-center justify-center gap-2 rounded py-1 text-xl font-extrabold text-white transition-transform duration-300 hover:-translate-y-[2px] hover:opacity-90 hover:shadow-lg active:scale-105 ${className}`}
+      className={`mb-2 flex w-full items-center justify-center gap-2 rounded border bg-white/30 py-1 text-xl font-extralight text-black transition-transform duration-300 hover:-translate-y-[2px] hover:font-extrabold hover:opacity-90 hover:shadow-lg active:scale-105 ${className}`}
     >
       {name}
     </button>
