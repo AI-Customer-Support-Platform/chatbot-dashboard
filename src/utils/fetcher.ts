@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse, AxiosError } from "axios";
+import toast from "react-hot-toast";
 
 interface ErrorResponse {
   message: string;
@@ -18,9 +19,13 @@ fetcher.interceptors.response.use(
     };
     return Promise.reject(error);
   },
-  (err: AxiosError<{ message?: string }>) => {
+  (err: AxiosError<{ detail?: string; message?: string }>) => {
     const message =
-      err?.response?.data?.message || err?.message || "Server error";
+      err?.response?.data?.detail ||
+      err?.response?.data?.message ||
+      err?.message ||
+      "Server error";
+    toast.error(message);
     throw { ...err, message };
   }
 );
