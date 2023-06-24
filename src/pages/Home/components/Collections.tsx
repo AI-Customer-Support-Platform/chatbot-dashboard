@@ -5,10 +5,14 @@ import Skeleton from "react-loading-skeleton";
 import RefreshIcon from "@/components/icons/RefreshIcon";
 import classNames from "classnames";
 import useAPI from "@/hooks/useAPI";
+import PortalModalCenter from "@/components/portalDialog/PortalModalCenter";
+import CreateCollectionModal from "./CreateCollectionModal";
 
 const Collections = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [collections, setCollections] = useState<Collection[]>([]);
+  const [isOpenCreateCollectionModal, setIsOpenCreateCollectionModal] =
+    useState(false);
   const { fetcherQueryCollections } = useAPI();
 
   const _fetcherQueryCollections = async () => {
@@ -22,6 +26,10 @@ const Collections = () => {
     if (isLoading) return;
 
     _fetcherQueryCollections();
+  };
+
+  const handleClickCreateCollectionButton = () => {
+    setIsOpenCreateCollectionModal(true);
   };
 
   useEffect(() => {
@@ -57,7 +65,11 @@ const Collections = () => {
             </>
           ) : (
             <>
-              <CreateCollectionButton />
+              <CreateCollectionButton
+                handleClickCreateCollectionButton={
+                  handleClickCreateCollectionButton
+                }
+              />
               {collections.map((collection) => (
                 <CollectionCard
                   key={collection.id}
@@ -68,6 +80,17 @@ const Collections = () => {
             </>
           )}
         </div>
+      </section>
+      <section>
+        <PortalModalCenter
+          isOpen={isOpenCreateCollectionModal}
+          setIsOpen={setIsOpenCreateCollectionModal}
+        >
+          <CreateCollectionModal
+            setIsOpen={setIsOpenCreateCollectionModal}
+            refresh={_fetcherQueryCollections}
+          />
+        </PortalModalCenter>
       </section>
     </div>
   );
