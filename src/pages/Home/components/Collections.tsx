@@ -1,21 +1,19 @@
 import { useEffect, useState } from "react";
 import CollectionCard from "./CollectionCard";
 import CreateCollectionButton from "./CreateCollectionButton";
-import { fetcherQueryCollections } from "@/apis/collection";
-import { useAuth0 } from "@auth0/auth0-react";
 import Skeleton from "react-loading-skeleton";
 import RefreshIcon from "@/components/icons/RefreshIcon";
 import classNames from "classnames";
+import useAPI from "@/hooks/useAPI";
 
 const Collections = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [collections, setCollections] = useState<Collection[]>([]);
-  const { getAccessTokenSilently } = useAuth0();
+  const { fetcherQueryCollections } = useAPI();
 
   const _fetcherQueryCollections = async () => {
     setIsLoading(true);
-    const token = await getAccessTokenSilently();
-    const resp = await fetcherQueryCollections(token);
+    const resp = await fetcherQueryCollections();
     setCollections(resp.collections);
     setIsLoading(false);
   };
