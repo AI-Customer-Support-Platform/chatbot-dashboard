@@ -18,7 +18,14 @@ const Collections = () => {
   const _fetcherQueryCollections = async () => {
     setIsLoading(true);
     const resp = await fetcherQueryCollections();
-    setCollections(resp.collections);
+    const _collections = resp.collections;
+
+    _collections.sort((a, b) => {
+      return (
+        new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
+      );
+    });
+    setCollections(_collections);
     setIsLoading(false);
   };
 
