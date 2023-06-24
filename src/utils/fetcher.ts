@@ -25,7 +25,10 @@ fetcher.interceptors.response.use(
       err?.response?.data?.message ||
       err?.message ||
       "Server error";
-    toast.error(message);
+
+    if (typeof message === "string") {
+      toast.error(message);
+    }
     throw { ...err, message };
   }
 );
