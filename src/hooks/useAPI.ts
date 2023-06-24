@@ -16,8 +16,31 @@ const useAPI = () => {
     });
   };
 
+  const fetcherCreateCollection = async (
+    name: string,
+    description?: string
+  ): Promise<{
+    collections: Collection[];
+  }> => {
+    const token = await getAccessToken();
+
+    return fetcher.put(
+      "/collection",
+      {
+        name,
+        description,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  };
+
   return {
     fetcherQueryCollections,
+    fetcherCreateCollection,
   };
 };
 export default useAPI;
