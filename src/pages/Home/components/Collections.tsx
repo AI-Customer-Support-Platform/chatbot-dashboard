@@ -80,6 +80,7 @@ const Collections = () => {
                   key={collection.id}
                   name={collection.name}
                   description={collection?.description}
+                  collectionId={collection.id}
                 />
               ))}
             </>

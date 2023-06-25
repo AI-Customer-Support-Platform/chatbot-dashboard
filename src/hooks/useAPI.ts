@@ -16,6 +16,21 @@ const useAPI = () => {
     });
   };
 
+  const fetcherQueryCollection = async (
+    collection_id: string
+  ): Promise<Collection> => {
+    const token = await getAccessToken();
+
+    return fetcher.get("/collection/query", {
+      params: {
+        collection_id,
+      },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  };
+
   const fetcherCreateCollection = async (
     name: string,
     description?: string
@@ -41,6 +56,7 @@ const useAPI = () => {
   return {
     fetcherQueryCollections,
     fetcherCreateCollection,
+    fetcherQueryCollection,
   };
 };
 export default useAPI;
