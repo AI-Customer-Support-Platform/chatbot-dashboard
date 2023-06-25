@@ -8,6 +8,7 @@ interface PortalModalCenterProps {
   isOpen: boolean;
   setIsOpen: (show: boolean) => void;
   isBlur?: boolean;
+  allowClickOutside?: boolean;
 }
 
 const PortalModalCenter: React.FC<PortalModalCenterProps> = ({
@@ -15,6 +16,7 @@ const PortalModalCenter: React.FC<PortalModalCenterProps> = ({
   isOpen,
   setIsOpen,
   isBlur = false,
+  allowClickOutside,
 }) => {
   const [visible, setVisible] = useState(false);
   const mouseDownElement = useRef<EventTarget | null>(null);
@@ -28,7 +30,11 @@ const PortalModalCenter: React.FC<PortalModalCenterProps> = ({
   const handleMouseUp = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
-    if (event.currentTarget === mouseDownElement.current) setIsOpen(false);
+    if (allowClickOutside) return;
+
+    if (event.currentTarget === mouseDownElement.current) {
+      setIsOpen(false);
+    }
   };
   useEffect(() => {
     if (isOpen) {
