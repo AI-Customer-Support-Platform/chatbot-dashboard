@@ -1,6 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { Outlet, ScrollRestoration } from "react-router-dom";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import useInjectChatbot from "./hooks/useInjectChatbot";
 
@@ -9,17 +9,13 @@ const App = () => {
   const pathname = useLocation().pathname;
   useInjectChatbot();
 
-  if (isLoading) {
-    return <div>Loading...</div>;
+  if (!isLoading && !isAuthenticated && pathname !== "/login") {
+    window.location.href = "/login";
   }
 
-  if (!isAuthenticated && pathname !== "/login") {
-    const navigate = useNavigate();
-    navigate("/login");
-  }
   return (
     <div className="min-h-screen">
-      <Outlet />
+      {isLoading ? <div>Loading...</div> : <Outlet />}
 
       <Toaster />
       <ScrollRestoration />
