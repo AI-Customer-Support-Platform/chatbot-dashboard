@@ -53,10 +53,52 @@ const useAPI = () => {
     );
   };
 
+  const fetcherDeleteCollection = async (collection_id: string) => {
+    const token = await getAccessToken();
+
+    return fetcher.post(
+      `/delete/${collection_id}`,
+      {
+        delete_all: true,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  };
+
+  const fetcherUpdateCollection = async (
+    collection_id: string,
+    name: string,
+    description?: string
+  ) => {
+    const token = await getAccessToken();
+
+    return fetcher.post(
+      `/collection/update`,
+      {
+        name,
+        description,
+      },
+      {
+        params: {
+          collection_id,
+        },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  };
+
   return {
     fetcherQueryCollections,
     fetcherCreateCollection,
     fetcherQueryCollection,
+    fetcherDeleteCollection,
+    fetcherUpdateCollection,
   };
 };
 export default useAPI;

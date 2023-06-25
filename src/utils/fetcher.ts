@@ -28,6 +28,8 @@ fetcher.interceptors.response.use(
 
     if (typeof message === "string") {
       toast.error(message);
+    } else {
+      toast.error("Something went wrong.");
     }
     throw { ...err, message };
   }

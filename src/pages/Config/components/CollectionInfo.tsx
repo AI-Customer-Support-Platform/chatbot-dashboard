@@ -1,17 +1,31 @@
-import { useEffect } from "react";
+import PortalModalCenter from "@/components/portalDialog/PortalModalCenter";
+import { useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { useNavigate } from "react-router-dom";
+import DeleteCollectionModal from "./DeleteCollectionModal";
+import UpdateCollectionModal from "./UpdateCollectionModal";
 
 interface CollectionInfoProps {
+  refresh: () => void;
   collection: Collection | undefined;
 }
 
-const CollectionInfo: React.FC<CollectionInfoProps> = ({ collection }) => {
+const CollectionInfo: React.FC<CollectionInfoProps> = ({
+  refresh,
+  collection,
+}) => {
   const navigate = useNavigate();
+  const [isOpenEditCollectionModal, setIsOpenEditCollectionModal] =
+    useState(false);
+  const [isOpenDeleteCollectionModal, setIsOpenDeleteCollectionModal] =
+    useState(false);
 
-  useEffect(() => {
-    console.log(collection);
-  }, [collection]);
+  const handleClickEditCollectionButton = () => {
+    setIsOpenEditCollectionModal(true);
+  };
+  const handleClickDeleteCollectionButton = () => {
+    setIsOpenDeleteCollectionModal(true);
+  };
 
   return (
     <>
@@ -42,9 +56,17 @@ const CollectionInfo: React.FC<CollectionInfoProps> = ({ collection }) => {
         </div>
         {collection ? (
           <section className="flex gap-4">
-            <CustomButton name="Edit" classNames="text-white" />
+            <CustomButton
+              handleClick={handleClickEditCollectionButton}
+              name="Update"
+              classNames="text-white"
+            />
             <CustomButton name="Chat" classNames="bg-blue-500 text-white" />
-            <CustomButton name="Delete" classNames="bg-red-500 text-white" />
+            <CustomButton
+              handleClick={handleClickDeleteCollectionButton}
+              name="Delete"
+              classNames="bg-red-500 text-white"
+            />
           </section>
         ) : (
           <section className="w-24">
@@ -52,6 +74,27 @@ const CollectionInfo: React.FC<CollectionInfoProps> = ({ collection }) => {
           </section>
         )}
       </div>
+      <section>
+        <PortalModalCenter
+          isOpen={isOpenDeleteCollectionModal}
+          setIsOpen={setIsOpenDeleteCollectionModal}
+        >
+          <DeleteCollectionModal
+            collection={collection}
+            setIsOpen={setIsOpenDeleteCollectionModal}
+          />
+        </PortalModalCenter>
+        <PortalModalCenter
+          isOpen={isOpenEditCollectionModal}
+          setIsOpen={setIsOpenEditCollectionModal}
+        >
+          <UpdateCollectionModal
+            collection={collection}
+            refresh={refresh}
+            setIsOpen={setIsOpenEditCollectionModal}
+          />
+        </PortalModalCenter>
+      </section>
     </>
   );
 };
