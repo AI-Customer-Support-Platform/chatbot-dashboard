@@ -1,15 +1,15 @@
 import PlusIcon from "@/components/icons/PlusIcon";
 
-interface CreateCollectionButtonProps {
-  handleClickCreateCollectionButton: () => void;
+interface CreateButtonProps {
+  handleClickCreateButton: () => void;
 }
 
-const CreateCollectionButton: React.FC<CreateCollectionButtonProps> = ({
-  handleClickCreateCollectionButton,
+const CreateButton: React.FC<CreateButtonProps> = ({
+  handleClickCreateButton,
 }) => {
   return (
     <button
-      onClick={handleClickCreateCollectionButton}
+      onClick={handleClickCreateButton}
       className="flex select-none flex-col items-center justify-center rounded-lg bg-slate-50/50 py-16 transition-transform duration-300 hover:-translate-y-2 hover:bg-slate-50/70 hover:shadow-lg active:scale-105"
     >
       <PlusIcon className="text-slate-400" />
@@ -17,4 +17,4 @@ const CreateCollectionButton: React.FC<CreateCollectionButtonProps> = ({
     </button>
   );
 };
-export default CreateCollectionButton;
+export default CreateButton;

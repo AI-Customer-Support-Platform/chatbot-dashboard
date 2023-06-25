@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import CollectionCard from "./CollectionCard";
-import CreateCollectionButton from "./CreateCollectionButton";
 import Skeleton from "react-loading-skeleton";
 import RefreshIcon from "@/components/icons/RefreshIcon";
 import classNames from "classnames";
 import useAPI from "@/hooks/useAPI";
 import PortalModalCenter from "@/components/portalDialog/PortalModalCenter";
 import CreateCollectionModal from "./CreateCollectionModal";
+import CreateButton from "@/components/buttons/CreateButton";
 
 const Collections = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -72,10 +72,8 @@ const Collections = () => {
             </>
           ) : (
             <>
-              <CreateCollectionButton
-                handleClickCreateCollectionButton={
-                  handleClickCreateCollectionButton
-                }
+              <CreateButton
+                handleClickCreateButton={handleClickCreateCollectionButton}
               />
               {collections.map((collection) => (
                 <CollectionCard
