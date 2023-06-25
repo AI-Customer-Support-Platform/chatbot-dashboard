@@ -69,6 +69,7 @@ const Collections = () => {
               <Skeleton className="h-64" />
               <Skeleton className="h-64" />
               <Skeleton className="h-64" />
+              <Skeleton className="h-64" />
             </>
           ) : (
             <>

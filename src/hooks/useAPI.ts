@@ -93,12 +93,57 @@ const useAPI = () => {
     );
   };
 
+  const fetcherUploadDocument = async (
+    collection_id: string,
+    file: File,
+    file_name: string,
+    metadata?: object
+  ) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("file_name", file_name);
+    formData.append("metadata", JSON.stringify(metadata));
+
+    const token = await getAccessToken();
+
+    return fetcher.post(`/upsert-file/${collection_id}`, formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
+    });
+  };
+
+  const fetcherDeleteDocument = async (
+    collection_id: string,
+    document_id: string
+  ) => {
+    const token = await getAccessToken();
+
+    return fetcher.post(
+      `/delete/${collection_id}`,
+      {
+        ids: [document_id],
+        filter: {
+          document_id,
+        },
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  };
+
   return {
     fetcherQueryCollections,
     fetcherCreateCollection,
     fetcherQueryCollection,
     fetcherDeleteCollection,
     fetcherUpdateCollection,
+    fetcherUploadDocument,
+    fetcherDeleteDocument,
   };
 };
 export default useAPI;

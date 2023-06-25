@@ -4,6 +4,8 @@ import RefreshIcon from "@/components/icons/RefreshIcon";
 import classNames from "classnames";
 import PortalModalCenter from "@/components/portalDialog/PortalModalCenter";
 import CreateButton from "@/components/buttons/CreateButton";
+import UploadCollectionModal from "./UploadDocumentModal";
+import DocumentCard from "./DocumentCard";
 
 interface CollectionInfoProps {
   collection: Collection | undefined;
@@ -14,19 +16,25 @@ const Documents: React.FC<CollectionInfoProps> = ({
   collection,
   handleClickRefresh,
 }) => {
-  const [documents, setDocuments] = useState<any[]>([]);
-  const [isOpenCreateDocumentModal, setIsOpenCreateDocumentModal] =
+  const [documents, setDocuments] = useState<IDocument[]>([]);
+  const [isOpenUploadDocumentModal, setIsOpenUploadDocumentModal] =
     useState(false);
 
-  const handleClickCreateDocumentButton = () => {
-    setIsOpenCreateDocumentModal(true);
+  const handleClickUploadDocumentButton = () => {
+    setIsOpenUploadDocumentModal(true);
   };
 
   useEffect(() => {
     if (!collection) return;
+    const _documents = [...collection.documents];
 
-    setDocuments(collection.documents);
-    console.log("documents: ", collection.documents);
+    _documents.sort((a, b) => {
+      return (
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+      );
+    });
+
+    setDocuments(_documents);
   }, [collection]);
 
   return (
@@ -55,18 +63,33 @@ const Documents: React.FC<CollectionInfoProps> = ({
           ) : (
             <>
               <CreateButton
-                handleClickCreateButton={handleClickCreateDocumentButton}
+                name="Upload"
+                handleClickCreateButton={handleClickUploadDocumentButton}
               />
+
+              {documents.map((document) => (
+                <DocumentCard
+                  collection_id={collection.id}
+                  refresh={handleClickRefresh}
+                  key={document.id}
+                  document={document}
+                />
+              ))}
             </>
           )}
         </div>
       </section>
       <section>
         <PortalModalCenter
-          isOpen={isOpenCreateDocumentModal}
-          setIsOpen={setIsOpenCreateDocumentModal}
+          isOpen={isOpenUploadDocumentModal}
+          setIsOpen={setIsOpenUploadDocumentModal}
+          allowClickOutside={true}
         >
-          <div>Create Documents</div>
+          <UploadCollectionModal
+            collection={collection}
+            setIsOpen={setIsOpenUploadDocumentModal}
+            refresh={handleClickRefresh}
+          />
         </PortalModalCenter>
       </section>
     </div>
