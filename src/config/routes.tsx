@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "@/App";
-import { Config, Home, Login, NotFound } from "@/pages";
+import { Chat, Config, Home, Login, NotFound } from "@/pages";
 
 const router = createBrowserRouter([
   {
@@ -14,6 +14,10 @@ const router = createBrowserRouter([
       {
         path: "/config/:collectionId",
         element: <Config />,
+      },
+      {
+        path: "/chat/:collectionId",
+        element: <Chat />,
       },
       {
         path: "*",

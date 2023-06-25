@@ -61,7 +61,13 @@ const CollectionInfo: React.FC<CollectionInfoProps> = ({
               name="Update"
               classNames="text-white"
             />
-            <CustomButton name="Chat" classNames="bg-blue-500 text-white" />
+            <CustomButton
+              handleClick={() => {
+                window.location.href = `/chat/${collection.id}`;
+              }}
+              name="Chat"
+              classNames="bg-blue-500 text-white"
+            />
             <CustomButton
               handleClick={handleClickDeleteCollectionButton}
               name="Delete"

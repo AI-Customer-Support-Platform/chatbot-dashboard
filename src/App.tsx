@@ -2,10 +2,12 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Outlet, ScrollRestoration } from "react-router-dom";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
+import useInjectChatbot from "./hooks/useInjectChatbot";
 
 const App = () => {
   const { isAuthenticated, isLoading } = useAuth0();
   const pathname = useLocation().pathname;
+  useInjectChatbot();
 
   if (isLoading) {
     return <div>Loading...</div>;

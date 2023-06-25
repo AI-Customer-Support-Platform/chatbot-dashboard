@@ -27,7 +27,12 @@ const CollectionCard: React.FC<CollectionCardProps> = ({
           }}
           name="Config"
         />
-        <CollectionButton name="Chat" />
+        <CollectionButton
+          handleClick={() => {
+            window.location.href = `/chat/${collectionId}`;
+          }}
+          name="Chat"
+        />
       </section>
     </div>
   );
