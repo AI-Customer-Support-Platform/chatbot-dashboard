@@ -123,9 +123,8 @@ const useAPI = () => {
     return fetcher.post(
       `/delete/${collection_id}`,
       {
-        ids: [document_id],
         filter: {
-          document_id,
+          source_id: document_id,
         },
       },
       {
