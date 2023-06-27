@@ -1,4 +1,4 @@
-import { useAuth0 } from "@auth0/auth0-react";
+import { LogoutOptions, useAuth0 } from "@auth0/auth0-react";
 
 const UserInfo = () => {
   const { user, logout } = useAuth0();
@@ -20,7 +20,13 @@ const UserInfo = () => {
         </div>
       </div>
       <button
-        onClick={() => logout()}
+        onClick={() =>
+          logout({
+            logoutParams: {
+              returnTo: import.meta.env.VITE_REDIRECT_URI,
+            },
+          })
+        }
         className="rounded-lg bg-black/70 px-2 py-1 font-bold text-white hover:scale-105 active:scale-110"
       >
         Logout
