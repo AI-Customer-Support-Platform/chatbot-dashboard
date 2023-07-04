@@ -10,7 +10,7 @@ interface UploadDocumentModalProps {
   refresh: () => void;
 }
 
-const supportedFileTypes = ["markdown", "docx", "csv", "ppt", "txt"];
+const supportedFileTypes = ["md", "docx", "csv", "ppt", "txt", "pdf", "doc"];
 
 const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
   collection,
