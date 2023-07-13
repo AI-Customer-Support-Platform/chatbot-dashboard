@@ -6,6 +6,7 @@ import PortalModalCenter from "@/components/portalDialog/PortalModalCenter";
 import CreateButton from "@/components/buttons/CreateButton";
 import UploadCollectionModal from "./UploadDocumentModal";
 import DocumentCard from "./DocumentCard";
+import { Collection, IDocument } from "@/config/constants";
 
 interface CollectionInfoProps {
   collection: Collection | undefined;

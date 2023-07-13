@@ -1,6 +1,7 @@
 import PortalModalCenter from "@/components/portalDialog/PortalModalCenter";
 import { useState } from "react";
 import DeleteDocumentModal from "./DeleteDocumentModal";
+import { IDocument } from "@/config/constants";
 
 interface DocumentCardProps {
   collection_id: string;

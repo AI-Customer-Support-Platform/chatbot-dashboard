@@ -1,4 +1,5 @@
 import LoadingIcon from "@/components/icons/LoadingIcon";
+import { Collection } from "@/config/constants";
 import useAPI from "@/hooks/useAPI";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";

@@ -1,5 +1,6 @@
 import CloseIcon from "@/components/icons/CloseIcon";
 import LoadingIcon from "@/components/icons/LoadingIcon";
+import { Collection } from "@/config/constants";
 import useAPI from "@/hooks/useAPI";
 import { ChangeEvent, useRef, useState } from "react";
 import { toast } from "react-hot-toast";

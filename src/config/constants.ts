@@ -1,4 +1,4 @@
-interface Collection {
+export interface Collection {
   name: string;
   description?: string;
   id: string;
@@ -7,7 +7,7 @@ interface Collection {
   updated_at: string;
 }
 
-interface IDocument {
+export interface IDocument {
   collection_id: string;
   id: string;
   file_name: string;

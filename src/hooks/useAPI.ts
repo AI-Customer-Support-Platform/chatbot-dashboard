@@ -1,5 +1,6 @@
 import fetcher from "@/utils/fetcher";
 import useAccessToken from "./useAccessToken";
+import { Collection } from "@/config/constants";
 
 const useAPI = () => {
   const { getAccessToken } = useAccessToken();

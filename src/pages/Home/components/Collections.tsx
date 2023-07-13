@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import CollectionCard from "./CollectionCard";
 import Skeleton from "react-loading-skeleton";
 import RefreshIcon from "@/components/icons/RefreshIcon";
@@ -7,6 +7,7 @@ import useAPI from "@/hooks/useAPI";
 import PortalModalCenter from "@/components/portalDialog/PortalModalCenter";
 import CreateCollectionModal from "./CreateCollectionModal";
 import CreateButton from "@/components/buttons/CreateButton";
+import { Collection } from "@/config/constants";
 
 const Collections = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -15,7 +16,7 @@ const Collections = () => {
     useState(false);
   const { fetcherQueryCollections } = useAPI();
 
-  const _fetcherQueryCollections = async () => {
+  const _fetcherQueryCollections = useCallback(async () => {
     setIsLoading(true);
     const resp = await fetcherQueryCollections();
     const _collections = resp.collections;
@@ -27,7 +28,7 @@ const Collections = () => {
     });
     setCollections(_collections);
     setIsLoading(false);
-  };
+  }, [fetcherQueryCollections]);
 
   const handleClickRefresh = () => {
     if (isLoading) return;
@@ -46,7 +47,7 @@ const Collections = () => {
     return () => {
       clearTimeout(timer);
     };
-  }, []);
+  }, [_fetcherQueryCollections]);
 
   return (
     <div>

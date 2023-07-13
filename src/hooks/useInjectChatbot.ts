@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 const useInjectChatbot = (): void => {
@@ -13,13 +13,13 @@ const useInjectChatbot = (): void => {
   link.rel = "stylesheet";
   link.href = "https://chatbot-web-dev.vercel.app/chatgptb.css";
 
-  const handleInjectChatbot = (): void => {
+  const handleInjectChatbot = useCallback((): void => {
     const head = document.head;
     head.appendChild(script);
     head.appendChild(link);
-  };
+  }, [link, script]);
 
-  const handleRemoveChatbot = (): void => {
+  const handleRemoveChatbot = useCallback((): void => {
     const head = document.head;
 
     if (head.contains(script)) {
@@ -29,7 +29,7 @@ const useInjectChatbot = (): void => {
     if (head.contains(link)) {
       head.removeChild(link);
     }
-  };
+  }, [link, script]);
 
   const handleSetupCollectionId = (collection_id: string) => {
     window.chatGPTBConfig = {
@@ -50,7 +50,7 @@ const useInjectChatbot = (): void => {
 
     // Clean up the injected script and link on unmount
     return handleRemoveChatbot;
-  }, [pathname]);
+  }, [pathname, handleInjectChatbot, handleRemoveChatbot]);
 };
 
 export default useInjectChatbot;
