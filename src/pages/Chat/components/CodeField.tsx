@@ -23,7 +23,7 @@ const CodeField: React.FC<CodeFieldProps> = ({ collectionId }) => {
 
 <script
   type="module"
-  crossorigin=""
+  crossorigin
   src="https://chatbot-web-dev.vercel.app/chatgptb.js"
 ></script>
 <link
