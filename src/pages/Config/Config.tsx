@@ -1,5 +1,5 @@
 import useAPI from "@/hooks/useAPI";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import CollectionInfo from "./components/CollectionInfo";
 import Documents from "./components/Documents";
@@ -13,7 +13,7 @@ const Config = () => {
   );
   const { fetcherQueryCollection } = useAPI();
 
-  const _fetcherQueryCollection = useCallback(async () => {
+  const _fetcherQueryCollection = async () => {
     if (!collectionId || isLoading) return;
 
     setIsLoading(true);
@@ -21,7 +21,7 @@ const Config = () => {
     const resp = await fetcherQueryCollection(collectionId);
     setIsLoading(false);
     setCollection(resp);
-  }, [collectionId, isLoading, fetcherQueryCollection]);
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -30,7 +30,7 @@ const Config = () => {
     return () => {
       clearTimeout(timer);
     };
-  }, [_fetcherQueryCollection]);
+  }, []);
   return (
     <div className="min-h-screen bg-gradient-to-br from-zinc-100 via-blue-100 to-white">
       <main className="container mx-auto p-4 sm:p-8">

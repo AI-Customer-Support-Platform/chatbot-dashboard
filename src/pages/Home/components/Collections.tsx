@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import CollectionCard from "./CollectionCard";
 import Skeleton from "react-loading-skeleton";
 import RefreshIcon from "@/components/icons/RefreshIcon";
@@ -16,7 +16,7 @@ const Collections = () => {
     useState(false);
   const { fetcherQueryCollections } = useAPI();
 
-  const _fetcherQueryCollections = useCallback(async () => {
+  const _fetcherQueryCollections = async () => {
     setIsLoading(true);
     const resp = await fetcherQueryCollections();
     const _collections = resp.collections;
@@ -28,7 +28,7 @@ const Collections = () => {
     });
     setCollections(_collections);
     setIsLoading(false);
-  }, [fetcherQueryCollections]);
+  };
 
   const handleClickRefresh = () => {
     if (isLoading) return;
@@ -47,7 +47,7 @@ const Collections = () => {
     return () => {
       clearTimeout(timer);
     };
-  }, [_fetcherQueryCollections]);
+  }, []);
 
   return (
     <div>

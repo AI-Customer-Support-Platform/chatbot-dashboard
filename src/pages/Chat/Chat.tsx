@@ -1,5 +1,5 @@
 import useAPI from "@/hooks/useAPI";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { useNavigate, useParams } from "react-router-dom";
 import CodeField from "./components/CodeField";
@@ -12,7 +12,7 @@ const Chat = () => {
   );
   const { fetcherQueryCollection } = useAPI();
   const navigate = useNavigate();
-  const handleCheckPermission = useCallback(async () => {
+  const handleCheckPermission = async () => {
     if (!collectionId) {
       navigate("/");
       return;
@@ -24,7 +24,7 @@ const Chat = () => {
       console.log(error);
       navigate("/");
     }
-  }, [collectionId, fetcherQueryCollection, navigate]);
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -33,7 +33,7 @@ const Chat = () => {
     return () => {
       clearTimeout(timer);
     };
-  }, [handleCheckPermission]);
+  }, []);
   return (
     <div className="min-h-screen bg-gradient-to-br from-zinc-100 via-blue-100 to-white">
       <main className="container mx-auto p-4 sm:p-8">
