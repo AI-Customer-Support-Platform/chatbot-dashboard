@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import CollectionCard from "./CollectionCard";
 import Skeleton from "react-loading-skeleton";
 import RefreshIcon from "@/components/icons/RefreshIcon";
@@ -11,13 +11,18 @@ import { Collection } from "@/config/constants";
 
 const Collections = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isFetching, setIsFetching] = useState(false);
   const [collections, setCollections] = useState<Collection[]>([]);
   const [isOpenCreateCollectionModal, setIsOpenCreateCollectionModal] =
     useState(false);
   const { fetcherQueryCollections } = useAPI();
 
-  const _fetcherQueryCollections = async () => {
+  const fetchCollections = useCallback(async () => {
+    if (isLoading) return;
+
     setIsLoading(true);
+    setIsFetching(true);
+
     const resp = await fetcherQueryCollections();
     const _collections = resp.collections;
 
@@ -26,35 +31,32 @@ const Collections = () => {
         new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
       );
     });
+
     setCollections(_collections);
     setIsLoading(false);
-  };
-
-  const handleClickRefresh = () => {
-    if (isLoading) return;
-
-    _fetcherQueryCollections();
-  };
+  }, [isLoading, fetcherQueryCollections]);
 
   const handleClickCreateCollectionButton = () => {
     setIsOpenCreateCollectionModal(true);
   };
 
   useEffect(() => {
+    if (isFetching) return;
+
     const timer = setTimeout(() => {
-      _fetcherQueryCollections();
+      fetchCollections();
     }, 0);
     return () => {
       clearTimeout(timer);
     };
-  }, []);
+  }, [isFetching, fetchCollections]);
 
   return (
     <div>
       <section className="mb-8 flex  items-center gap-4">
         <h1 className="text-3xl font-bold">My Collections</h1>
         <button
-          onClick={handleClickRefresh}
+          onClick={() => fetchCollections()}
           title="refresh"
           className={classNames(" text-slate-500", {
             "animate-spin": isLoading,
@@ -96,7 +98,7 @@ const Collections = () => {
         >
           <CreateCollectionModal
             setIsOpen={setIsOpenCreateCollectionModal}
-            refresh={_fetcherQueryCollections}
+            refresh={fetchCollections}
           />
         </PortalModalCenter>
       </section>

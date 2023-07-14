@@ -1,39 +1,44 @@
 import useAPI from "@/hooks/useAPI";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Skeleton from "react-loading-skeleton";
 import { useNavigate, useParams } from "react-router-dom";
 import CodeField from "./components/CodeField";
 import { Collection } from "@/config/constants";
 
 const Chat = () => {
+  const [isChecking, setIsChecking] = useState(false);
   const { collectionId } = useParams();
   const [collection, setCollection] = useState<Collection | undefined>(
     undefined
   );
   const { fetcherQueryCollection } = useAPI();
   const navigate = useNavigate();
-  const handleCheckPermission = async () => {
+  const handleCheckPermission = useCallback(async () => {
     if (!collectionId) {
       navigate("/");
       return;
     }
     try {
+      setIsChecking(true);
       const resp = await fetcherQueryCollection(collectionId);
       setCollection(resp);
     } catch (error) {
-      console.log(error);
+      console.error(error);
       navigate("/");
     }
-  };
+  }, [collectionId, navigate, fetcherQueryCollection]);
 
   useEffect(() => {
+    if (isChecking) return;
+
     const timer = setTimeout(() => {
       handleCheckPermission();
     }, 0);
     return () => {
       clearTimeout(timer);
     };
-  }, []);
+  }, [isChecking, handleCheckPermission]);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-zinc-100 via-blue-100 to-white">
       <main className="container mx-auto p-4 sm:p-8">
