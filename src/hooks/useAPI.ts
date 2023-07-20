@@ -103,7 +103,10 @@ const useAPI = () => {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("file_name", file_name);
-    formData.append("metadata", JSON.stringify(metadata));
+
+    if (metadata !== undefined) {
+      formData.append("metadata", JSON.stringify(metadata));
+    }
 
     const token = await getAccessToken();
 
