@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
-import RefreshIcon from "@/components/icons/RefreshIcon";
-import classNames from "classnames";
 import PortalModalCenter from "@/components/portalDialog/PortalModalCenter";
 import CreateButton from "@/components/buttons/CreateButton";
 import UploadCollectionModal from "./UploadDocumentModal";
 import DocumentCard from "./DocumentCard";
 import { Collection, IDocument } from "@/config/constants";
+import TitleWithRefreshButton from "@/components/TitleWithRefreshButton";
 
 interface CollectionInfoProps {
   collection: Collection | undefined;
@@ -40,18 +39,12 @@ const Documents: React.FC<CollectionInfoProps> = ({
 
   return (
     <div>
-      <section className="mb-8 flex  items-center gap-4">
-        <h1 className="text-3xl font-bold">Documents</h1>
-        <button
-          onClick={handleClickRefresh}
-          title="refresh"
-          className={classNames(" text-slate-500", {
-            "animate-spin": !collection,
-          })}
-        >
-          <RefreshIcon />
-        </button>
-      </section>
+      <TitleWithRefreshButton
+        title="Documents"
+        isLoading={!collection}
+        handleClickRefresh={handleClickRefresh}
+      />
+
       <section>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {!collection ? (

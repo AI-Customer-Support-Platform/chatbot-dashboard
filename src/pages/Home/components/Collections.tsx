@@ -1,13 +1,12 @@
 import { useEffect, useState, useCallback } from "react";
 import CollectionCard from "./CollectionCard";
 import Skeleton from "react-loading-skeleton";
-import RefreshIcon from "@/components/icons/RefreshIcon";
-import classNames from "classnames";
 import useAPI from "@/hooks/useAPI";
 import PortalModalCenter from "@/components/portalDialog/PortalModalCenter";
 import CreateCollectionModal from "./CreateCollectionModal";
 import CreateButton from "@/components/buttons/CreateButton";
 import { Collection } from "@/config/constants";
+import TitleWithRefreshButton from "@/components/TitleWithRefreshButton";
 
 const Collections = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -53,18 +52,12 @@ const Collections = () => {
 
   return (
     <div>
-      <section className="mb-8 flex  items-center gap-4">
-        <h1 className="text-3xl font-bold">My Collections</h1>
-        <button
-          onClick={() => fetchCollections()}
-          title="refresh"
-          className={classNames(" text-slate-500", {
-            "animate-spin": isLoading,
-          })}
-        >
-          <RefreshIcon />
-        </button>
-      </section>
+      <TitleWithRefreshButton
+        title="Collections"
+        isLoading={isLoading}
+        handleClickRefresh={fetchCollections}
+      />
+
       <section>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {isLoading ? (
