@@ -7,6 +7,8 @@ import CreateCollectionModal from "./CreateCollectionModal";
 import CreateButton from "@/components/buttons/CreateButton";
 import { Collection } from "@/config/constants";
 import TitleWithRefreshButton from "@/components/TitleWithRefreshButton";
+import { useAuth0 } from "@auth0/auth0-react";
+import toast from "react-hot-toast";
 
 const Collections = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -15,6 +17,7 @@ const Collections = () => {
   const [isOpenCreateCollectionModal, setIsOpenCreateCollectionModal] =
     useState(false);
   const { fetcherQueryCollections } = useAPI();
+  const { user } = useAuth0();
 
   const fetchCollections = useCallback(async () => {
     if (isLoading) return;
@@ -36,6 +39,11 @@ const Collections = () => {
   }, [isLoading, fetcherQueryCollections]);
 
   const handleClickCreateCollectionButton = () => {
+    if (!user?.email_verified) {
+      toast("⚠️ Email Verification Required");
+      return;
+    }
+
     setIsOpenCreateCollectionModal(true);
   };
 
