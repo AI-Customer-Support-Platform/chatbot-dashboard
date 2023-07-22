@@ -18,7 +18,9 @@ const DeleteCollectionModal: React.FC<DeleteCollectionModalProps> = ({
   const navigate = useNavigate();
 
   const handleClickDeleteButton = async () => {
-    if (!collection) return;
+    if (!collection) {
+      return;
+    }
 
     try {
       setIsLoading(true);

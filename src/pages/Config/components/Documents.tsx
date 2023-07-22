@@ -25,7 +25,10 @@ const Documents: React.FC<CollectionInfoProps> = ({
   };
 
   useEffect(() => {
-    if (!collection) return;
+    if (!collection) {
+      return;
+    }
+
     const _documents = [...collection.documents];
 
     _documents.sort((a, b) => {

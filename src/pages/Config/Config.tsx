@@ -15,7 +15,9 @@ const Config = () => {
   const { fetcherQueryCollection } = useAPI();
 
   const fetchCollection = useCallback(async () => {
-    if (!collectionId || isLoading) return;
+    if (!collectionId || isLoading) {
+      return;
+    }
 
     setIsLoading(true);
     setIsFetching(true);
@@ -28,7 +30,9 @@ const Config = () => {
   }, [collectionId, isLoading, fetcherQueryCollection]);
 
   useEffect(() => {
-    if (isFetching) return;
+    if (isFetching) {
+      return;
+    }
 
     const timer = setTimeout(() => {
       fetchCollection();

@@ -19,7 +19,9 @@ const DeleteDocumentModal: React.FC<DeleteDocumentModalProps> = ({
   const { fetcherDeleteDocument } = useAPI();
 
   const handleClickDeleteButton = async () => {
-    if (!collection_id || !document_id) return;
+    if (!collection_id || !document_id) {
+      return;
+    }
 
     try {
       setIsLoading(true);

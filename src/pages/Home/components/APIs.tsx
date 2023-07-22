@@ -8,7 +8,9 @@ const APIs = () => {
 
   let timer: undefined | number = undefined;
   const handleClickRefreshButton = () => {
-    if (isLoading) return;
+    if (isLoading) {
+      return;
+    }
 
     setIsLoading(true);
 

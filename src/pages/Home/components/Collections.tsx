@@ -20,7 +20,9 @@ const Collections = () => {
   const { user } = useAuth0();
 
   const fetchCollections = useCallback(async () => {
-    if (isLoading) return;
+    if (isLoading) {
+      return;
+    }
 
     setIsLoading(true);
     setIsFetching(true);
@@ -48,7 +50,9 @@ const Collections = () => {
   };
 
   useEffect(() => {
-    if (isFetching) return;
+    if (isFetching) {
+      return;
+    }
 
     const timer = setTimeout(() => {
       fetchCollections();

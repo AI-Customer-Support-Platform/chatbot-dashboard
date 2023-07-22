@@ -33,7 +33,10 @@ const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (!event.target || !event.target.files) return;
+    if (!event.target || !event.target.files) {
+      return;
+    }
+
     const file = event.target.files[0];
     setSelectedFile(file);
   };

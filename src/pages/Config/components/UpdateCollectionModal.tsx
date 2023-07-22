@@ -24,7 +24,9 @@ const UpdateCollectionModal: React.FC<UpdateCollectionModalProps> = ({
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
 
   const handleClickUpdate = async () => {
-    if (!collectionId) return;
+    if (!collectionId) {
+      return;
+    }
 
     if (!nameRef.current || !nameRef.current.value) {
       toast("⚠️ Name is required");
@@ -50,7 +52,9 @@ const UpdateCollectionModal: React.FC<UpdateCollectionModalProps> = ({
   };
 
   useEffect(() => {
-    if (!collection || !nameRef.current || !descriptionRef.current) return;
+    if (!collection || !nameRef.current || !descriptionRef.current) {
+      return;
+    }
 
     nameRef.current.value = collection.name;
     descriptionRef.current.value = collection?.description

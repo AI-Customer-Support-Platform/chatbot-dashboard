@@ -29,7 +29,9 @@ const Chat = () => {
   }, [collectionId, navigate, fetcherQueryCollection]);
 
   useEffect(() => {
-    if (isChecking) return;
+    if (isChecking) {
+      return;
+    }
 
     const timer = setTimeout(() => {
       handleCheckPermission();

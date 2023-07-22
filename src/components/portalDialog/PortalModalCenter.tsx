@@ -30,7 +30,9 @@ const PortalModalCenter: React.FC<PortalModalCenterProps> = ({
   const handleMouseUp = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
-    if (allowClickOutside) return;
+    if (allowClickOutside) {
+      return;
+    }
 
     if (event.currentTarget === mouseDownElement.current) {
       setIsOpen(false);
