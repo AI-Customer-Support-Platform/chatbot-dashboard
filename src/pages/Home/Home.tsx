@@ -1,6 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import UserInfo from "./components/UserInfo";
 import Collections from "./components/Collections";
+import APIs from "./components/APIs";
 
 const Home = () => {
   const { user } = useAuth0();
@@ -10,6 +11,7 @@ const Home = () => {
       {user && (
         <main className="container mx-auto p-4 sm:p-8 ">
           <UserInfo />
+          {user.email_verified && <APIs />}
           <Collections />
         </main>
       )}
