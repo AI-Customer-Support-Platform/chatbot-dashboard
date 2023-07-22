@@ -19,21 +19,27 @@ const CreateCollectionModal: React.FC<CreateCollectionModalProps> = ({
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
 
   const handleClickCreate = async () => {
-    setIsLoading(true);
     if (!nameRef.current || !nameRef.current.value) {
       toast("⚠️ Name is required");
-      setIsLoading(false);
       return;
     }
-    await fetcherCreateCollection(
-      nameRef.current.value,
-      descriptionRef.current?.value
-    );
-    setIsLoading(false);
-    setIsOpen(false);
-    setTimeout(() => {
-      refresh();
-    }, 500);
+
+    try {
+      setIsLoading(true);
+      await fetcherCreateCollection(
+        nameRef.current.value,
+        descriptionRef.current?.value
+      );
+      setIsLoading(false);
+      setIsOpen(false);
+      setTimeout(() => {
+        refresh();
+      }, 500);
+    } catch (error) {
+      console.error(error);
+      toast.error("⚠️ Create collection failed");
+      setIsLoading(false);
+    }
   };
 
   return (
