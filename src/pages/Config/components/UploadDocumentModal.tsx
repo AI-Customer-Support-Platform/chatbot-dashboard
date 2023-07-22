@@ -39,7 +39,9 @@ const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
   };
 
   const handleClickUpload = async () => {
-    if (!collection) return;
+    if (!collection) {
+      return;
+    }
 
     if (!selectedFile) {
       toast("⚠️ Please select a file");
@@ -52,16 +54,21 @@ const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
       return;
     }
 
-    const customName = nameRef.current?.value;
-    const fileName = customName ? customName : selectedFile.name;
+    const customName = nameRef.current?.value || selectedFile.name;
 
-    setIsLoading(true);
-    await fetcherUploadDocument(collection?.id, selectedFile, fileName);
-    setIsLoading(false);
-    setIsOpen(false);
-    setTimeout(() => {
-      refresh();
-    }, 500);
+    try {
+      setIsLoading(true);
+      await fetcherUploadDocument(collection.id, selectedFile, customName);
+      setIsLoading(false);
+      setIsOpen(false);
+      setTimeout(() => {
+        refresh();
+      }, 500);
+    } catch (error) {
+      console.error(error);
+      toast.error("⚠️ Upload failed");
+      setIsLoading(false);
+    }
   };
 
   return (
