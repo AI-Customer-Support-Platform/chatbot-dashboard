@@ -40,13 +40,11 @@ const PortalModalCenter: React.FC<PortalModalCenterProps> = ({
   };
   useEffect(() => {
     if (show) {
-      setTimeout(() => {
-        setVisible(true);
-      }, 50);
+      setVisible(true);
     } else {
       setTimeout(() => {
         setVisible(false);
-      }, 700);
+      }, 150);
     }
   }, [show]);
 
@@ -56,7 +54,7 @@ const PortalModalCenter: React.FC<PortalModalCenterProps> = ({
           onMouseDown={handleMouseDown}
           onMouseUp={handleMouseUp}
           className={classNames(
-            "fixed inset-0 flex items-center justify-center bg-black/50 transition-opacity duration-700",
+            "fixed inset-0 flex items-center justify-center bg-black/50 transition-opacity duration-150",
             {
               "opacity-0": !visible,
               "opacity-100": visible,
@@ -72,7 +70,7 @@ const PortalModalCenter: React.FC<PortalModalCenterProps> = ({
     ? createPortal(
         <div
           className={classNames(
-            "fixed inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity duration-700",
+            "fixed inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity duration-150",
             {
               hidden: !visible,
               "backdrop-blur-lg": isBlur,
