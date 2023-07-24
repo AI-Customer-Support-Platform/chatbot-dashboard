@@ -78,8 +78,8 @@ const Documents: React.FC<CollectionInfoProps> = ({
       </section>
       <section>
         <PortalModalCenter
-          isOpen={isOpenUploadDocumentModal}
-          setIsOpen={setIsOpenUploadDocumentModal}
+          show={isOpenUploadDocumentModal}
+          setIsShow={setIsOpenUploadDocumentModal}
           allowClickOutside={true}
         >
           <UploadCollectionModal

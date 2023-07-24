@@ -32,8 +32,8 @@ const DocumentCard: React.FC<DocumentCardProps> = ({
       </section>
       <section>
         <PortalModalCenter
-          isOpen={isOpenDeleteDocumentModal}
-          setIsOpen={setIsOpenDeleteDocumentModal}
+          show={isOpenDeleteDocumentModal}
+          setIsShow={setIsOpenDeleteDocumentModal}
         >
           <DeleteDocumentModal
             refresh={refresh}

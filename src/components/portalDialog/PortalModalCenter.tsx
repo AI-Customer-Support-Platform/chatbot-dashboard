@@ -5,16 +5,16 @@ import classNames from "classnames";
 
 interface PortalModalCenterProps {
   children: React.ReactNode;
-  isOpen: boolean;
-  setIsOpen: (show: boolean) => void;
+  show: boolean;
+  setIsShow: (show: boolean) => void;
   isBlur?: boolean;
   allowClickOutside?: boolean;
 }
 
 const PortalModalCenter: React.FC<PortalModalCenterProps> = ({
   children,
-  isOpen,
-  setIsOpen,
+  show,
+  setIsShow,
   isBlur = false,
   allowClickOutside,
 }) => {
@@ -35,11 +35,11 @@ const PortalModalCenter: React.FC<PortalModalCenterProps> = ({
     }
 
     if (event.currentTarget === mouseDownElement.current) {
-      setIsOpen(false);
+      setIsShow(false);
     }
   };
   useEffect(() => {
-    if (isOpen) {
+    if (show) {
       setTimeout(() => {
         setVisible(true);
       }, 50);
@@ -48,9 +48,9 @@ const PortalModalCenter: React.FC<PortalModalCenterProps> = ({
         setVisible(false);
       }, 700);
     }
-  }, [isOpen]);
+  }, [show]);
 
-  return isOpen
+  return show
     ? createPortal(
         <div
           onMouseDown={handleMouseDown}

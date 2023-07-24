@@ -83,8 +83,8 @@ const CollectionInfo: React.FC<CollectionInfoProps> = ({
       </div>
       <section>
         <PortalModalCenter
-          isOpen={isOpenDeleteCollectionModal}
-          setIsOpen={setIsOpenDeleteCollectionModal}
+          show={isOpenDeleteCollectionModal}
+          setIsShow={setIsOpenDeleteCollectionModal}
         >
           <DeleteCollectionModal
             collection={collection}
@@ -92,8 +92,8 @@ const CollectionInfo: React.FC<CollectionInfoProps> = ({
           />
         </PortalModalCenter>
         <PortalModalCenter
-          isOpen={isOpenEditCollectionModal}
-          setIsOpen={setIsOpenEditCollectionModal}
+          show={isOpenEditCollectionModal}
+          setIsShow={setIsOpenEditCollectionModal}
         >
           <UpdateCollectionModal
             collection={collection}

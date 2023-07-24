@@ -98,8 +98,8 @@ const Collections = () => {
       </section>
       <section>
         <PortalModalCenter
-          isOpen={isOpenCreateCollectionModal}
-          setIsOpen={setIsOpenCreateCollectionModal}
+          show={isOpenCreateCollectionModal}
+          setIsShow={setIsOpenCreateCollectionModal}
         >
           <CreateCollectionModal
             setIsOpen={setIsOpenCreateCollectionModal}
