@@ -1,4 +1,5 @@
 import LoadingIcon from "@/components/icons/LoadingIcon";
+import ModalHeader from "@/components/modal/ModalHeader";
 import useAPI from "@/hooks/useAPI";
 import { useState } from "react";
 
@@ -43,9 +44,7 @@ const DeleteDocumentModal: React.FC<DeleteDocumentModalProps> = ({
 
   return (
     <div className="rounded-lg bg-white p-4">
-      <section className="mb-4 flex items-center justify-between">
-        <h1 className="text-xl font-bold">Delete Document</h1>
-      </section>
+      <ModalHeader title="Delete Document" />
       <section className="mb-8">
         <h2>Are you sure you want to delete the document?</h2>
       </section>

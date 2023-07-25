@@ -1,4 +1,5 @@
 import LoadingIcon from "@/components/icons/LoadingIcon";
+import ModalHeader from "@/components/modal/ModalHeader";
 import { Collection } from "@/config/constants";
 import useAPI from "@/hooks/useAPI";
 import { useState } from "react";
@@ -40,9 +41,7 @@ const DeleteCollectionModal: React.FC<DeleteCollectionModalProps> = ({
 
   return (
     <div className="rounded-lg bg-white p-4">
-      <section className="mb-4 flex items-center justify-between">
-        <h1 className="text-xl font-bold">Delete Collection</h1>
-      </section>
+      <ModalHeader title="Delete Collection" />
       <section className="mb-8">
         <h2>Are you sure you want to delete the collection?</h2>
       </section>

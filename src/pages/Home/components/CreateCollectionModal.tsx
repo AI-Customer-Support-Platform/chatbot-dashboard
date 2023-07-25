@@ -1,5 +1,5 @@
-import CloseIcon from "@/components/icons/CloseIcon";
 import LoadingIcon from "@/components/icons/LoadingIcon";
+import ModalHeader from "@/components/modal/ModalHeader";
 import useAPI from "@/hooks/useAPI";
 import { useRef, useState } from "react";
 import { toast } from "react-hot-toast";
@@ -44,12 +44,7 @@ const CreateCollectionModal: React.FC<CreateCollectionModalProps> = ({
 
   return (
     <div className="rounded-lg bg-white p-4">
-      <section className="mb-8 flex items-center justify-between">
-        <h1 className="text-xl font-bold">Create Collection</h1>
-        <button onClick={() => setIsOpen(false)} className="hover:opacity-50">
-          <CloseIcon />
-        </button>
-      </section>
+      <ModalHeader title="Create Collection" setIsShow={setIsOpen} />
       <section className="mb-4 flex flex-col gap-4">
         <div className="flex flex-col ">
           <label className="ml-2 text-slate-400" htmlFor="name">

@@ -1,5 +1,5 @@
-import CloseIcon from "@/components/icons/CloseIcon";
 import LoadingIcon from "@/components/icons/LoadingIcon";
+import ModalHeader from "@/components/modal/ModalHeader";
 import { Collection } from "@/config/constants";
 import useAPI from "@/hooks/useAPI";
 import { ChangeEvent, useRef, useState } from "react";
@@ -76,14 +76,10 @@ const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
 
   return (
     <div className="rounded-lg bg-white p-4">
-      <section className="mb-8 flex items-center justify-between">
-        <h1 className="text-xl font-bold">Upload Document</h1>
-        {!isLoading && (
-          <button onClick={() => setIsOpen(false)} className="hover:opacity-50">
-            <CloseIcon />
-          </button>
-        )}
-      </section>
+      <ModalHeader
+        title="Upload Document"
+        setIsShow={isLoading ? undefined : setIsOpen}
+      />
       <section className="mb-4 flex flex-col gap-4">
         <div className="flex flex-col ">
           <input id="file" type="file" onChange={handleFileChange} />

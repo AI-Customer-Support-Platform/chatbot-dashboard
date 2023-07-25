@@ -1,5 +1,5 @@
-import CloseIcon from "@/components/icons/CloseIcon";
 import LoadingIcon from "@/components/icons/LoadingIcon";
+import ModalHeader from "@/components/modal/ModalHeader";
 import { Collection } from "@/config/constants";
 import useAPI from "@/hooks/useAPI";
 import { useEffect, useRef, useState } from "react";
@@ -64,12 +64,7 @@ const UpdateCollectionModal: React.FC<UpdateCollectionModalProps> = ({
 
   return (
     <div className="rounded-lg bg-white p-4">
-      <section className="mb-8 flex items-center justify-between">
-        <h1 className="text-xl font-bold">Update Collection</h1>
-        <button onClick={() => setIsOpen(false)} className="hover:opacity-50">
-          <CloseIcon />
-        </button>
-      </section>
+      <ModalHeader title="Update Collection" setIsShow={setIsOpen} />
       <section className="mb-4 flex flex-col gap-4">
         <div className="flex flex-col ">
           <label className="ml-2 text-slate-400" htmlFor="name">
