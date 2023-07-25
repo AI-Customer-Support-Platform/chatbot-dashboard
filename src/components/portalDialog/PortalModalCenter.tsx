@@ -41,9 +41,11 @@ const PortalModalCenter: React.FC<PortalModalCenterProps> = ({
   useEffect(() => {
     if (show) {
       setVisible(true);
+      document.body.classList.add("modal-open");
     } else {
       setTimeout(() => {
         setVisible(false);
+        document.body.classList.remove("modal-open");
       }, 150);
     }
   }, [show]);

@@ -5,3 +5,7 @@
 .grecaptcha-badge {
   visibility: hidden;
 }
+
+.modal-open {
+  overflow: hidden;
+}
