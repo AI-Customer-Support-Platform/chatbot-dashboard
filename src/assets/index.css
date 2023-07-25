@@ -2,10 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  body {
+    @apply font-inter;
+  }
+}
+
 .grecaptcha-badge {
   visibility: hidden;
 }
 
 .modal-open {
   overflow: hidden;
+}
+
+@font-face {
+  font-family: "Lato";
+  src: url("./fonts/Lato-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Inter";
+  src:
+    url("./fonts/Inter-VF.ttf") format("woff2") tech("variations"),
+    url("./fonts/Inter-VF.ttf") format("woff2-variations");
+  font-weight: 100 1000;
+  font-stretch: 25% 151%;
 }
