@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import ModalHeader from "./ModalHeader";
 
 interface ModalContainerProps {
@@ -14,11 +15,18 @@ const ModalContainer: React.FC<ModalContainerProps> = ({
   return (
     <div className="flex max-h-[98%] max-w-[98%] flex-col">
       {(title || setIsShow) && (
-        <section className="flex-none rounded-t-lg bg-white p-4">
+        <section className="flex-none rounded-t-lg bg-white p-4 pb-0">
           <ModalHeader title={title} setIsShow={setIsShow} />
         </section>
       )}
-      <section className="flex-1 overflow-auto rounded-b-lg bg-white p-4 pt-0">
+      <section
+        className={classNames(
+          "flex-1 overflow-auto rounded-b-lg bg-white p-4",
+          {
+            "rounded-t-lg": !title && !setIsShow,
+          }
+        )}
+      >
         {children}
       </section>
     </div>
