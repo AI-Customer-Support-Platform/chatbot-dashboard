@@ -1,5 +1,8 @@
 import ProgressBar from "@/components/ProgressBar";
+import PortalModalCenter from "@/components/portalDialog/PortalModalCenter";
 import classNames from "classnames";
+import { useState } from "react";
+import SubscribePlansModal from "./SubscribePlansModal";
 
 interface APIItemProps {
   name: string;
@@ -59,6 +62,10 @@ const APIItem: React.FC<APIItemProps> = ({
 };
 
 const UnOrSubscribeButton: React.FC<{ active: boolean }> = ({ active }) => {
+  const [isShowSubscribeModal, setIsShowSubscribeModal] = useState(false);
+  const handleClickSubsribe = () => {
+    setIsShowSubscribeModal(true);
+  };
   return (
     <>
       {active ? (
@@ -66,9 +73,20 @@ const UnOrSubscribeButton: React.FC<{ active: boolean }> = ({ active }) => {
           Unsubscribe
         </button>
       ) : (
-        <button className="rounded-lg border bg-white px-1 text-sm text-slate-500 transition duration-200 hover:scale-105 hover:border-2 hover:border-blue-400 hover:font-bold hover:text-blue-500 active:scale-110 ">
-          Subscribe
-        </button>
+        <>
+          <button
+            onClick={handleClickSubsribe}
+            className="rounded-lg border bg-white px-1 text-sm text-slate-500 transition duration-200 hover:scale-105 hover:border-2 hover:border-blue-400 hover:font-bold hover:text-blue-500 active:scale-110 "
+          >
+            Subscribe
+          </button>
+          <PortalModalCenter
+            show={isShowSubscribeModal}
+            setIsShow={setIsShowSubscribeModal}
+          >
+            <SubscribePlansModal setIsShow={setIsShowSubscribeModal} />
+          </PortalModalCenter>
+        </>
       )}
     </>
   );
