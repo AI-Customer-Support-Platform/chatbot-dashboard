@@ -68,7 +68,7 @@ const PlanCard: React.FC<PlanCardProps> = ({ title, price, features }) => {
       <section className="mb-4">
         <ul>
           {features.map((feature) => (
-            <FeatureListItem content={feature} />
+            <FeatureListItem key={feature} content={feature} />
           ))}
         </ul>
       </section>
