@@ -1,5 +1,5 @@
 import LoadingIcon from "@/components/icons/LoadingIcon";
-import ModalHeader from "@/components/modal/ModalHeader";
+import ModalContainer from "@/components/modal/ModalContainer";
 import { Collection } from "@/config/constants";
 import useAPI from "@/hooks/useAPI";
 import { useEffect, useRef, useState } from "react";
@@ -63,8 +63,7 @@ const UpdateCollectionModal: React.FC<UpdateCollectionModalProps> = ({
   }, [collection]);
 
   return (
-    <div className="rounded-lg bg-white p-4">
-      <ModalHeader title="Update Collection" setIsShow={setIsOpen} />
+    <ModalContainer title="Update Collection" setIsShow={setIsOpen}>
       <section className="mb-4 flex flex-col gap-4">
         <div className="flex flex-col ">
           <label className="ml-2 text-slate-400" htmlFor="name">
@@ -78,7 +77,7 @@ const UpdateCollectionModal: React.FC<UpdateCollectionModalProps> = ({
           />
         </div>
         <div className="flex flex-col ">
-          <label className="ml-2 text-slate-400" htmlFor="name">
+          <label className="ml-2 text-slate-400" htmlFor="description">
             description
           </label>
           <textarea
@@ -100,7 +99,7 @@ const UpdateCollectionModal: React.FC<UpdateCollectionModalProps> = ({
           </button>
         )}
       </section>
-    </div>
+    </ModalContainer>
   );
 };
 export default UpdateCollectionModal;

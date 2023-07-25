@@ -1,7 +1,7 @@
 import CloseIcon from "../icons/CloseIcon";
 
 interface ModalHeaderProps {
-  title: string;
+  title?: string;
   setIsShow?: (b: boolean) => void;
 }
 
@@ -12,8 +12,8 @@ const ModalHeader: React.FC<ModalHeaderProps> = ({ title, setIsShow }) => {
     }
   };
   return (
-    <section className="mb-8 flex items-center justify-between gap-8">
-      <h1 className="text-2xl font-bold">{title}</h1>
+    <section className="flex items-center justify-between gap-8">
+      {title ? <h2 className="text-2xl font-bold">{title}</h2> : <div></div>}
       {setIsShow && (
         <button onClick={handleClickCloseButton} className="hover:opacity-50">
           <CloseIcon />

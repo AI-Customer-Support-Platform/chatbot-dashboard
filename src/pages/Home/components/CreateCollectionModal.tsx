@@ -1,5 +1,5 @@
 import LoadingIcon from "@/components/icons/LoadingIcon";
-import ModalHeader from "@/components/modal/ModalHeader";
+import ModalContainer from "@/components/modal/ModalContainer";
 import useAPI from "@/hooks/useAPI";
 import { useRef, useState } from "react";
 import { toast } from "react-hot-toast";
@@ -43,8 +43,7 @@ const CreateCollectionModal: React.FC<CreateCollectionModalProps> = ({
   };
 
   return (
-    <div className="rounded-lg bg-white p-4">
-      <ModalHeader title="Create Collection" setIsShow={setIsOpen} />
+    <ModalContainer title="Create Collection" setIsShow={setIsOpen}>
       <section className="mb-4 flex flex-col gap-4">
         <div className="flex flex-col ">
           <label className="ml-2 text-slate-400" htmlFor="name">
@@ -58,7 +57,7 @@ const CreateCollectionModal: React.FC<CreateCollectionModalProps> = ({
           />
         </div>
         <div className="flex flex-col ">
-          <label className="ml-2 text-slate-400" htmlFor="name">
+          <label className="ml-2 text-slate-400" htmlFor="description">
             description
           </label>
           <textarea
@@ -80,7 +79,7 @@ const CreateCollectionModal: React.FC<CreateCollectionModalProps> = ({
           </button>
         )}
       </section>
-    </div>
+    </ModalContainer>
   );
 };
 export default CreateCollectionModal;

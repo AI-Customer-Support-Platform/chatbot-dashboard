@@ -1,5 +1,5 @@
 import LoadingIcon from "@/components/icons/LoadingIcon";
-import ModalHeader from "@/components/modal/ModalHeader";
+import ModalContainer from "@/components/modal/ModalContainer";
 import { Collection } from "@/config/constants";
 import useAPI from "@/hooks/useAPI";
 import { ChangeEvent, useRef, useState } from "react";
@@ -75,11 +75,7 @@ const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
   };
 
   return (
-    <div className="rounded-lg bg-white p-4">
-      <ModalHeader
-        title="Upload Document"
-        setIsShow={isLoading ? undefined : setIsOpen}
-      />
+    <ModalContainer title="Upload Document" setIsShow={setIsOpen}>
       <section className="mb-4 flex flex-col gap-4">
         <div className="flex flex-col ">
           <input id="file" type="file" onChange={handleFileChange} />
@@ -108,7 +104,7 @@ const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
           </button>
         )}
       </section>
-    </div>
+    </ModalContainer>
   );
 };
 export default UploadDocumentModal;
