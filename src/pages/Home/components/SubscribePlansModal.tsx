@@ -11,52 +11,58 @@ const SubscribePlansModal: React.FC<SubscribePlansModalProps> = ({
   api,
   setIsShow,
 }) => {
+  const plans = [
+    {
+      plan: "Basic",
+      price: 50,
+      features: [
+        `Access to ${uppercaseFirstLetter(api)} API`,
+        "5000 Tokens Allocated",
+        "2MB Document Upload Capacity",
+        "Unlimited Collection Creation",
+      ],
+    },
+    {
+      plan: "Standard",
+      price: 60,
+      features: [
+        `Access to ${uppercaseFirstLetter(api)} API`,
+        "10000 Tokens Allocated",
+        "5MB Document Upload Capacity",
+        "Unlimited Collection Creation",
+      ],
+    },
+    {
+      plan: "Plus",
+      price: 70,
+      features: [
+        `Access to ${uppercaseFirstLetter(api)} API`,
+        "15000 Tokens Allocated",
+        "10MB Document Upload Capacity",
+        "Unlimited Collection Creation",
+      ],
+    },
+    {
+      plan: "Premium",
+      price: 80,
+      features: [
+        `Access to ${uppercaseFirstLetter(api)} API`,
+        "20000 Tokens Allocated",
+        "20MB Document Upload Capacity",
+        "Unlimited Collection Creation",
+      ],
+    },
+  ];
+
   return (
     <ModalContainer
       title={uppercaseFirstLetter(api) + " API Plans"}
       setIsShow={setIsShow}
     >
       <section className="flex flex-wrap justify-center gap-4 font-lato">
-        <PlanCard
-          api={api}
-          plan="Basic"
-          price={50}
-          features={[
-            "5000 Tokens Allocated",
-            "2MB Document Upload Capacity",
-            "Unlimited Collection Creation",
-          ]}
-        />
-        <PlanCard
-          api={api}
-          plan="Standard"
-          price={60}
-          features={[
-            "10000 Tokens Allocated",
-            "5MB Document Upload Capacity",
-            "Unlimited Collection Creation",
-          ]}
-        />
-        <PlanCard
-          api={api}
-          plan="Plus"
-          price={70}
-          features={[
-            "15000 Tokens Allocated",
-            "10MB Document Upload Capacity",
-            "Unlimited Collection Creation",
-          ]}
-        />
-        <PlanCard
-          api={api}
-          plan="Premium"
-          price={80}
-          features={[
-            "20000 Tokens Allocated",
-            "20MB Document Upload Capacity",
-            "Unlimited Collection Creation",
-          ]}
-        />
+        {plans.map((plan) => (
+          <PlanCard key={plan.plan} api={api} {...plan} />
+        ))}
       </section>
     </ModalContainer>
   );
