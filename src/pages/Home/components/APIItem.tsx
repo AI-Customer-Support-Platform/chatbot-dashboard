@@ -22,7 +22,7 @@ const APIItem: React.FC<APIItemProps> = ({
       <section className="mb-2 flex justify-between gap-4">
         <span className="text-xl font-bold">{name}</span>
 
-        <UnOrSubscribeButton active={active} />
+        <UnOrSubscribeButton api={name.toLowerCase()} active={active} />
       </section>
       <section
         className={classNames("", {
@@ -61,7 +61,14 @@ const APIItem: React.FC<APIItemProps> = ({
   );
 };
 
-const UnOrSubscribeButton: React.FC<{ active: boolean }> = ({ active }) => {
+interface SubscribeButtonProps {
+  api: string;
+  active: boolean;
+}
+const UnOrSubscribeButton: React.FC<SubscribeButtonProps> = ({
+  api,
+  active,
+}) => {
   const [isShowSubscribeModal, setIsShowSubscribeModal] = useState(false);
   const handleClickSubsribe = () => {
     setIsShowSubscribeModal(true);
@@ -84,7 +91,10 @@ const UnOrSubscribeButton: React.FC<{ active: boolean }> = ({ active }) => {
             show={isShowSubscribeModal}
             setIsShow={setIsShowSubscribeModal}
           >
-            <SubscribePlansModal setIsShow={setIsShowSubscribeModal} />
+            <SubscribePlansModal
+              api={api}
+              setIsShow={setIsShowSubscribeModal}
+            />
           </PortalModalCenter>
         </>
       )}

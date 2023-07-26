@@ -1,18 +1,25 @@
 import CheckIcon from "@/components/icons/CheckIcon";
 import ModalContainer from "@/components/modal/ModalContainer";
+import { uppercaseFirstLetter } from "@/utils/utils";
 
 interface SubscribePlansModalProps {
+  api: string;
   setIsShow: (show: boolean) => void;
 }
 
 const SubscribePlansModal: React.FC<SubscribePlansModalProps> = ({
+  api,
   setIsShow,
 }) => {
   return (
-    <ModalContainer title="Web API Plans" setIsShow={setIsShow}>
+    <ModalContainer
+      title={uppercaseFirstLetter(api) + " API Plans"}
+      setIsShow={setIsShow}
+    >
       <section className="flex flex-wrap justify-center gap-4 font-lato">
         <PlanCard
-          title="Basic"
+          api={api}
+          plan="Basic"
           price={50}
           features={[
             "5000 Tokens Allocated",
@@ -21,7 +28,8 @@ const SubscribePlansModal: React.FC<SubscribePlansModalProps> = ({
           ]}
         />
         <PlanCard
-          title="Standard"
+          api={api}
+          plan="Standard"
           price={60}
           features={[
             "10000 Tokens Allocated",
@@ -30,7 +38,8 @@ const SubscribePlansModal: React.FC<SubscribePlansModalProps> = ({
           ]}
         />
         <PlanCard
-          title="Plus"
+          api={api}
+          plan="Plus"
           price={70}
           features={[
             "15000 Tokens Allocated",
@@ -39,7 +48,8 @@ const SubscribePlansModal: React.FC<SubscribePlansModalProps> = ({
           ]}
         />
         <PlanCard
-          title="Premium"
+          api={api}
+          plan="Premium"
           price={80}
           features={[
             "20000 Tokens Allocated",
@@ -53,14 +63,18 @@ const SubscribePlansModal: React.FC<SubscribePlansModalProps> = ({
 };
 
 interface PlanCardProps {
-  title: string;
+  api: string;
+  plan: string;
   price: number;
   features: string[];
 }
-const PlanCard: React.FC<PlanCardProps> = ({ title, price, features }) => {
+const PlanCard: React.FC<PlanCardProps> = ({ api, plan, price, features }) => {
+  const handleClickSubscribe = () => {
+    console.log("Subscribe to " + api + "--" + plan.toLowerCase());
+  };
   return (
     <div className="w-full rounded-lg border-2 border-slate-100 p-2 transition duration-200 hover:-translate-y-[1px] hover:border-slate-200 hover:shadow-lg sm:w-auto">
-      <h2 className="mb-2 text-xl font-bold">{title}</h2>
+      <h2 className="mb-2 text-xl font-bold">{plan}</h2>
       <section className="mb-4">
         <span className="font-inter text-3xl font-extrabold ">{price}$</span>
         <span className="text-xl text-slate-500"> / month</span>
@@ -73,7 +87,10 @@ const PlanCard: React.FC<PlanCardProps> = ({ title, price, features }) => {
         </ul>
       </section>
       <section className="flex justify-center">
-        <button className="w-full rounded border border-black py-2 font-inter font-bold transition duration-200 hover:bg-black hover:text-white">
+        <button
+          onClick={handleClickSubscribe}
+          className="w-full rounded border border-black py-2 font-inter font-bold transition duration-200 hover:bg-black hover:text-white"
+        >
           Subscribe
         </button>
       </section>
