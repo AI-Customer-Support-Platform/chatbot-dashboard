@@ -70,14 +70,22 @@ const UnOrSubscribeButton: React.FC<SubscribeButtonProps> = ({
   active,
 }) => {
   const [isShowSubscribeModal, setIsShowSubscribeModal] = useState(false);
+
+  const handleClickManage = () => {
+    console.log("manage");
+  };
+
   const handleClickSubsribe = () => {
     setIsShowSubscribeModal(true);
   };
   return (
     <>
       {active ? (
-        <button className="rounded-lg border bg-white px-1 text-sm text-slate-500 transition duration-200 hover:scale-105 hover:border-2 hover:border-red-400 hover:font-bold hover:text-red-500 active:scale-110 ">
-          Unsubscribe
+        <button
+          onClick={handleClickManage}
+          className="rounded-lg border bg-white px-1 text-sm text-slate-500 transition duration-200 hover:scale-105 hover:border-2 hover:border-black hover:font-bold hover:text-black active:scale-110 "
+        >
+          Manage
         </button>
       ) : (
         <>
