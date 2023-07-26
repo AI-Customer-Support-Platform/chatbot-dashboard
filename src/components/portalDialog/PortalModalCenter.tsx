@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useEffect } from "react";
 import classNames from "classnames";
@@ -38,17 +38,29 @@ const PortalModalCenter: React.FC<PortalModalCenterProps> = ({
       setIsShow(false);
     }
   };
+
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsShow(false);
+      }
+    },
+    [setIsShow]
+  );
+
   useEffect(() => {
     if (show) {
       setVisible(true);
       document.body.classList.add("modal-open");
+      document.addEventListener("keydown", handleKeyDown);
     } else {
       setTimeout(() => {
         setVisible(false);
         document.body.classList.remove("modal-open");
+        document.removeEventListener("keydown", handleKeyDown);
       }, 150);
     }
-  }, [show]);
+  }, [show, handleKeyDown]);
 
   return show
     ? createPortal(
