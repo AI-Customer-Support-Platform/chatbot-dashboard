@@ -15,7 +15,7 @@ const ModalContainer: React.FC<ModalContainerProps> = ({
   return (
     <div className="flex max-h-[98%] max-w-[98%] flex-col">
       {(title || setIsShow) && (
-        <section className="flex-none rounded-t-lg bg-white p-4 pb-0">
+        <section className="flex-none rounded-t-lg bg-white p-4">
           <ModalHeader title={title} setIsShow={setIsShow} />
         </section>
       )}
