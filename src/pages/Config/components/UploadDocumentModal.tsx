@@ -1,8 +1,9 @@
+import FileInputButton from "@/components/buttons/FileInputButton";
 import LoadingIcon from "@/components/icons/LoadingIcon";
 import ModalContainer from "@/components/modal/ModalContainer";
 import { Collection } from "@/config/constants";
 import useAPI from "@/hooks/useAPI";
-import { ChangeEvent, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 
 interface UploadDocumentModalProps {
@@ -12,14 +13,14 @@ interface UploadDocumentModalProps {
 }
 
 const supportedFileTypes = [
+  "txt",
   "md",
-  "docx",
   "csv",
+  "pdf",
+  "docx",
+  "doc",
   "ppt",
   "pptx",
-  "txt",
-  "pdf",
-  "doc",
 ];
 
 const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
@@ -32,13 +33,28 @@ const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
   const nameRef = useRef<HTMLInputElement>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (!event.target || !event.target.files) {
+  const handleFileChange = (file: File | null) => {
+    if (!file) {
       return;
     }
 
-    const file = event.target.files[0];
-    setSelectedFile(file);
+    const fileExtension = file.name.split(".").pop()?.toLowerCase();
+    const isSupportedFileType =
+      fileExtension && supportedFileTypes.includes(fileExtension);
+    const nameRefCurrent = nameRef.current;
+
+    if (!isSupportedFileType) {
+      toast("⚠️ Unsupported file type");
+      setSelectedFile(null);
+      if (nameRefCurrent) {
+        nameRefCurrent.value = "";
+      }
+    } else {
+      setSelectedFile(file);
+      if (nameRefCurrent) {
+        nameRefCurrent.value = file.name;
+      }
+    }
   };
 
   const handleClickUpload = async () => {
@@ -48,12 +64,6 @@ const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
 
     if (!selectedFile) {
       toast("⚠️ Please select a file");
-      return;
-    }
-
-    const fileExtension = selectedFile.name.split(".").pop()?.toLowerCase();
-    if (!fileExtension || !supportedFileTypes.includes(fileExtension)) {
-      toast("⚠️ Unsupported file type");
       return;
     }
 
@@ -77,16 +87,31 @@ const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
   return (
     <ModalContainer title="Upload Document" setIsShow={setIsOpen}>
       <section className="mb-4 flex flex-col gap-4">
-        <div className="flex flex-col ">
-          <input id="file" type="file" onChange={handleFileChange} />
+        <div className="flex flex-col gap-4 ">
+          <section className="ml-2">
+            <span className="text-slate-400">Supported File Types</span>
+            <span className="block text-sm text-slate-500">
+              {supportedFileTypes.join(", ")}
+            </span>
+          </section>
+          <section className="flex justify-center">
+            <FileInputButton onChange={handleFileChange} />
+          </section>
+          <section className="ml-2">
+            <span className="text-slate-400">Chosen File</span>
+            <span className="block max-w-[400px] text-sm text-slate-500">
+              {selectedFile ? selectedFile.name : "None"}{" "}
+            </span>
+          </section>
         </div>
         <div className="flex flex-col ">
           <label className="ml-2 text-slate-400" htmlFor="name">
-            custom name
+            Custom Document Name
           </label>
           <input
             ref={nameRef}
             id="name"
+            placeholder="optional"
             className="rounded-lg border p-1 px-2 outline-none"
             type="text"
           />
