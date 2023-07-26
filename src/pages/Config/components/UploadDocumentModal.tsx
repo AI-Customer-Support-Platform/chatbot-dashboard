@@ -85,7 +85,10 @@ const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
   };
 
   return (
-    <ModalContainer title="Upload Document" setIsShow={setIsOpen}>
+    <ModalContainer
+      title="Upload Document"
+      setIsShow={!isLoading ? setIsOpen : undefined}
+    >
       <section className="mb-4 flex flex-col gap-4">
         <div className="flex flex-col gap-4 ">
           <section className="ml-2">
