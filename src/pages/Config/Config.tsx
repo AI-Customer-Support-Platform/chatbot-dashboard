@@ -7,7 +7,7 @@ import { Collection } from "@/config/constants";
 
 const Config = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [isFetching, setIsFetching] = useState(false);
+  const [isFirstLoading, setIsFirstLoading] = useState(false);
   const { collectionId } = useParams();
   const [collection, setCollection] = useState<Collection | undefined>(
     undefined
@@ -20,7 +20,7 @@ const Config = () => {
     }
 
     setIsLoading(true);
-    setIsFetching(true);
+    setIsFirstLoading(true);
     setCollection(undefined);
 
     const resp = await fetcherQueryCollection(collectionId);
@@ -30,7 +30,7 @@ const Config = () => {
   }, [collectionId, isLoading, fetcherQueryCollection]);
 
   useEffect(() => {
-    if (isFetching) {
+    if (isFirstLoading) {
       return;
     }
 
@@ -41,7 +41,7 @@ const Config = () => {
     return () => {
       clearTimeout(timer);
     };
-  }, [isFetching, fetchCollection]);
+  }, [isFirstLoading, fetchCollection]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-zinc-100 via-blue-100 to-white">
