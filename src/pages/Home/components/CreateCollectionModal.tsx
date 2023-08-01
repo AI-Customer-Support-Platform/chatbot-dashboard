@@ -37,7 +37,7 @@ const CreateCollectionModal: React.FC<CreateCollectionModalProps> = ({
       }, 500);
     } catch (error) {
       console.error(error);
-      toast.error("⚠️ Create collection failed");
+      toast.error("Create collection failed");
       setIsLoading(false);
     }
   };

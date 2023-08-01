@@ -79,7 +79,7 @@ const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
       }, 500);
     } catch (error) {
       console.error(error);
-      toast.error("⚠️ Upload failed");
+      toast.error("Upload failed");
       setIsLoading(false);
     }
   };
