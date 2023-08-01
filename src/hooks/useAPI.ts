@@ -145,6 +145,7 @@ const useAPI = () => {
     url: string
   ): Promise<{ url: string }> => {
     const token = await getAccessToken();
+
     return fetcher.post(
       "/plan/create",
       {
@@ -160,6 +161,16 @@ const useAPI = () => {
     );
   };
 
+  const fetcherManagePlan = async (): Promise<{ url: string }> => {
+    const token = await getAccessToken();
+
+    return fetcher.get("/plan/update", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  };
+
   return {
     fetcherQueryCollections,
     fetcherCreateCollection,
@@ -169,6 +180,7 @@ const useAPI = () => {
     fetcherUploadDocument,
     fetcherDeleteDocument,
     fetcherSubscribePlan,
+    fetcherManagePlan,
   };
 };
 export default useAPI;
