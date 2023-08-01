@@ -5,6 +5,8 @@ import { useState } from "react";
 import SubscribePlansModal from "./SubscribePlansModal";
 import { ApiDetails, ApiType } from "@/config/constants";
 import { uppercaseFirstLetter, formatDate } from "../../../utils/utils";
+import useAPI from "@/hooks/useAPI";
+import LoadingIcon from "@/components/icons/LoadingIcon";
 
 interface APIItemProps {
   name: ApiType;
@@ -28,9 +30,9 @@ const APIItem: React.FC<APIItemProps> = ({ name, apiDetails }) => {
           <div>
             <section>
               <span className="mb-1 block text-sm text-slate-500">
-                Level:{" "}
+                Plan:{" "}
                 <span className="font-bold text-black/60">
-                  {apiDetails.plan}
+                  {uppercaseFirstLetter(apiDetails.plan)}
                 </span>
               </span>
 
@@ -84,9 +86,18 @@ const UnOrSubscribeButton: React.FC<SubscribeButtonProps> = ({
   active,
 }) => {
   const [isShowSubscribeModal, setIsShowSubscribeModal] = useState(false);
+  const [isLoadingManage, setIsLoadingManage] = useState(false);
+  const { fetcherManagePlan } = useAPI();
 
-  const handleClickManage = () => {
-    console.log("manage");
+  const handleClickManage = async () => {
+    try {
+      setIsLoadingManage(true);
+      const resp = await fetcherManagePlan();
+      window.location.href = resp.url;
+    } catch (error) {
+      console.error(error);
+      setIsLoadingManage(false);
+    }
   };
 
   const handleClickSubsribe = () => {
@@ -95,12 +106,20 @@ const UnOrSubscribeButton: React.FC<SubscribeButtonProps> = ({
   return (
     <>
       {active ? (
-        <button
-          onClick={handleClickManage}
-          className="rounded-lg border bg-white px-1 text-sm text-slate-500 transition duration-200 hover:scale-105 hover:border-2 hover:border-black hover:font-bold hover:text-black active:scale-110 "
-        >
-          Manage
-        </button>
+        <>
+          {isLoadingManage ? (
+            <span className="animate-spin">
+              <LoadingIcon />
+            </span>
+          ) : (
+            <button
+              onClick={handleClickManage}
+              className="rounded-lg border bg-white px-1 text-sm text-slate-500 transition duration-200 hover:scale-105 hover:border-2 hover:border-black hover:font-bold hover:text-black active:scale-110 "
+            >
+              Manage
+            </button>
+          )}
+        </>
       ) : (
         <>
           <button
