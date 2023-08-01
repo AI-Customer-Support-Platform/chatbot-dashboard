@@ -21,3 +21,19 @@ export interface Plans {
   price: number;
   features: string[];
 }
+
+export interface ApiDetails {
+  plan: PlanType;
+  remaining_tokens: number;
+  total_tokens: number;
+  remaining_space: number;
+  total_space: number;
+  start_at: string;
+  expire_at: string;
+}
+
+export interface UserPlanDetail {
+  web: ApiDetails | null;
+  instagram: ApiDetails | null;
+  line: ApiDetails | null;
+}

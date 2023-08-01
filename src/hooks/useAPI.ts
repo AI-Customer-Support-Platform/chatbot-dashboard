@@ -1,6 +1,11 @@
 import fetcher from "@/utils/fetcher";
 import useAccessToken from "./useAccessToken";
-import { ApiType, Collection, PlanType } from "@/config/constants";
+import {
+  ApiType,
+  Collection,
+  PlanType,
+  UserPlanDetail,
+} from "@/config/constants";
 
 const useAPI = () => {
   const { getAccessToken } = useAccessToken();
@@ -139,6 +144,16 @@ const useAPI = () => {
     );
   };
 
+  const fetcherUserPlanDetail = async (): Promise<UserPlanDetail> => {
+    const token = await getAccessToken();
+
+    return fetcher.get("/user/plan", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  };
+
   const fetcherSubscribePlan = async (
     api: ApiType,
     plan: PlanType,
@@ -179,6 +194,7 @@ const useAPI = () => {
     fetcherUpdateCollection,
     fetcherUploadDocument,
     fetcherDeleteDocument,
+    fetcherUserPlanDetail,
     fetcherSubscribePlan,
     fetcherManagePlan,
   };

@@ -1,43 +1,63 @@
 import APIItem from "./APIItem";
-import { useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import TitleWithRefreshButton from "@/components/TitleWithRefreshButton";
 import Skeleton from "react-loading-skeleton";
+import useAPI from "@/hooks/useAPI";
+import { UserPlanDetail } from "@/config/constants";
 
 const APIs = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isFirstLoading, setIsFirstLoading] = useState(true);
+  const [planDetials, setPlanDetails] = useState<UserPlanDetail>({
+    web: null,
+    instagram: null,
+    line: null,
+  });
+  const { fetcherUserPlanDetail } = useAPI();
 
-  let timer: undefined | number = undefined;
-  const handleClickRefreshButton = () => {
+  const fetchUserPlanDetails = useCallback(async () => {
     if (isLoading) {
       return;
     }
 
-    setIsLoading(true);
-
-    clearTimeout(timer);
-    timer = setTimeout(() => {
+    try {
+      setIsLoading(true);
+      setIsFirstLoading(false);
+      const resp = await fetcherUserPlanDetail();
+      setPlanDetails(resp);
+    } catch (error) {
+      console.error(error);
+    } finally {
       setIsLoading(false);
-    }, 1000);
-  };
+    }
+  }, [fetcherUserPlanDetail, isLoading]);
+
+  useEffect(() => {
+    if (!isFirstLoading) {
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      fetchUserPlanDetails();
+    }, 0);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [fetchUserPlanDetails, isFirstLoading]);
 
   return (
     <div className="mb-8">
       <TitleWithRefreshButton
         title="APIs"
         isLoading={isLoading}
-        handleClickRefresh={handleClickRefreshButton}
+        handleClickRefresh={fetchUserPlanDetails}
       />
 
       {!isLoading ? (
         <section>
-          <APIItem name="web" active={false} />
-          <APIItem
-            name="instagram"
-            active={true}
-            totalTokens={100}
-            remainingTokens={23}
-          />
-          <APIItem name="line" active={false} />
+          <APIItem name="web" apiDetails={planDetials.web} />
+          <APIItem name="instagram" apiDetails={planDetials.instagram} />
+          <APIItem name="line" apiDetails={planDetials.line} />
         </section>
       ) : (
         <section className="flex flex-col gap-2">
