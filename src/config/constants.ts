@@ -13,3 +13,11 @@ export interface IDocument {
   file_name: string;
   created_at: string;
 }
+
+export type ApiType = "web" | "instagram" | "line";
+export type PlanType = "basic" | "standard" | "plus" | "premium";
+export interface Plans {
+  plan: PlanType;
+  price: number;
+  features: string[];
+}

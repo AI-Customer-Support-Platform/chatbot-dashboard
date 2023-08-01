@@ -3,9 +3,11 @@ import PortalModalCenter from "@/components/portalDialog/PortalModalCenter";
 import classNames from "classnames";
 import { useState } from "react";
 import SubscribePlansModal from "./SubscribePlansModal";
+import { ApiType } from "@/config/constants";
+import { uppercaseFirstLetter } from "../../../utils/utils";
 
 interface APIItemProps {
-  name: string;
+  name: ApiType;
   active: boolean;
   totalTokens?: number;
   remainingTokens?: number;
@@ -20,9 +22,9 @@ const APIItem: React.FC<APIItemProps> = ({
   return (
     <div className="mb-2 flex max-w-3xl flex-col justify-between overflow-auto rounded-lg bg-white/50 p-2 transition duration-300 hover:bg-white/70 hover:shadow">
       <section className="mb-2 flex justify-between gap-4">
-        <span className="text-xl font-bold">{name}</span>
+        <span className="text-xl font-bold">{uppercaseFirstLetter(name)}</span>
 
-        <UnOrSubscribeButton api={name.toLowerCase()} active={active} />
+        <UnOrSubscribeButton api={name} active={active} />
       </section>
       <section
         className={classNames("", {
@@ -62,7 +64,7 @@ const APIItem: React.FC<APIItemProps> = ({
 };
 
 interface SubscribeButtonProps {
-  api: string;
+  api: ApiType;
   active: boolean;
 }
 const UnOrSubscribeButton: React.FC<SubscribeButtonProps> = ({

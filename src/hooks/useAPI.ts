@@ -1,6 +1,6 @@
 import fetcher from "@/utils/fetcher";
 import useAccessToken from "./useAccessToken";
-import { Collection } from "@/config/constants";
+import { ApiType, Collection, PlanType } from "@/config/constants";
 
 const useAPI = () => {
   const { getAccessToken } = useAccessToken();
@@ -139,6 +139,27 @@ const useAPI = () => {
     );
   };
 
+  const fetcherSubscribePlan = async (
+    api: ApiType,
+    plan: PlanType,
+    url: string
+  ): Promise<{ url: string }> => {
+    const token = await getAccessToken();
+    return fetcher.post(
+      "/plan/create",
+      {
+        api,
+        plan,
+        url,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  };
+
   return {
     fetcherQueryCollections,
     fetcherCreateCollection,
@@ -147,6 +168,7 @@ const useAPI = () => {
     fetcherUpdateCollection,
     fetcherUploadDocument,
     fetcherDeleteDocument,
+    fetcherSubscribePlan,
   };
 };
 export default useAPI;

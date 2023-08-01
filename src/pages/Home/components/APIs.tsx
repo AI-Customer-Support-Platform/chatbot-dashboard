@@ -30,14 +30,14 @@ const APIs = () => {
 
       {!isLoading ? (
         <section>
+          <APIItem name="web" active={false} />
           <APIItem
-            name="Web"
+            name="instagram"
             active={true}
-            totalTokens={500}
-            remainingTokens={183}
+            totalTokens={100}
+            remainingTokens={23}
           />
-          <APIItem name="Instagram" active={false} />
-          <APIItem name="Line" active={false} />
+          <APIItem name="line" active={false} />
         </section>
       ) : (
         <section className="flex flex-col gap-2">
