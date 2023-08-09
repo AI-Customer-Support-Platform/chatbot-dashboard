@@ -6,6 +6,7 @@ import UploadCollectionModal from "./UploadDocumentModal";
 import DocumentCard from "./DocumentCard";
 import { Collection, IDocument } from "@/config/constants";
 import TitleWithRefreshButton from "@/components/TitleWithRefreshButton";
+import FileSpaceInfo from "./FileSpaceInfo";
 
 interface CollectionInfoProps {
   collection: Collection | undefined;
@@ -47,6 +48,7 @@ const Documents: React.FC<CollectionInfoProps> = ({
         isLoading={!collection}
         handleClickRefresh={handleClickRefresh}
       />
+      <FileSpaceInfo refresh={!collection} />
 
       <section>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
