@@ -12,7 +12,7 @@ import toast from "react-hot-toast";
 
 const Collections = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [isFirstLoading, setIsFirstLoading] = useState(false);
+  const [initLoaded, setInitLoaded] = useState(false);
   const [collections, setCollections] = useState<Collection[]>([]);
   const [isOpenCreateCollectionModal, setIsOpenCreateCollectionModal] =
     useState(false);
@@ -26,7 +26,7 @@ const Collections = () => {
 
     try {
       setIsLoading(true);
-      setIsFirstLoading(true);
+      setInitLoaded(true);
 
       const resp = await fetcherQueryCollections();
       const _collections = resp.collections;
@@ -55,17 +55,15 @@ const Collections = () => {
   };
 
   useEffect(() => {
-    if (isFirstLoading) {
-      return;
+    if (!initLoaded) {
+      const timer = setTimeout(() => {
+        fetchCollections();
+      }, 0);
+      return () => {
+        clearTimeout(timer);
+      };
     }
-
-    const timer = setTimeout(() => {
-      fetchCollections();
-    }, 0);
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [isFirstLoading, fetchCollections]);
+  }, [initLoaded, fetchCollections]);
 
   return (
     <div>

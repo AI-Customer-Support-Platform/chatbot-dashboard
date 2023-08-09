@@ -7,7 +7,7 @@ import { UserPlanDetail } from "@/config/constants";
 
 const APIs = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [isFirstLoading, setIsFirstLoading] = useState(true);
+  const [initLoaded, setInitLoaded] = useState(false);
   const [planDetials, setPlanDetails] = useState<UserPlanDetail>({
     web: null,
     instagram: null,
@@ -22,7 +22,7 @@ const APIs = () => {
 
     try {
       setIsLoading(true);
-      setIsFirstLoading(false);
+      setInitLoaded(true);
       const resp = await fetcherUserPlanDetail();
       setPlanDetails(resp);
     } catch (error) {
@@ -33,17 +33,15 @@ const APIs = () => {
   }, [fetcherUserPlanDetail, isLoading]);
 
   useEffect(() => {
-    if (!isFirstLoading) {
-      return;
+    if (!initLoaded) {
+      const timer = setTimeout(() => {
+        fetchUserPlanDetails();
+      }, 0);
+      return () => {
+        clearTimeout(timer);
+      };
     }
-
-    const timer = setTimeout(() => {
-      fetchUserPlanDetails();
-    }, 0);
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [fetchUserPlanDetails, isFirstLoading]);
+  }, [fetchUserPlanDetails, initLoaded]);
 
   return (
     <div className="mb-8">
