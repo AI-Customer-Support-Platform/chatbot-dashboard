@@ -7,7 +7,7 @@ interface FileSpaceInfoProps {
 }
 
 const FileSpaceInfo: React.FC<FileSpaceInfoProps> = ({ refresh }) => {
-  const [isFirstLoading, setIsFirstLoading] = useState(false);
+  const [initLoaded, setInitLoaded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const fetcherUserStorage = useCallback(() => {
@@ -15,7 +15,7 @@ const FileSpaceInfo: React.FC<FileSpaceInfoProps> = ({ refresh }) => {
       return;
     }
     setIsLoading(true);
-    setIsFirstLoading(true);
+    setInitLoaded(true);
 
     setTimeout(() => {
       setIsLoading(false);
@@ -23,24 +23,18 @@ const FileSpaceInfo: React.FC<FileSpaceInfoProps> = ({ refresh }) => {
   }, [isLoading]);
 
   useEffect(() => {
-    if (isFirstLoading) {
-      return;
-    }
-
-    const timer = setTimeout(() => {
+    if (initLoaded && refresh) {
       fetcherUserStorage();
-    }, 0);
+    } else if (!initLoaded) {
+      const timer = setTimeout(() => {
+        fetcherUserStorage();
+      }, 0);
 
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [fetcherUserStorage, isFirstLoading]);
-
-  useEffect(() => {
-    if (refresh) {
-      fetcherUserStorage();
+      return () => {
+        clearTimeout(timer);
+      };
     }
-  }, [refresh, fetcherUserStorage]);
+  }, [fetcherUserStorage, initLoaded, refresh]);
 
   return (
     <div className="-mt-4 mb-8 max-w-3xl">
