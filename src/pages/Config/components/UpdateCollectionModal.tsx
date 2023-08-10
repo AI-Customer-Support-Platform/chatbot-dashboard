@@ -22,6 +22,12 @@ const UpdateCollectionModal: React.FC<UpdateCollectionModalProps> = ({
   const { collectionId } = useParams();
   const nameRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
+  const [isValidInput, setIsValidInput] = useState(false);
+
+  const handleNameChange = () => {
+    const inputValue = nameRef.current?.value?.trim();
+    setIsValidInput(!!inputValue);
+  };
 
   const handleClickUpdate = async () => {
     if (!collectionId) {
@@ -60,6 +66,7 @@ const UpdateCollectionModal: React.FC<UpdateCollectionModalProps> = ({
     descriptionRef.current.value = collection?.description
       ? collection.description
       : "";
+    handleNameChange();
   }, [collection]);
 
   return (
@@ -74,6 +81,7 @@ const UpdateCollectionModal: React.FC<UpdateCollectionModalProps> = ({
             id="name"
             className="rounded-lg border p-1 px-2 outline-none"
             type="text"
+            onChange={handleNameChange}
           />
         </div>
         <div className="flex flex-col ">
@@ -84,21 +92,24 @@ const UpdateCollectionModal: React.FC<UpdateCollectionModalProps> = ({
             ref={descriptionRef}
             id="description"
             className="rounded-lg border p-1 px-2 outline-none"
+            placeholder="optional"
           />
         </div>
       </section>
-      <section className="flex place-content-center">
-        {isLoading ? (
-          <LoadingIcon className="animate-spin" />
-        ) : (
-          <button
-            onClick={handleClickUpdate}
-            className=" rounded bg-black px-2 py-1 text-lg font-extrabold text-white transition-transform duration-300 hover:scale-105 active:scale-110"
-          >
-            Update
-          </button>
-        )}
-      </section>
+      {isValidInput && (
+        <section className="flex place-content-center">
+          {isLoading ? (
+            <LoadingIcon className="animate-spin" />
+          ) : (
+            <button
+              onClick={handleClickUpdate}
+              className=" rounded bg-black px-2 py-1 text-lg font-extrabold text-white transition-transform duration-300 hover:scale-105 active:scale-110"
+            >
+              Update
+            </button>
+          )}
+        </section>
+      )}
     </ModalContainer>
   );
 };

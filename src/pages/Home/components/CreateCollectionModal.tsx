@@ -17,6 +17,12 @@ const CreateCollectionModal: React.FC<CreateCollectionModalProps> = ({
   const { fetcherCreateCollection } = useAPI();
   const nameRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
+  const [isValidInput, setIsValidInput] = useState(false);
+
+  const handleNameChange = () => {
+    const inputValue = nameRef.current?.value?.trim();
+    setIsValidInput(!!inputValue);
+  };
 
   const handleClickCreate = async () => {
     if (!nameRef.current || !nameRef.current.value) {
@@ -54,6 +60,7 @@ const CreateCollectionModal: React.FC<CreateCollectionModalProps> = ({
             id="name"
             className="rounded-lg border p-1 px-2 outline-none"
             type="text"
+            onChange={handleNameChange}
           />
         </div>
         <div className="flex flex-col ">
@@ -64,21 +71,24 @@ const CreateCollectionModal: React.FC<CreateCollectionModalProps> = ({
             ref={descriptionRef}
             id="description"
             className="rounded-lg border p-1 px-2 outline-none"
+            placeholder="optional"
           />
         </div>
       </section>
-      <section className="flex place-content-center">
-        {isLoading ? (
-          <LoadingIcon className="animate-spin" />
-        ) : (
-          <button
-            onClick={handleClickCreate}
-            className=" rounded bg-black px-2 py-1 text-lg font-extrabold text-white transition-transform duration-300 hover:scale-105 active:scale-110"
-          >
-            Create
-          </button>
-        )}
-      </section>
+      {isValidInput && (
+        <section className="flex place-content-center">
+          {isLoading ? (
+            <LoadingIcon className="animate-spin" />
+          ) : (
+            <button
+              onClick={handleClickCreate}
+              className=" rounded bg-black px-2 py-1 text-lg font-extrabold text-white transition-transform duration-300 hover:scale-105 active:scale-110"
+            >
+              Create
+            </button>
+          )}
+        </section>
+      )}
     </ModalContainer>
   );
 };

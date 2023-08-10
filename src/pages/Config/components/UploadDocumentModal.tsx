@@ -3,6 +3,7 @@ import LoadingIcon from "@/components/icons/LoadingIcon";
 import ModalContainer from "@/components/modal/ModalContainer";
 import { Collection } from "@/config/constants";
 import useAPI from "@/hooks/useAPI";
+import classNames from "classnames";
 import { useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 
@@ -100,14 +101,20 @@ const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
           <section className="flex justify-center">
             <FileInputButton onChange={handleFileChange} />
           </section>
-          <section className="ml-2">
-            <span className="text-slate-400">Chosen File</span>
-            <span className="block max-w-[400px] text-sm text-slate-500">
-              {selectedFile ? selectedFile.name : "None"}{" "}
-            </span>
-          </section>
+          {selectedFile && (
+            <section className="ml-2">
+              <span className="text-slate-400">Chosen File</span>
+              <span className="block max-w-[400px] text-sm text-slate-500">
+                {selectedFile ? selectedFile.name : "None"}{" "}
+              </span>
+            </section>
+          )}
         </div>
-        <div className="flex flex-col ">
+        <div
+          className={classNames("flex flex-col ", {
+            hidden: !selectedFile,
+          })}
+        >
           <label className="ml-2 text-slate-400" htmlFor="name">
             Custom Document Name
           </label>
@@ -120,18 +127,20 @@ const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
           />
         </div>
       </section>
-      <section className="flex place-content-center">
-        {isLoading ? (
-          <LoadingIcon className="animate-spin" />
-        ) : (
-          <button
-            onClick={handleClickUpload}
-            className=" rounded bg-black px-2 py-1 text-lg font-extrabold text-white transition-transform duration-300 hover:scale-105 active:scale-110"
-          >
-            Upload
-          </button>
-        )}
-      </section>
+      {selectedFile && (
+        <section className="flex place-content-center">
+          {isLoading ? (
+            <LoadingIcon className="animate-spin" />
+          ) : (
+            <button
+              onClick={handleClickUpload}
+              className=" rounded bg-black px-2 py-1 text-lg font-extrabold text-white transition-transform duration-300 hover:scale-105 active:scale-110"
+            >
+              Upload
+            </button>
+          )}
+        </section>
+      )}
     </ModalContainer>
   );
 };
