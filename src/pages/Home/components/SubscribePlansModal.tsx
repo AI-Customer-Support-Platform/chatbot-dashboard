@@ -22,9 +22,10 @@ const SubscribePlansModal: React.FC<SubscribePlansModalProps> = ({
       price: 5000,
       features: [
         `Access to ${uppercaseFirstLetter(api)} API`,
-        "750,000 Tokens Allocated",
-        "2MB Document Upload Capacity",
-        "Unlimited Collection Creation",
+        "750,000 tokens allocated",
+        "Around 750 questions users can ask",
+        "2MB document upload capacity",
+        "Unlimited collection creation",
       ],
     },
     {
@@ -32,9 +33,10 @@ const SubscribePlansModal: React.FC<SubscribePlansModalProps> = ({
       price: 15000,
       features: [
         `Access to ${uppercaseFirstLetter(api)} API`,
-        "7500,000 Tokens Allocated",
-        "20MB Document Upload Capacity",
-        "Unlimited Collection Creation",
+        "7500,000 tokens allocated",
+        "Around 7,500 questions users can ask",
+        "20MB document upload capacity",
+        "Unlimited collection creation",
       ],
     },
     {
@@ -42,9 +44,10 @@ const SubscribePlansModal: React.FC<SubscribePlansModalProps> = ({
       price: 22000,
       features: [
         `Access to ${uppercaseFirstLetter(api)} API`,
-        "37,500,000 Tokens Allocated",
-        "100MB Document Upload Capacity",
-        "Unlimited Collection Creation",
+        "37,500,000 tokens allocated",
+        "Around 37,500 questions users can ask",
+        "100MB document upload capacity",
+        "Unlimited collection creation",
       ],
     },
     {
@@ -52,9 +55,10 @@ const SubscribePlansModal: React.FC<SubscribePlansModalProps> = ({
       price: 40000,
       features: [
         `Access to ${uppercaseFirstLetter(api)} API`,
-        "75,000,000 Tokens Allocated",
-        "5000MB Document Upload Capacity",
-        "Unlimited Collection Creation",
+        "75,000,000 tokens allocated",
+        "Around 75,000 questions users can ask",
+        "5000MB document upload capacity",
+        "Unlimited collection creation",
       ],
     },
   ];
