@@ -1,14 +1,19 @@
 import classNames from "classnames";
+import React from "react";
 
 interface ProgressBarProps {
-  progressPercentage: number;
+  numerator: number;
+  denominator: number;
   bgColor?: string;
 }
 
 const ProgressBar: React.FC<ProgressBarProps> = ({
-  progressPercentage,
+  numerator,
+  denominator,
   bgColor = "bg-blue-600",
 }) => {
+  const progressPercentage =
+    denominator !== 0 ? (numerator / denominator) * 100 : 100;
   const percent = progressPercentage > 100 ? 100 : progressPercentage;
   const formattedPercentage = progressPercentage.toFixed(1);
   return (

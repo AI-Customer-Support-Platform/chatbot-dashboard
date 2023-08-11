@@ -67,11 +67,8 @@ const FileSpaceInfo: React.FC<FileSpaceInfoProps> = ({ refresh }) => {
 
           {
             <ProgressBar
-              progressPercentage={
-                ((storage.total_space - storage.remaining_space) /
-                  storage.total_space) *
-                100
-              }
+              numerator={storage.total_space - storage.remaining_space}
+              denominator={storage.total_space}
               bgColor="bg-slate-500"
             />
           }

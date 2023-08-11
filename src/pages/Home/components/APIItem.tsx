@@ -59,10 +59,8 @@ const APIItem: React.FC<APIItemProps> = ({ name, apiDetails }) => {
 
               {apiDetails.total_tokens && apiDetails.remaining_tokens && (
                 <ProgressBar
-                  progressPercentage={
-                    (apiDetails.remaining_tokens / apiDetails.total_tokens) *
-                    100
-                  }
+                  numerator={apiDetails.remaining_tokens}
+                  denominator={apiDetails.total_tokens}
                 />
               )}
             </section>
