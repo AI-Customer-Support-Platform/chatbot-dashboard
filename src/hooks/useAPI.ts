@@ -186,6 +186,19 @@ const useAPI = () => {
     });
   };
 
+  const fetcherUserStorage = async (): Promise<{
+    remaining_space: number;
+    total_space: number;
+  }> => {
+    const token = await getAccessToken();
+
+    return fetcher.get("/user/storage", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  };
+
   return {
     fetcherQueryCollections,
     fetcherCreateCollection,
@@ -197,6 +210,7 @@ const useAPI = () => {
     fetcherUserPlanDetail,
     fetcherSubscribePlan,
     fetcherManagePlan,
+    fetcherUserStorage,
   };
 };
 export default useAPI;
