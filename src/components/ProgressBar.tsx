@@ -30,7 +30,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
       >
         <span
           className={classNames({
-            "inline-block translate-x-12 text-black": percent <= 10,
+            "inline-block translate-x-20 text-black": percent <= 10,
           })}
         >{`${formattedPercentage}%`}</span>
       </div>
