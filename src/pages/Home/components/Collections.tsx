@@ -70,7 +70,7 @@ const Collections = () => {
       <TitleWithRefreshButton
         title="Collections"
         isLoading={isLoading}
-        handleClickRefresh={fetchCollections}
+        refresh={fetchCollections}
       />
 
       <section>

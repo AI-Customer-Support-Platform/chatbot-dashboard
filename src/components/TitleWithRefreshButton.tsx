@@ -4,21 +4,21 @@ import RefreshIcon from "./icons/RefreshIcon";
 interface TitleWithRefreshButtonProps {
   title: string;
   isLoading: boolean;
-  handleClickRefresh: () => void;
+  refresh: () => void;
   classname?: string;
 }
 
 const TitleWithRefreshButton: React.FC<TitleWithRefreshButtonProps> = ({
   title,
   isLoading,
-  handleClickRefresh,
+  refresh,
   classname,
 }) => {
   return (
     <section className="mb-8 flex items-center gap-4">
       <h1 className={`text-3xl font-bold ${classname}`}>{title}</h1>
       <button
-        onClick={handleClickRefresh}
+        onClick={refresh}
         title="refresh"
         className={classNames("text-slate-500", {
           "animate-spin": isLoading,

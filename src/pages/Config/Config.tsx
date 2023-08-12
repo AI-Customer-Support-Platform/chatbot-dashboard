@@ -45,10 +45,7 @@ const Config = () => {
     <div className="min-h-screen bg-gradient-to-br from-zinc-100 via-blue-100 to-white">
       <main className="container mx-auto p-4 sm:p-8">
         <CollectionInfo refresh={fetchCollection} collection={collection} />
-        <Documents
-          handleClickRefresh={fetchCollection}
-          collection={collection}
-        />
+        <Documents refresh={fetchCollection} collection={collection} />
       </main>
     </div>
   );

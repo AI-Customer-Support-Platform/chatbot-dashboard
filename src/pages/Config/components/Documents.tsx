@@ -8,15 +8,12 @@ import { Collection, IDocument } from "@/config/constants";
 import TitleWithRefreshButton from "@/components/TitleWithRefreshButton";
 import FileSpaceInfo from "./FileSpaceInfo";
 
-interface CollectionInfoProps {
+interface DocumentsProps {
   collection: Collection | undefined;
-  handleClickRefresh: () => void;
+  refresh: () => void;
 }
 
-const Documents: React.FC<CollectionInfoProps> = ({
-  collection,
-  handleClickRefresh,
-}) => {
+const Documents: React.FC<DocumentsProps> = ({ collection, refresh }) => {
   const [documents, setDocuments] = useState<IDocument[]>([]);
   const [isOpenUploadDocumentModal, setIsOpenUploadDocumentModal] =
     useState(false);
@@ -46,7 +43,7 @@ const Documents: React.FC<CollectionInfoProps> = ({
       <TitleWithRefreshButton
         title="Documents"
         isLoading={!collection}
-        handleClickRefresh={handleClickRefresh}
+        refresh={refresh}
       />
       <FileSpaceInfo refresh={!collection} />
 
@@ -69,7 +66,7 @@ const Documents: React.FC<CollectionInfoProps> = ({
               {documents.map((document) => (
                 <DocumentCard
                   collection_id={collection.id}
-                  refresh={handleClickRefresh}
+                  refresh={refresh}
                   key={document.id}
                   document={document}
                 />
@@ -87,7 +84,7 @@ const Documents: React.FC<CollectionInfoProps> = ({
           <UploadCollectionModal
             collection={collection}
             setIsOpen={setIsOpenUploadDocumentModal}
-            refresh={handleClickRefresh}
+            refresh={refresh}
           />
         </PortalModalCenter>
       </section>

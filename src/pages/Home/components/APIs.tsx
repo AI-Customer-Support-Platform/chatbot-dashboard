@@ -48,7 +48,7 @@ const APIs = () => {
       <TitleWithRefreshButton
         title="APIs"
         isLoading={isLoading}
-        handleClickRefresh={fetchUserPlanDetails}
+        refresh={fetchUserPlanDetails}
       />
 
       {!isLoading ? (
