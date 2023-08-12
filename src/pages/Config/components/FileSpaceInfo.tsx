@@ -11,13 +11,14 @@ interface FileSpaceInfoProps {
 const FileSpaceInfo: React.FC<FileSpaceInfoProps> = ({ refresh }) => {
   const [initLoaded, setInitLoaded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [needRefresh, setNeedRefresh] = useState(false);
   const { fetcherUserStorage } = useAPI();
   const [storage, setStorage] = useState({
     remaining_space: 0,
     total_space: 0,
   });
 
-  const _fetcherUserStorage = useCallback(async () => {
+  const fetchUserStorage = useCallback(async () => {
     if (isLoading) {
       return;
     }
@@ -35,18 +36,25 @@ const FileSpaceInfo: React.FC<FileSpaceInfoProps> = ({ refresh }) => {
   }, [isLoading, fetcherUserStorage]);
 
   useEffect(() => {
-    if (initLoaded && refresh) {
-      _fetcherUserStorage();
-    } else if (!initLoaded) {
+    if (refresh) {
+      setNeedRefresh(true);
+    }
+  }, [refresh]);
+
+  useEffect(() => {
+    if (!initLoaded) {
       const timer = setTimeout(() => {
-        _fetcherUserStorage();
+        fetchUserStorage();
       }, 0);
 
       return () => {
         clearTimeout(timer);
       };
+    } else if (needRefresh) {
+      setNeedRefresh(false);
+      fetchUserStorage();
     }
-  }, [_fetcherUserStorage, initLoaded, refresh]);
+  }, [fetchUserStorage, initLoaded, needRefresh]);
 
   return (
     <div className="-mt-4 mb-8 max-w-3xl">
