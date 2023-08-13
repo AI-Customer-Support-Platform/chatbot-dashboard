@@ -4,17 +4,17 @@ import PortalModalCenter from "@/components/portalDialog/PortalModalCenter";
 import CreateButton from "@/components/buttons/CreateButton";
 import UploadCollectionModal from "./UploadDocumentModal";
 import DocumentCard from "./DocumentCard";
-import { Collection, IDocument } from "@/config/constants";
+import { TCollection, TDocument } from "@/types";
 import TitleWithRefreshButton from "@/components/TitleWithRefreshButton";
 import FileSpaceInfo from "./FileSpaceInfo";
 
 interface DocumentsProps {
-  collection: Collection | undefined;
+  collection: TCollection | undefined;
   refresh: () => void;
 }
 
 const Documents: React.FC<DocumentsProps> = ({ collection, refresh }) => {
-  const [documents, setDocuments] = useState<IDocument[]>([]);
+  const [documents, setDocuments] = useState<TDocument[]>([]);
   const [isOpenUploadDocumentModal, setIsOpenUploadDocumentModal] =
     useState(false);
 

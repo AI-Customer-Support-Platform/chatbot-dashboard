@@ -1,7 +1,7 @@
 import FileInputButton from "@/components/buttons/FileInputButton";
 import LoadingIcon from "@/components/icons/LoadingIcon";
 import ModalContainer from "@/components/modal/ModalContainer";
-import { Collection } from "@/config/constants";
+import { TCollection } from "@/types";
 import useAPI from "@/hooks/useAPI";
 import { useUserStore } from "@/store";
 import classNames from "classnames";
@@ -9,7 +9,7 @@ import { useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 
 interface UploadDocumentModalProps {
-  collection: Collection | undefined;
+  collection: TCollection | undefined;
   setIsOpen: (show: boolean) => void;
   refresh: () => void;
 }

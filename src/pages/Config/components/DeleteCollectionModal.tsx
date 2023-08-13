@@ -1,12 +1,12 @@
 import LoadingIcon from "@/components/icons/LoadingIcon";
 import ModalContainer from "@/components/modal/ModalContainer";
-import { Collection } from "@/config/constants";
+import { TCollection } from "@/types";
 import useAPI from "@/hooks/useAPI";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 interface DeleteCollectionModalProps {
-  collection: Collection | undefined;
+  collection: TCollection | undefined;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 

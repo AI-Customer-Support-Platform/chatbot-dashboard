@@ -3,14 +3,14 @@ import PortalModalCenter from "@/components/portalDialog/PortalModalCenter";
 import classNames from "classnames";
 import { useState } from "react";
 import SubscribePlansModal from "./SubscribePlansModal";
-import { ApiDetails, ApiType } from "@/config/constants";
+import { TApiDetails, TApi } from "@/types";
 import { uppercaseFirstLetter, formatDate } from "../../../utils/utils";
 import useAPI from "@/hooks/useAPI";
 import LoadingIcon from "@/components/icons/LoadingIcon";
 
 interface APIItemProps {
-  name: ApiType;
-  apiDetails: ApiDetails | null;
+  name: TApi;
+  apiDetails: TApiDetails | null;
 }
 
 const APIItem: React.FC<APIItemProps> = ({ name, apiDetails }) => {
@@ -76,7 +76,7 @@ const APIItem: React.FC<APIItemProps> = ({ name, apiDetails }) => {
 };
 
 interface SubscribeButtonProps {
-  api: ApiType;
+  api: TApi;
   active: boolean;
 }
 const UnOrSubscribeButton: React.FC<SubscribeButtonProps> = ({

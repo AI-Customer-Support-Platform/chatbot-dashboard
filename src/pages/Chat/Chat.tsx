@@ -3,12 +3,12 @@ import { useEffect, useState, useCallback } from "react";
 import Skeleton from "react-loading-skeleton";
 import { useNavigate, useParams } from "react-router-dom";
 import CodeField from "./components/CodeField";
-import { Collection } from "@/config/constants";
+import { TCollection } from "@/types";
 
 const Chat = () => {
   const [isChecking, setIsChecking] = useState(false);
   const { collectionId } = useParams();
-  const [collection, setCollection] = useState<Collection | undefined>(
+  const [collection, setCollection] = useState<TCollection | undefined>(
     undefined
   );
   const { fetcherQueryCollection } = useAPI();

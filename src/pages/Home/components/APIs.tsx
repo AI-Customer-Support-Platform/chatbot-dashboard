@@ -3,12 +3,12 @@ import { useEffect, useState, useCallback } from "react";
 import TitleWithRefreshButton from "@/components/TitleWithRefreshButton";
 import Skeleton from "react-loading-skeleton";
 import useAPI from "@/hooks/useAPI";
-import { UserPlanDetail } from "@/config/constants";
+import { TUserPlanDetail } from "@/types";
 
 const APIs = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [initLoaded, setInitLoaded] = useState(false);
-  const [planDetials, setPlanDetails] = useState<UserPlanDetail>({
+  const [planDetials, setPlanDetails] = useState<TUserPlanDetail>({
     web: null,
     instagram: null,
     line: null,

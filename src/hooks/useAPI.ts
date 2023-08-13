@@ -1,18 +1,13 @@
 import fetcher from "@/utils/fetcher";
 import useAccessToken from "./useAccessToken";
-import {
-  ApiType,
-  Collection,
-  PlanType,
-  UserPlanDetail,
-} from "@/config/constants";
+import { TApi, TCollection, TPlan, TUserPlanDetail } from "@/types";
 import { UserStorage } from "@/types";
 
 const useAPI = () => {
   const { getAccessToken } = useAccessToken();
 
   const fetcherQueryCollections = async (): Promise<{
-    collections: Collection[];
+    collections: TCollection[];
   }> => {
     const token = await getAccessToken();
 
@@ -25,7 +20,7 @@ const useAPI = () => {
 
   const fetcherQueryCollection = async (
     collection_id: string
-  ): Promise<Collection> => {
+  ): Promise<TCollection> => {
     const token = await getAccessToken();
 
     return fetcher.get("/collection/query", {
@@ -42,7 +37,7 @@ const useAPI = () => {
     name: string,
     description?: string
   ): Promise<{
-    collections: Collection[];
+    collections: TCollection[];
   }> => {
     const token = await getAccessToken();
 
@@ -145,7 +140,7 @@ const useAPI = () => {
     );
   };
 
-  const fetcherUserPlanDetail = async (): Promise<UserPlanDetail> => {
+  const fetcherUserPlanDetail = async (): Promise<TUserPlanDetail> => {
     const token = await getAccessToken();
 
     return fetcher.get("/user/plan", {
@@ -156,8 +151,8 @@ const useAPI = () => {
   };
 
   const fetcherSubscribePlan = async (
-    api: ApiType,
-    plan: PlanType,
+    api: TApi,
+    plan: TPlan,
     url: string
   ): Promise<{ url: string }> => {
     const token = await getAccessToken();

@@ -1,14 +1,14 @@
 import CheckIcon from "@/components/icons/CheckIcon";
 import LoadingIcon from "@/components/icons/LoadingIcon";
 import ModalContainer from "@/components/modal/ModalContainer";
-import { ApiType, PlanType, Plans } from "@/config/constants";
+import { TApi, TPlan, TPlans } from "@/types";
 import useAPI from "@/hooks/useAPI";
 import { uppercaseFirstLetter } from "@/utils/utils";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
 interface SubscribePlansModalProps {
-  api: ApiType;
+  api: TApi;
   setIsShow: (show: boolean) => void;
 }
 
@@ -16,7 +16,7 @@ const SubscribePlansModal: React.FC<SubscribePlansModalProps> = ({
   api,
   setIsShow,
 }) => {
-  const plans: Plans[] = [
+  const plans: TPlans[] = [
     {
       plan: "basic",
       price: 5000,
@@ -78,8 +78,8 @@ const SubscribePlansModal: React.FC<SubscribePlansModalProps> = ({
 };
 
 interface PlanCardProps {
-  api: ApiType;
-  plan: PlanType;
+  api: TApi;
+  plan: TPlan;
   price: number;
   features: string[];
 }

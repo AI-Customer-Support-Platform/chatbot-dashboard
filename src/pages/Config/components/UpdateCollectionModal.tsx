@@ -1,13 +1,13 @@
 import LoadingIcon from "@/components/icons/LoadingIcon";
 import ModalContainer from "@/components/modal/ModalContainer";
-import { Collection } from "@/config/constants";
+import { TCollection } from "@/types";
 import useAPI from "@/hooks/useAPI";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useParams } from "react-router-dom";
 
 interface UpdateCollectionModalProps {
-  collection: Collection | undefined;
+  collection: TCollection | undefined;
   setIsOpen: (show: boolean) => void;
   refresh: () => void;
 }

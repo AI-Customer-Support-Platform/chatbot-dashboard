@@ -4,11 +4,11 @@ import Skeleton from "react-loading-skeleton";
 import { useNavigate } from "react-router-dom";
 import DeleteCollectionModal from "./DeleteCollectionModal";
 import UpdateCollectionModal from "./UpdateCollectionModal";
-import { Collection } from "@/config/constants";
+import { TCollection } from "@/types";
 
 interface CollectionInfoProps {
   refresh: () => void;
-  collection: Collection | undefined;
+  collection: TCollection | undefined;
 }
 
 const CollectionInfo: React.FC<CollectionInfoProps> = ({
