@@ -28,6 +28,10 @@ const FileSpaceInfo: React.FC<FileSpaceInfoProps> = ({ refresh }) => {
       setStorage(resp);
     } catch (error) {
       console.error(error);
+      setStorage({
+        total_space: 0,
+        remaining_space: 0,
+      });
     } finally {
       setIsLoading(false);
     }
