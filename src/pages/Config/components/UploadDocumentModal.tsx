@@ -3,6 +3,7 @@ import LoadingIcon from "@/components/icons/LoadingIcon";
 import ModalContainer from "@/components/modal/ModalContainer";
 import { Collection } from "@/config/constants";
 import useAPI from "@/hooks/useAPI";
+import { useUserStore } from "@/store";
 import classNames from "classnames";
 import { useRef, useState } from "react";
 import { toast } from "react-hot-toast";
@@ -33,13 +34,22 @@ const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
   const { fetcherUploadDocument } = useAPI();
   const nameRef = useRef<HTMLInputElement>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const { storage } = useUserStore();
 
   const handleFileChange = (file: File | null) => {
     if (!file) {
       return;
     }
 
-    const fileExtension = file.name.split(".").pop()?.toLowerCase();
+    const { size, name } = file;
+    const fileExtension = name.split(".").pop()?.toLowerCase();
+
+    if (size > storage.remaining_space) {
+      toast("⚠️ Not enough space");
+      setSelectedFile(null);
+      return;
+    }
+
     const isSupportedFileType =
       fileExtension && supportedFileTypes.includes(fileExtension);
     const nameRefCurrent = nameRef.current;
@@ -47,13 +57,10 @@ const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
     if (!isSupportedFileType) {
       toast("⚠️ Unsupported file type");
       setSelectedFile(null);
-      if (nameRefCurrent) {
-        nameRefCurrent.value = "";
-      }
     } else {
       setSelectedFile(file);
       if (nameRefCurrent) {
-        nameRefCurrent.value = file.name;
+        nameRefCurrent.value = name;
       }
     }
   };

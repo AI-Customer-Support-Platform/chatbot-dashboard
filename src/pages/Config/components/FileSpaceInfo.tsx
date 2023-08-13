@@ -1,5 +1,6 @@
 import ProgressBar from "@/components/ProgressBar";
 import useAPI from "@/hooks/useAPI";
+import { useUserStore } from "@/store";
 import { bytesToMB } from "@/utils/utils";
 import { useCallback, useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
@@ -13,10 +14,7 @@ const FileSpaceInfo: React.FC<FileSpaceInfoProps> = ({ refresh }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [needRefresh, setNeedRefresh] = useState(false);
   const { fetcherUserStorage } = useAPI();
-  const [storage, setStorage] = useState({
-    remaining_space: 0,
-    total_space: 0,
-  });
+  const { storage, setStorage } = useUserStore();
 
   const fetchUserStorage = useCallback(async () => {
     if (isLoading) {
@@ -33,7 +31,7 @@ const FileSpaceInfo: React.FC<FileSpaceInfoProps> = ({ refresh }) => {
     } finally {
       setIsLoading(false);
     }
-  }, [isLoading, fetcherUserStorage]);
+  }, [isLoading, fetcherUserStorage, setStorage]);
 
   useEffect(() => {
     if (refresh) {

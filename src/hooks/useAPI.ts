@@ -6,6 +6,7 @@ import {
   PlanType,
   UserPlanDetail,
 } from "@/config/constants";
+import { UserStorage } from "@/types";
 
 const useAPI = () => {
   const { getAccessToken } = useAccessToken();
@@ -186,10 +187,7 @@ const useAPI = () => {
     });
   };
 
-  const fetcherUserStorage = async (): Promise<{
-    remaining_space: number;
-    total_space: number;
-  }> => {
+  const fetcherUserStorage = async (): Promise<UserStorage> => {
     const token = await getAccessToken();
 
     return fetcher.get("/user/storage", {
