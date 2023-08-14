@@ -4,12 +4,12 @@ import PortalModalCenter from "@/components/portalDialog/PortalModalCenter";
 import CreateButton from "@/components/buttons/CreateButton";
 import UploadCollectionModal from "./UploadDocumentModal";
 import DocumentCard from "./DocumentCard";
-import { TCollection, TDocument } from "@/types";
+import { TCollectionData, TDocument } from "@/types";
 import TitleWithRefreshButton from "@/components/TitleWithRefreshButton";
 import FileSpaceInfo from "./FileSpaceInfo";
 
 interface DocumentsProps {
-  collection: TCollection | undefined;
+  collection: TCollectionData | undefined;
   refresh: () => void;
 }
 

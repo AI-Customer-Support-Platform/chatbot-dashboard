@@ -3,13 +3,13 @@ import { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import CollectionInfo from "./components/CollectionInfo";
 import Documents from "./components/Documents";
-import { TCollection } from "@/types";
+import { TCollectionData } from "@/types";
 
 const Config = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [initLoaded, setInitLoaded] = useState(false);
   const { collectionId } = useParams();
-  const [collection, setCollection] = useState<TCollection | undefined>(
+  const [collection, setCollection] = useState<TCollectionData | undefined>(
     undefined
   );
   const { fetcherQueryCollection } = useAPI();

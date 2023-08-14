@@ -1,13 +1,13 @@
 import fetcher from "@/utils/fetcher";
 import useAccessToken from "./useAccessToken";
-import { TApi, TCollection, TPlan, TUserPlanDetail } from "@/types";
+import { TApi, TCollectionData, TPlan, TUserPlanDetail } from "@/types";
 import { UserStorage } from "@/types";
 
 const useAPI = () => {
   const { getAccessToken } = useAccessToken();
 
   const fetcherQueryCollections = async (): Promise<{
-    collections: TCollection[];
+    collections: TCollectionData[];
   }> => {
     const token = await getAccessToken();
 
@@ -20,7 +20,7 @@ const useAPI = () => {
 
   const fetcherQueryCollection = async (
     collection_id: string
-  ): Promise<TCollection> => {
+  ): Promise<TCollectionData> => {
     const token = await getAccessToken();
 
     return fetcher.get("/collection/query", {
@@ -37,7 +37,7 @@ const useAPI = () => {
     name: string,
     description?: string
   ): Promise<{
-    collections: TCollection[];
+    collections: TCollectionData[];
   }> => {
     const token = await getAccessToken();
 

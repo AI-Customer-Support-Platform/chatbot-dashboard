@@ -5,7 +5,7 @@ import useAPI from "@/hooks/useAPI";
 import PortalModalCenter from "@/components/portalDialog/PortalModalCenter";
 import CreateCollectionModal from "./CreateCollectionModal";
 import CreateButton from "@/components/buttons/CreateButton";
-import { TCollection } from "@/types";
+import { TCollectionData } from "@/types";
 import TitleWithRefreshButton from "@/components/TitleWithRefreshButton";
 import { useAuth0 } from "@auth0/auth0-react";
 import toast from "react-hot-toast";
@@ -13,7 +13,7 @@ import toast from "react-hot-toast";
 const Collections = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [initLoaded, setInitLoaded] = useState(false);
-  const [collections, setCollections] = useState<TCollection[]>([]);
+  const [collections, setCollections] = useState<TCollectionData[]>([]);
   const [isOpenCreateCollectionModal, setIsOpenCreateCollectionModal] =
     useState(false);
   const { fetcherQueryCollections } = useAPI();
