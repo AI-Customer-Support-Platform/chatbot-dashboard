@@ -1,6 +1,12 @@
 import fetcher from "@/utils/fetcher";
 import useAccessToken from "./useAccessToken";
-import { TApi, TCollectionData, TPlan, TUserPlanDetail } from "@/types";
+import {
+  TApi,
+  TCollectionData,
+  TCollectionInfo,
+  TPlan,
+  TUserPlanDetail,
+} from "@/types";
 import { UserStorage } from "@/types";
 
 const useAPI = () => {
@@ -73,16 +79,14 @@ const useAPI = () => {
 
   const fetcherUpdateCollection = async (
     collection_id: string,
-    name: string,
-    description?: string
+    collectionInfo: TCollectionInfo
   ) => {
     const token = await getAccessToken();
 
     return fetcher.post(
       `/collection/update`,
       {
-        name,
-        description,
+        ...collectionInfo,
       },
       {
         params: {

@@ -3,6 +3,7 @@ import { TDocument } from "./document";
 export type TCollectionInfo = {
   name: string;
   description?: string;
+  fallback_msg?: string;
 };
 
 export type TCollectionData = TCollectionInfo & {
