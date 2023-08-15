@@ -56,8 +56,8 @@ const SubscribePlansModal: React.FC<SubscribePlansModalProps> = ({
       features: [
         `Access to ${uppercaseFirstLetter(api)} API`,
         "7,500,000 tokens allocated",
-        "Around 75,00 questions users can ask",
-        "5000MB document upload capacity",
+        "Around 75,000 questions users can ask",
+        "500MB document upload capacity",
         "Unlimited collection creation",
       ],
     },
