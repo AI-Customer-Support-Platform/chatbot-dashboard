@@ -1,4 +1,4 @@
-import LoadingIcon from "@/components/icons/LoadingIcon";
+import { LoadingIcon } from "@/components/icons";
 import ModalContainer from "@/components/modal/ModalContainer";
 import useAPI from "@/hooks/useAPI";
 import { useRef, useState } from "react";

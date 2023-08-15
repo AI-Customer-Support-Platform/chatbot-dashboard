@@ -1,5 +1,5 @@
 import { ChangeEvent, DragEvent } from "react";
-import UploadFileIcon from "../icons/UploadFileIcon";
+import { UploadFileIcon } from "../icons";
 
 interface FileInputButtonProps {
   onChange: (file: File | null) => void;

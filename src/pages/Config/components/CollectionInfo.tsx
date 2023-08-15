@@ -6,7 +6,7 @@ import { TCollectionData, TCollectionInfo } from "@/types";
 import classNames from "classnames";
 import toast from "react-hot-toast";
 import useAPI from "@/hooks/useAPI";
-import LoadingIcon from "@/components/icons/LoadingIcon";
+import { LoadingIcon } from "@/components/icons";
 import BackToHomeButton from "@/components/buttons/BackToHomeButton";
 
 interface CollectionInfoProps {

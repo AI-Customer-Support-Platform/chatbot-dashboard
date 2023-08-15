@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import RefreshIcon from "./icons/RefreshIcon";
+import { RefreshIcon } from "./icons";
 
 interface TitleWithRefreshButtonProps {
   title: string;

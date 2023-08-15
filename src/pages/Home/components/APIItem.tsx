@@ -6,7 +6,7 @@ import SubscribePlansModal from "./SubscribePlansModal";
 import { TApiDetails, TApi } from "@/types";
 import { uppercaseFirstLetter, formatDate } from "../../../utils/utils";
 import useAPI from "@/hooks/useAPI";
-import LoadingIcon from "@/components/icons/LoadingIcon";
+import { LoadingIcon } from "@/components/icons";
 
 interface APIItemProps {
   name: TApi;

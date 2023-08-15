@@ -1,11 +1,11 @@
-import CheckIcon from "@/components/icons/CheckIcon";
-import LoadingIcon from "@/components/icons/LoadingIcon";
+import { LoadingIcon } from "@/components/icons";
 import ModalContainer from "@/components/modal/ModalContainer";
 import { TApi, TPlan, TPlans } from "@/types";
 import useAPI from "@/hooks/useAPI";
 import { uppercaseFirstLetter } from "@/utils/utils";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { CheckIcon } from "@/components/icons";
 
 interface SubscribePlansModalProps {
   api: TApi;
@@ -104,7 +104,7 @@ const PlanCard: React.FC<PlanCardProps> = ({ api, plan, price, features }) => {
   };
 
   return (
-    <div className="w-full flex-auto md:max-w-md min-w-[300px] rounded-lg border-2 border-slate-100 p-2 transition duration-200 hover:-translate-y-[1px] hover:border-slate-200 hover:shadow-lg sm:w-auto">
+    <div className="w-full min-w-[300px] flex-auto rounded-lg border-2 border-slate-100 p-2 transition duration-200 hover:-translate-y-[1px] hover:border-slate-200 hover:shadow-lg sm:w-auto md:max-w-md">
       <h2 className="mb-2 text-xl font-bold">{uppercaseFirstLetter(plan)}</h2>
       <section className="mb-4">
         <span className="font-inter text-3xl font-extrabold ">
