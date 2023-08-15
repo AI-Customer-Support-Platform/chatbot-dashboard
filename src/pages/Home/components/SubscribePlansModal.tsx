@@ -104,7 +104,7 @@ const PlanCard: React.FC<PlanCardProps> = ({ api, plan, price, features }) => {
   };
 
   return (
-    <div className="w-full rounded-lg border-2 border-slate-100 p-2 transition duration-200 hover:-translate-y-[1px] hover:border-slate-200 hover:shadow-lg sm:w-auto">
+    <div className="w-full flex-auto md:max-w-md min-w-[300px] rounded-lg border-2 border-slate-100 p-2 transition duration-200 hover:-translate-y-[1px] hover:border-slate-200 hover:shadow-lg sm:w-auto">
       <h2 className="mb-2 text-xl font-bold">{uppercaseFirstLetter(plan)}</h2>
       <section className="mb-4">
         <span className="font-inter text-3xl font-extrabold ">
