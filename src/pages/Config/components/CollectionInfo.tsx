@@ -1,13 +1,13 @@
 import PortalModalCenter from "@/components/portalDialog/PortalModalCenter";
 import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
-import { useNavigate } from "react-router-dom";
 import DeleteCollectionModal from "./DeleteCollectionModal";
 import { TCollectionData, TCollectionInfo } from "@/types";
 import classNames from "classnames";
 import toast from "react-hot-toast";
 import useAPI from "@/hooks/useAPI";
 import LoadingIcon from "@/components/icons/LoadingIcon";
+import BackToHomeButton from "@/components/buttons/BackToHomeButton";
 
 interface CollectionInfoProps {
   refresh: () => void;
@@ -18,7 +18,6 @@ const CollectionInfo: React.FC<CollectionInfoProps> = ({
   refresh,
   collectionData,
 }) => {
-  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const { fetcherUpdateCollection } = useAPI();
   const [isOpenDeleteCollectionModal, setIsOpenDeleteCollectionModal] =
@@ -83,11 +82,9 @@ const CollectionInfo: React.FC<CollectionInfoProps> = ({
 
   return (
     <>
-      <CustomButton
-        handleClick={() => navigate("/")}
-        name="Back"
-        classNames="mb-12 bg-white text-black"
-      />
+      <section className="mb-8">
+        <BackToHomeButton />
+      </section>
       <section className="mb-6 flex flex-col gap-4">
         <div className="flex items-center gap-6">
           {collectionInfo ? (
