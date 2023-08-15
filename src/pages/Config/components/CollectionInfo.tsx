@@ -82,8 +82,43 @@ const CollectionInfo: React.FC<CollectionInfoProps> = ({
 
   return (
     <>
-      <section className="mb-8">
+      <section className="mb-8 flex gap-6">
         <BackToHomeButton />
+        {collectionData ? (
+          <>
+            <CustomButton
+              handleClick={() => {
+                window.location.href = `/chat/${collectionData.id}`;
+              }}
+              name="Chat"
+              classNames="bg-blue-500 text-white"
+            />
+            <CustomButton
+              handleClick={handleClickDeleteCollectionButton}
+              name="Delete the collection"
+              classNames="hover:bg-red-500  bg-slate-300 text-slate-400 hover:text-white"
+            />
+            <PortalModalCenter
+              show={isOpenDeleteCollectionModal}
+              setIsShow={setIsOpenDeleteCollectionModal}
+            >
+              <DeleteCollectionModal
+                collection={collectionData}
+                setIsOpen={setIsOpenDeleteCollectionModal}
+              />
+            </PortalModalCenter>
+          </>
+        ) : (
+          <div className="flex gap-6">
+            <section className="h-auto w-16">
+              <Skeleton className="text-4xl" />
+            </section>
+
+            <section className="h-auto w-48">
+              <Skeleton className="text-4xl" />
+            </section>
+          </div>
+        )}
       </section>
       <section className="mb-6 flex flex-col gap-4">
         <div className="flex items-center gap-6">
@@ -182,39 +217,6 @@ const CollectionInfo: React.FC<CollectionInfoProps> = ({
             </div>
           )}
         </div>
-        {collectionData ? (
-          <>
-            <section className="flex gap-4">
-              <CustomButton
-                handleClick={() => {
-                  window.location.href = `/chat/${collectionData.id}`;
-                }}
-                name="Chat"
-                classNames="bg-blue-500 text-white"
-              />
-            </section>
-            <section>
-              <CustomButton
-                handleClick={handleClickDeleteCollectionButton}
-                name="Delete the collection"
-                classNames="hover:bg-red-500  bg-slate-300 text-slate-400 hover:text-white"
-              />
-              <PortalModalCenter
-                show={isOpenDeleteCollectionModal}
-                setIsShow={setIsOpenDeleteCollectionModal}
-              >
-                <DeleteCollectionModal
-                  collection={collectionData}
-                  setIsOpen={setIsOpenDeleteCollectionModal}
-                />
-              </PortalModalCenter>
-            </section>
-          </>
-        ) : (
-          <section className="w-24">
-            <Skeleton className="text-3xl" />
-          </section>
-        )}
       </section>
     </>
   );
