@@ -1,6 +1,8 @@
 import axios, { AxiosInstance, AxiosResponse, AxiosError } from "axios";
+import i18next from "i18next";
 import toast from "react-hot-toast";
 
+console.log(i18next.t("Create"));
 interface ErrorResponse {
   message: string;
 }
@@ -29,7 +31,7 @@ fetcher.interceptors.response.use(
     if (typeof message === "string") {
       toast.error(message);
     } else {
-      toast.error("Something went wrong.");
+      toast.error(i18next.t("Something went wrong"));
     }
     throw { ...err, message };
   }

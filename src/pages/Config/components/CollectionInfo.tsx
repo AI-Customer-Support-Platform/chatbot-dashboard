@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import useAPI from "@/hooks/useAPI";
 import { LoadingIcon } from "@/components/icons";
 import BackToHomeButton from "@/components/buttons/BackToHomeButton";
+import { useTranslation } from "react-i18next";
 
 interface CollectionInfoProps {
   refresh: () => void;
@@ -26,6 +27,7 @@ const CollectionInfo: React.FC<CollectionInfoProps> = ({
     TCollectionInfo | undefined
   >(undefined);
   const [isCollectionInfoChanged, setIsCollectionInfoChanged] = useState(false);
+  const { t } = useTranslation();
 
   const handleInputChange = (value: string, type: keyof TCollectionInfo) => {
     setIsCollectionInfoChanged(true);
@@ -43,7 +45,7 @@ const CollectionInfo: React.FC<CollectionInfoProps> = ({
     const { name, description, fallback_msg } = collectionInfo;
 
     if (name.trim() === "") {
-      toast("⚠️ Name is required");
+      toast(`⚠️ ${t("Name is required")}`);
       return;
     }
 
@@ -90,12 +92,12 @@ const CollectionInfo: React.FC<CollectionInfoProps> = ({
               handleClick={() => {
                 window.location.href = `/chat/${collectionData.id}`;
               }}
-              name="Chat"
+              name={t("Chat")}
               classNames="bg-blue-500 text-white"
             />
             <CustomButton
               handleClick={handleClickDeleteCollectionButton}
-              name="Delete the collection"
+              name={t("Delete the collection")}
               classNames="hover:bg-red-500  bg-slate-300 text-slate-400 hover:text-white"
             />
             <PortalModalCenter
@@ -126,7 +128,7 @@ const CollectionInfo: React.FC<CollectionInfoProps> = ({
             <div className="max-w-sm">
               <section className="mb-3 flex flex-col">
                 <label className="mb-1 font-bold" htmlFor="name">
-                  Name
+                  {t("Name")}
                 </label>
                 <input
                   onChange={(event) => {
@@ -140,7 +142,7 @@ const CollectionInfo: React.FC<CollectionInfoProps> = ({
                         !collectionInfo.name,
                     }
                   )}
-                  placeholder="required"
+                  placeholder={t("required")}
                   type="text"
                   id="name"
                   value={collectionInfo.name}
@@ -149,7 +151,7 @@ const CollectionInfo: React.FC<CollectionInfoProps> = ({
 
               <section className="mb-3 flex flex-col">
                 <label className="mb-1 font-bold" htmlFor="description">
-                  Description
+                  {t("Description")}
                 </label>
                 <textarea
                   onChange={(event) => {
@@ -157,14 +159,14 @@ const CollectionInfo: React.FC<CollectionInfoProps> = ({
                   }}
                   className="rounded border border-slate-300 bg-slate-100 p-1 outline-2 focus-within:bg-slate-50 focus-within:outline focus-within:outline-blue-500"
                   id="description"
-                  placeholder="optional"
+                  placeholder={t("optional")}
                   value={collectionInfo.description}
                 ></textarea>
               </section>
 
               <section className="mb-3 flex flex-col">
                 <label className="mb-1 font-bold" htmlFor="fallback-message">
-                  Fallback message
+                  {t("Fallback message")}
                 </label>
                 <textarea
                   onChange={(event) => {
@@ -175,8 +177,9 @@ const CollectionInfo: React.FC<CollectionInfoProps> = ({
                   value={collectionInfo.fallback_msg}
                 ></textarea>
                 <span className="mt-1 text-xs text-slate-600">
-                  This message serves as a fallback response for the user if the
-                  plan expires or if there are insufficient tokens.
+                  {t(
+                    "This message serves as a fallback response for the user if the plan expires or if there are insufficient tokens."
+                  )}
                 </span>
               </section>
 
@@ -186,12 +189,12 @@ const CollectionInfo: React.FC<CollectionInfoProps> = ({
                     <>
                       <CustomButton
                         handleClick={handleClickUpdate}
-                        name="Update info"
+                        name={t("Update info")}
                         classNames="text-white bg-green-600"
                       />
                       <CustomButton
                         handleClick={handleClickCancelUpdateButton}
-                        name="Cancel"
+                        name={t("Cancel")}
                         classNames="text-white"
                       />
                     </>

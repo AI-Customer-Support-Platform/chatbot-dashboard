@@ -9,6 +9,7 @@ import { TCollectionData } from "@/types";
 import TitleWithRefreshButton from "@/components/TitleWithRefreshButton";
 import { useAuth0 } from "@auth0/auth0-react";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 const Collections = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -18,6 +19,7 @@ const Collections = () => {
     useState(false);
   const { fetcherQueryCollections } = useAPI();
   const { user } = useAuth0();
+  const { t } = useTranslation();
 
   const fetchCollections = useCallback(async () => {
     if (isLoading) {
@@ -47,7 +49,7 @@ const Collections = () => {
 
   const handleClickCreateCollectionButton = () => {
     if (!user?.email_verified) {
-      toast("⚠️ Email Verification Required");
+      toast(`⚠️ ${t("Email Verification Required")}`);
       return;
     }
 
@@ -68,7 +70,7 @@ const Collections = () => {
   return (
     <div>
       <TitleWithRefreshButton
-        title="Collections"
+        title={t("Collections")}
         isLoading={isLoading}
         refresh={fetchCollections}
       />

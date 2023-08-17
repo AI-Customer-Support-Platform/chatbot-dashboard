@@ -2,6 +2,7 @@ import PortalModalCenter from "@/components/portalDialog/PortalModalCenter";
 import { useState } from "react";
 import DeleteDocumentModal from "./DeleteDocumentModal";
 import { TDocument } from "@/types";
+import { useTranslation } from "react-i18next";
 
 interface DocumentCardProps {
   collection_id: string;
@@ -13,6 +14,8 @@ const DocumentCard: React.FC<DocumentCardProps> = ({
   refresh,
   collection_id,
 }) => {
+  const { t } = useTranslation();
+
   const [isOpenDeleteDocumentModal, setIsOpenDeleteDocumentModal] =
     useState(false);
 
@@ -27,7 +30,7 @@ const DocumentCard: React.FC<DocumentCardProps> = ({
       <section>
         <DocumentButton
           handleClick={handleClickDeleteDocumentButton}
-          name="Delete"
+          name={t("Delete")}
         />
       </section>
       <section>

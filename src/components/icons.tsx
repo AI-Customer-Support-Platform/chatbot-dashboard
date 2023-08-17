@@ -5,6 +5,20 @@ interface SVGProps extends React.SVGProps<SVGSVGElement> {
   width?: string | number;
   gradientId?: string;
 }
+export const TriangleIcon = (props: SVGProps) => {
+  return (
+    <svg
+      width="9"
+      height="5"
+      viewBox="0 0 9 5"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path d="M4.5 4.5L8.83013 0L0.169873 0L4.5 4.5Z" fill="currentColor" />
+    </svg>
+  );
+};
 
 export const ArrorBackIcon = (props: SVGProps) => {
   return (
@@ -16,7 +30,7 @@ export const ArrorBackIcon = (props: SVGProps) => {
       {...props}
     >
       <path
-        fill={props.fill || "#000"}
+        fill="currentColor"
         d="M20 11H6.83l2.88-2.88A.996.996 0 1 0 8.3 6.71L3.71 11.3a.996.996 0 0 0 0 1.41L8.3 17.3a.996.996 0 1 0 1.41-1.41L6.83 13H20c.55 0 1-.45 1-1s-.45-1-1-1z"
       />
     </svg>

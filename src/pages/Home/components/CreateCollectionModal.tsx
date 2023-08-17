@@ -3,6 +3,7 @@ import ModalContainer from "@/components/modal/ModalContainer";
 import useAPI from "@/hooks/useAPI";
 import { useRef, useState } from "react";
 import { toast } from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 interface CreateCollectionModalProps {
   setIsOpen: (show: boolean) => void;
@@ -18,6 +19,7 @@ const CreateCollectionModal: React.FC<CreateCollectionModalProps> = ({
   const nameRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
   const [isValidInput, setIsValidInput] = useState(false);
+  const { t } = useTranslation();
 
   const handleNameChange = () => {
     const inputValue = nameRef.current?.value?.trim();
@@ -43,35 +45,36 @@ const CreateCollectionModal: React.FC<CreateCollectionModalProps> = ({
       }, 500);
     } catch (error) {
       console.error(error);
-      toast.error("Create collection failed");
+      toast.error(t("Create collection failed"));
       setIsLoading(false);
     }
   };
 
   return (
-    <ModalContainer title="Create Collection" setIsShow={setIsOpen}>
+    <ModalContainer title={t("Create Collection")} setIsShow={setIsOpen}>
       <section className="mb-4 flex flex-col gap-4">
         <div className="flex flex-col ">
           <label className="ml-2 text-slate-400" htmlFor="name">
-            name
+            {t("Name")}
           </label>
           <input
             ref={nameRef}
             id="name"
             className="rounded-lg border p-1 px-2 outline-none"
             type="text"
+            placeholder={t("required")}
             onChange={handleNameChange}
           />
         </div>
         <div className="flex flex-col ">
           <label className="ml-2 text-slate-400" htmlFor="description">
-            description
+            {t("Description")}
           </label>
           <textarea
             ref={descriptionRef}
             id="description"
             className="rounded-lg border p-1 px-2 outline-none"
-            placeholder="optional"
+            placeholder={t("optional")}
           />
         </div>
       </section>
@@ -84,7 +87,7 @@ const CreateCollectionModal: React.FC<CreateCollectionModalProps> = ({
               onClick={handleClickCreate}
               className=" rounded bg-black px-2 py-1 text-lg font-extrabold text-white transition-transform duration-300 hover:scale-105 active:scale-110"
             >
-              Create
+              {t("Create")}
             </button>
           )}
         </section>

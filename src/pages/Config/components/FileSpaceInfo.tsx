@@ -3,6 +3,7 @@ import useAPI from "@/hooks/useAPI";
 import { useUserStore } from "@/store";
 import { bytesToMB } from "@/utils/utils";
 import { useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
 
 interface FileSpaceInfoProps {
@@ -15,6 +16,7 @@ const FileSpaceInfo: React.FC<FileSpaceInfoProps> = ({ refresh }) => {
   const [needRefresh, setNeedRefresh] = useState(false);
   const { fetcherUserStorage } = useAPI();
   const { storage, setStorage } = useUserStore();
+  const { t } = useTranslation();
 
   const fetchUserStorage = useCallback(async () => {
     if (isLoading) {
@@ -62,7 +64,7 @@ const FileSpaceInfo: React.FC<FileSpaceInfoProps> = ({ refresh }) => {
     <div className="-mt-4 mb-8 max-w-3xl">
       {!isLoading ? (
         <section>
-          <h3 className="mb-2 font-bold text-slate-600 ">Storage</h3>
+          <h3 className="mb-2 font-bold text-slate-600 ">{t("Storage")}</h3>
           <span className="mb-1 block text-sm text-slate-600">
             <span className="font-bold">
               {bytesToMB(storage.total_space - storage.remaining_space)}{" "}

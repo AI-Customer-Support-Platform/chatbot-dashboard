@@ -4,6 +4,7 @@ import { TCollectionData } from "@/types";
 import useAPI from "@/hooks/useAPI";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 interface DeleteCollectionModalProps {
   collection: TCollectionData | undefined;
@@ -17,6 +18,7 @@ const DeleteCollectionModal: React.FC<DeleteCollectionModalProps> = ({
   const [isLoading, setIsLoading] = useState(false);
   const { fetcherDeleteCollection } = useAPI();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleClickDeleteButton = async () => {
     if (!collection) {
@@ -40,9 +42,9 @@ const DeleteCollectionModal: React.FC<DeleteCollectionModalProps> = ({
   };
 
   return (
-    <ModalContainer title="Delete Collection">
+    <ModalContainer title={t("Delete Collection")}>
       <section className="mb-8">
-        <h2>Are you sure you want to delete the collection?</h2>
+        <h2>{t("Are you sure you want to delete the collection?")}</h2>
       </section>
       <section className="flex place-content-center gap-8">
         {isLoading ? (
@@ -53,14 +55,14 @@ const DeleteCollectionModal: React.FC<DeleteCollectionModalProps> = ({
               onClick={handleClickDeleteButton}
               className=" rounded bg-red-500 px-2 py-1 text-lg font-extrabold text-white transition-transform duration-300 hover:scale-105 active:scale-110"
             >
-              Delete
+              {t("Delete")}
             </button>
 
             <button
               onClick={handleClickCancelButton}
               className=" rounded border bg-white px-2 py-1 text-lg font-extrabold text-black transition-transform duration-300 hover:scale-105 active:scale-110"
             >
-              Cancel
+              {t("Cancel")}
             </button>
           </>
         )}

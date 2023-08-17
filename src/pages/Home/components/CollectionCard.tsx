@@ -1,4 +1,5 @@
 import { truncate } from "@/utils/utils";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 interface CollectionCardProps {
@@ -12,6 +13,8 @@ const CollectionCard: React.FC<CollectionCardProps> = ({
   collectionId,
 }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
   return (
     <div className="flex flex-col justify-between rounded-lg bg-white/40 p-4 transition-transform duration-300 hover:-translate-y-2 hover:bg-white/60 hover:shadow-lg">
       <section className="mb-8">
@@ -25,13 +28,13 @@ const CollectionCard: React.FC<CollectionCardProps> = ({
           handleClick={() => {
             navigate(`/config/${collectionId}`);
           }}
-          name="Config"
+          name={t("Config")}
         />
         <CollectionButton
           handleClick={() => {
             window.location.href = `/chat/${collectionId}`;
           }}
-          name="Chat"
+          name={t("Chat")}
         />
       </section>
     </div>

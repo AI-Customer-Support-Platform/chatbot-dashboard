@@ -52,3 +52,25 @@ export const bytesToMB = (bytes: number): string => {
   const megabytes = bytes / (1024 * 1024);
   return `${megabytes.toFixed(2)}MB`;
 };
+
+export const isClickOutside = <T extends HTMLElement>(
+  ref: React.RefObject<T>,
+  event: MouseEvent
+): boolean => {
+  const refElement = ref.current;
+  if (refElement) {
+    const { left, top, width, height } = refElement.getBoundingClientRect();
+    const { clientX, clientY } = event;
+
+    if (
+      clientX < left ||
+      clientX > left + width ||
+      clientY < top ||
+      clientY > top + height
+    ) {
+      return true;
+    }
+  }
+
+  return false;
+};

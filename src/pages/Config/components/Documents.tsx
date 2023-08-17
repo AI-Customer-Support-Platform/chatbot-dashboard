@@ -7,6 +7,7 @@ import DocumentCard from "./DocumentCard";
 import { TCollectionData, TDocument } from "@/types";
 import TitleWithRefreshButton from "@/components/TitleWithRefreshButton";
 import FileSpaceInfo from "./FileSpaceInfo";
+import { useTranslation } from "react-i18next";
 
 interface DocumentsProps {
   collection: TCollectionData | undefined;
@@ -17,6 +18,7 @@ const Documents: React.FC<DocumentsProps> = ({ collection, refresh }) => {
   const [documents, setDocuments] = useState<TDocument[]>([]);
   const [isOpenUploadDocumentModal, setIsOpenUploadDocumentModal] =
     useState(false);
+  const { t } = useTranslation();
 
   const handleClickUploadDocumentButton = () => {
     setIsOpenUploadDocumentModal(true);
@@ -41,7 +43,7 @@ const Documents: React.FC<DocumentsProps> = ({ collection, refresh }) => {
   return (
     <div>
       <TitleWithRefreshButton
-        title="Documents"
+        title={t("Documents")}
         isLoading={!collection}
         refresh={refresh}
       />
@@ -59,7 +61,7 @@ const Documents: React.FC<DocumentsProps> = ({ collection, refresh }) => {
           ) : (
             <>
               <CreateButton
-                name="Upload"
+                name={t("Upload")}
                 handleClickCreateButton={handleClickUploadDocumentButton}
               />
 

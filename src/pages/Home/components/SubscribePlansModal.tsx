@@ -6,6 +6,7 @@ import { uppercaseFirstLetter } from "@/utils/utils";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { CheckIcon } from "@/components/icons";
+import { useTranslation } from "react-i18next";
 
 interface SubscribePlansModalProps {
   api: TApi;
@@ -16,56 +17,47 @@ const SubscribePlansModal: React.FC<SubscribePlansModalProps> = ({
   api,
   setIsShow,
 }) => {
+  const { t } = useTranslation();
+
+  const generateFeatures = (
+    api: string,
+    tokens: string,
+    questions: string,
+    upload: string
+  ) => [
+    t("AccessToApi", { api: uppercaseFirstLetter(api) }),
+    t("TokensAllocated", { tokens }),
+    t("QuestionsUsersCanAsk", { questions }),
+    t("DocumentUploadCapacity", { upload }),
+    t("UnlimitedCollectionCreation"),
+  ];
+
   const plans: TPlans[] = [
     {
-      plan: "basic",
+      plan: t("Basic"),
       price: 5000,
-      features: [
-        `Access to ${uppercaseFirstLetter(api)} API`,
-        "75,000 tokens allocated",
-        "Around 750 questions users can ask",
-        "2MB document upload capacity",
-        "Unlimited collection creation",
-      ],
+      features: generateFeatures(api, "75,000", "750", "2MB"),
     },
     {
-      plan: "standard",
+      plan: t("Standard"),
       price: 15000,
-      features: [
-        `Access to ${uppercaseFirstLetter(api)} API`,
-        "750,000 tokens allocated",
-        "Around 7,500 questions users can ask",
-        "20MB document upload capacity",
-        "Unlimited collection creation",
-      ],
+      features: generateFeatures(api, "750,000", "7,500", "20MB"),
     },
     {
-      plan: "plus",
+      plan: t("Plus"),
       price: 22000,
-      features: [
-        `Access to ${uppercaseFirstLetter(api)} API`,
-        "3,750,000 tokens allocated",
-        "Around 37,500 questions users can ask",
-        "100MB document upload capacity",
-        "Unlimited collection creation",
-      ],
+      features: generateFeatures(api, "3,750,000", "37,500", "100MB"),
     },
     {
-      plan: "premium",
+      plan: t("Premium"),
       price: 40000,
-      features: [
-        `Access to ${uppercaseFirstLetter(api)} API`,
-        "7,500,000 tokens allocated",
-        "Around 75,000 questions users can ask",
-        "500MB document upload capacity",
-        "Unlimited collection creation",
-      ],
+      features: generateFeatures(api, "7,500,000", "75,000", "500MB"),
     },
   ];
 
   return (
     <ModalContainer
-      title={uppercaseFirstLetter(api) + " API Plans"}
+      title={uppercaseFirstLetter(api) + ` API ` + t("Plans")}
       setIsShow={setIsShow}
     >
       <section className="flex flex-wrap justify-center gap-4 font-lato">
@@ -86,6 +78,7 @@ interface PlanCardProps {
 const PlanCard: React.FC<PlanCardProps> = ({ api, plan, price, features }) => {
   const [isLoading, setIsLoading] = useState(false);
   const { fetcherSubscribePlan } = useAPI();
+  const { t } = useTranslation();
 
   const handleClickSubscribe = async () => {
     if (!api || !plan) {
@@ -97,7 +90,7 @@ const PlanCard: React.FC<PlanCardProps> = ({ api, plan, price, features }) => {
       const response = await fetcherSubscribePlan(api, plan, window.origin);
       window.location.href = response.url;
     } catch (error) {
-      toast.error("Something went wrong");
+      toast.error(t("Something went wrong"));
       console.error("error");
       setIsLoading(false);
     }
@@ -110,7 +103,7 @@ const PlanCard: React.FC<PlanCardProps> = ({ api, plan, price, features }) => {
         <span className="font-inter text-3xl font-extrabold ">
           {price.toLocaleString()}¥
         </span>
-        <span className="text-xl text-slate-500"> / month</span>
+        <span className="text-xl text-slate-500"> / {t("month")}</span>
       </section>
       <section className="mb-4">
         <ul>
@@ -127,7 +120,7 @@ const PlanCard: React.FC<PlanCardProps> = ({ api, plan, price, features }) => {
             onClick={handleClickSubscribe}
             className="w-full rounded border border-black py-2 font-inter font-bold transition duration-200 hover:bg-black hover:text-white"
           >
-            Subscribe
+            {t("Subscribe")}
           </button>
         )}
       </section>

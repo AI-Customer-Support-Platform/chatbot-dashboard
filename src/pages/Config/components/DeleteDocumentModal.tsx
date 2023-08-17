@@ -2,6 +2,7 @@ import { LoadingIcon } from "@/components/icons";
 import ModalContainer from "@/components/modal/ModalContainer";
 import useAPI from "@/hooks/useAPI";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 interface DeleteDocumentModalProps {
   refresh: () => void;
@@ -18,6 +19,7 @@ const DeleteDocumentModal: React.FC<DeleteDocumentModalProps> = ({
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const { fetcherDeleteDocument } = useAPI();
+  const { t } = useTranslation();
 
   const handleClickDeleteButton = async () => {
     if (!collection_id || !document_id) {
@@ -43,9 +45,9 @@ const DeleteDocumentModal: React.FC<DeleteDocumentModalProps> = ({
   };
 
   return (
-    <ModalContainer title="Delete Document">
+    <ModalContainer title={t("Delete Document")}>
       <section className="mb-8">
-        <h2>Are you sure you want to delete the document?</h2>
+        <h2>{t("Are you sure you want to delete the document?")}</h2>
       </section>
       <section className="flex place-content-center gap-8">
         {isLoading ? (
@@ -56,14 +58,14 @@ const DeleteDocumentModal: React.FC<DeleteDocumentModalProps> = ({
               onClick={handleClickDeleteButton}
               className=" rounded bg-red-500 px-2 py-1 text-lg font-extrabold text-white transition-transform duration-300 hover:scale-105 active:scale-110"
             >
-              Delete
+              {t("Delete")}
             </button>
 
             <button
               onClick={handleClickCancelButton}
               className=" rounded border bg-white px-2 py-1 text-lg font-extrabold text-black transition-transform duration-300 hover:scale-105 active:scale-110"
             >
-              Cancel
+              {t("Cancel")}
             </button>
           </>
         )}

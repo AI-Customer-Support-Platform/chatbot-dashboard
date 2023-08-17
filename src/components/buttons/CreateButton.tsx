@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { PlusIcon } from "../icons";
 
 interface CreateButtonProps {
@@ -9,6 +10,7 @@ const CreateButton: React.FC<CreateButtonProps> = ({
   handleClickCreateButton,
   name,
 }) => {
+  const { t } = useTranslation();
   return (
     <button
       onClick={handleClickCreateButton}
@@ -16,7 +18,7 @@ const CreateButton: React.FC<CreateButtonProps> = ({
     >
       <PlusIcon className="text-slate-400" />
       <span className="text-xl font-bold text-slate-400/80">
-        {name ? name : "Create"}
+        {name ? name : t("Create")}
       </span>
     </button>
   );

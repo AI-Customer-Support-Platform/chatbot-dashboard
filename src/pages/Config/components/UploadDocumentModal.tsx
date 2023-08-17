@@ -7,6 +7,7 @@ import { useUserStore } from "@/store";
 import classNames from "classnames";
 import { useRef, useState } from "react";
 import { toast } from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 interface UploadDocumentModalProps {
   collection: TCollectionData | undefined;
@@ -35,6 +36,7 @@ const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
   const nameRef = useRef<HTMLInputElement>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const { storage } = useUserStore();
+  const { t } = useTranslation();
 
   const handleFileChange = (file: File | null) => {
     if (!file) {
@@ -45,7 +47,7 @@ const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
     const fileExtension = name.split(".").pop()?.toLowerCase();
 
     if (size > storage.remaining_space) {
-      toast("⚠️ Not enough space");
+      toast(`⚠️ ${t("Not enough space")}`);
       setSelectedFile(null);
       return;
     }
@@ -55,7 +57,7 @@ const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
     const nameRefCurrent = nameRef.current;
 
     if (!isSupportedFileType) {
-      toast("⚠️ Unsupported file type");
+      toast(`⚠️ ${t("Unsupported file type")}`);
       setSelectedFile(null);
     } else {
       setSelectedFile(file);
@@ -71,7 +73,7 @@ const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
     }
 
     if (!selectedFile) {
-      toast("⚠️ Please select a file");
+      toast(`⚠️ ${t("Please select a file")}`);
       return;
     }
 
@@ -87,20 +89,20 @@ const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
       }, 500);
     } catch (error) {
       console.error(error);
-      toast.error("Upload failed");
+      toast.error(t("Upload failed"));
       setIsLoading(false);
     }
   };
 
   return (
     <ModalContainer
-      title="Upload Document"
+      title={t("Upload Document")}
       setIsShow={!isLoading ? setIsOpen : undefined}
     >
       <section className="mb-4 flex flex-col gap-4">
         <div className="flex flex-col gap-4 ">
           <section className="ml-2">
-            <span className="text-slate-400">Supported File Types</span>
+            <span className="text-slate-400">{t("Supported File Types")}</span>
             <span className="block text-sm text-slate-500">
               {supportedFileTypes.join(", ")}
             </span>
@@ -110,7 +112,7 @@ const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
           </section>
           {selectedFile && (
             <section className="ml-2">
-              <span className="text-slate-400">Chosen File</span>
+              <span className="text-slate-400">{t("Chosen File")}</span>
               <span className="block max-w-[400px] text-sm text-slate-500">
                 {selectedFile ? selectedFile.name : "None"}{" "}
               </span>
@@ -122,13 +124,13 @@ const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
             hidden: !selectedFile,
           })}
         >
-          <label className="ml-2 text-slate-400" htmlFor="name">
-            Custom Document Name
+          <label className="ml-2 text-slate-400" htmlFor="filename">
+            {t("Custom Document Name")}
           </label>
           <input
             ref={nameRef}
-            id="name"
-            placeholder="optional"
+            id="filename"
+            placeholder={t("optional")}
             className="rounded-lg border p-1 px-2 outline-none"
             type="text"
           />
@@ -143,7 +145,7 @@ const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
               onClick={handleClickUpload}
               className=" rounded bg-black px-2 py-1 text-lg font-extrabold text-white transition-transform duration-300 hover:scale-105 active:scale-110"
             >
-              Upload
+              {t("Upload")}
             </button>
           )}
         </section>

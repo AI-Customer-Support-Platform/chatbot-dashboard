@@ -1,11 +1,13 @@
 import { ChangeEvent, DragEvent } from "react";
 import { UploadFileIcon } from "../icons";
+import { useTranslation } from "react-i18next";
 
 interface FileInputButtonProps {
   onChange: (file: File | null) => void;
 }
 
 const FileInputButton: React.FC<FileInputButtonProps> = ({ onChange }) => {
+  const { t } = useTranslation();
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
     onChange(file);
@@ -43,7 +45,7 @@ const FileInputButton: React.FC<FileInputButtonProps> = ({ onChange }) => {
     >
       <UploadFileIcon className="h-20 w-20" />
       <span className="mt-2 text-base leading-normal">
-        Select or Drag a file
+        {t("Select or Drag a file")}
       </span>
       <input type="file" className="hidden" onChange={handleFileChange} />
     </label>
