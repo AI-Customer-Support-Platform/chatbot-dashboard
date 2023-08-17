@@ -1,16 +1,18 @@
 import CodeBlock from "@/components/CodeBlock";
+import { useTranslation } from "react-i18next";
 
 interface CodeFieldProps {
   collectionId: string;
 }
 
 const CodeField: React.FC<CodeFieldProps> = ({ collectionId }) => {
+  const { t } = useTranslation();
   return (
     <div className="rounded-lg bg-white/50 p-4">
       <p className="text-lg text-slate-700">
-        To import our chatbot into your website, please copy the following code
-        and paste it into the <b>head</b> section of your website's index.html
-        file:
+        {t(
+          "To integrate our chatbot into your website, kindly copy the following code snippet and paste it within the `<head>` section of your website's index.html file:"
+        )}
       </p>
       <CodeBlock
         language="javascript"
@@ -30,7 +32,7 @@ const CodeField: React.FC<CodeFieldProps> = ({ collectionId }) => {
   rel="stylesheet"
   href="https://chatbot-web-dev.vercel.app/chatgptb.css"
 />
-    `}
+`}
       />
     </div>
   );

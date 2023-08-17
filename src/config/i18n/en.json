@@ -57,6 +57,9 @@
   "Delete Document": "Delete Document",
   "Are you sure you want to delete the document?": "Are you sure you want to delete the document?",
 
+  "Click the chatbot bubble in the lower right corner to preview the chatbot.": "Click the chatbot bubble in the lower right corner to preview the chatbot.",
+  "To integrate our chatbot into your website, kindly copy the following code snippet and paste it within the `<head>` section of your website's index.html file:": "To integrate our chatbot into your website, kindly copy the following code snippet and paste it within the `<head>` section of your website's index.html file:",
+
   "Name is required": "Name is required",
   "Not enough space": "Not enough space",
   "Unsupported file type": "Unsupported file type",

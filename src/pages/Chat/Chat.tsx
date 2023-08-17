@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import CodeField from "./components/CodeField";
 import { TCollectionData } from "@/types";
 import BackToHomeButton from "@/components/buttons/BackToHomeButton";
+import { useTranslation } from "react-i18next";
 
 const Chat = () => {
   const [isChecking, setIsChecking] = useState(false);
@@ -14,6 +15,8 @@ const Chat = () => {
   );
   const { fetcherQueryCollection } = useAPI();
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
   const handleCheckPermission = useCallback(async () => {
     if (!collectionId) {
       navigate("/");
@@ -56,8 +59,9 @@ const Chat = () => {
               <p className="mb-8 text-base">{collection?.description}</p>
 
               <p className="text-xl font-bold text-slate-500">
-                Click the chatbot bubble on the bottom right corner to preview
-                the chatbot.
+                {t(
+                  "Click the chatbot bubble in the lower right corner to preview the chatbot."
+                )}
               </p>
 
               <CodeField collectionId={collection.id} />

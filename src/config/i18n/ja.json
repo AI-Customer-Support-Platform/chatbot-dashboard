@@ -57,6 +57,9 @@
   "Delete Document": "ドキュメントを削除",
   "Are you sure you want to delete the document?": "本当にドキュメントを削除しますか？",
 
+  "Click the chatbot bubble in the lower right corner to preview the chatbot.": "チャットボットをプレビューするには、右下のチャットボットバブルをクリックします。",
+  "To integrate our chatbot into your website, kindly copy the following code snippet and paste it within the `<head>` section of your website's index.html file:": "チャットボットをウェブサイトに統合するには、以下のコードスニペットをコピーして、ウェブサイトのindex.htmlファイルの`<head>`セクションに貼り付けてください。",
+
   "Name is required": "名前は必須です",
   "Not enough space": "十分なスペースがありません",
   "Unsupported file type": "サポートされていないファイルタイプ",
