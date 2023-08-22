@@ -19,7 +19,9 @@ const APIItem: React.FC<APIItemProps> = ({ name, apiDetails }) => {
   return (
     <div className="mb-2 flex max-w-3xl flex-col justify-between overflow-auto rounded-lg bg-white/50 p-2 transition duration-300 hover:bg-white/70 hover:shadow">
       <section className="mb-2 flex justify-between gap-4">
-        <span className="text-xl font-bold">{uppercaseFirstLetter(name)}</span>
+        <span className="text-xl font-bold">
+          {t(uppercaseFirstLetter(name))}
+        </span>
 
         <UnOrSubscribeButton api={name} active={!!apiDetails} />
       </section>

@@ -4,6 +4,7 @@ import TitleWithRefreshButton from "@/components/TitleWithRefreshButton";
 import Skeleton from "react-loading-skeleton";
 import useAPI from "@/hooks/useAPI";
 import { TUserPlanDetail } from "@/types";
+import { useTranslation } from "react-i18next";
 
 const APIs = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -14,6 +15,7 @@ const APIs = () => {
     line: null,
   });
   const { fetcherUserPlanDetail } = useAPI();
+  const { t } = useTranslation();
 
   const fetchUserPlanDetails = useCallback(async () => {
     if (isLoading) {
@@ -46,7 +48,7 @@ const APIs = () => {
   return (
     <div className="mb-8">
       <TitleWithRefreshButton
-        title="APIs"
+        title={t("APIs")}
         isLoading={isLoading}
         refresh={fetchUserPlanDetails}
       />

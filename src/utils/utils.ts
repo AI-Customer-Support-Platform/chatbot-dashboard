@@ -1,3 +1,5 @@
+import i18next from "i18next";
+
 export const truncate = (text: string, maxLength = 40) => {
   if (text.length <= maxLength) {
     return text;
@@ -24,28 +26,34 @@ export const uppercaseFirstLetter = (inputString: string): string => {
   return firstLetter + restOfTheString;
 };
 
+type LanguageDateFormats = {
+  [key: string]: (month: string | number, day: number, year: number) => string;
+};
+
 export const formatDate = (dateString: string): string => {
+  // prettier-ignore
   const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
   ];
 
   const date = new Date(dateString);
   const month = months[date.getMonth()];
+  const monthNumber = date.getMonth() + 1;
   const day = date.getDate();
   const year = date.getFullYear();
+  const currentLanguage = i18next.language;
 
-  return `${month} ${day}, ${year}`;
+  const languageDateFormats: LanguageDateFormats = {
+    en: (month, day, year) => `${month} ${day}, ${year}`,
+    ja: (_, day, year) => `${year}年 ${monthNumber}月 ${day}日`,
+  };
+
+  const dateFormatFunction =
+    languageDateFormats[currentLanguage] || languageDateFormats["en"];
+  const formattedDate = dateFormatFunction(month, day, year);
+
+  return formattedDate;
 };
 
 export const bytesToMB = (bytes: number): string => {

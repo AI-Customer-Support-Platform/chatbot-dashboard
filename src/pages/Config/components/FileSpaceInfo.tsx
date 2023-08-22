@@ -69,12 +69,12 @@ const FileSpaceInfo: React.FC<FileSpaceInfoProps> = ({ refresh }) => {
             <span className="font-bold">
               {bytesToMB(storage.total_space - storage.remaining_space)}{" "}
             </span>
-            of
+            ／
             <span className="font-bold">
               {" "}
               {bytesToMB(storage.total_space)}{" "}
             </span>
-            used
+            {t("used")}
           </span>
 
           {
