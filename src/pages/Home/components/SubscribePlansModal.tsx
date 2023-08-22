@@ -34,22 +34,22 @@ const SubscribePlansModal: React.FC<SubscribePlansModalProps> = ({
 
   const plans: TPlans[] = [
     {
-      plan: t("Basic"),
+      plan: "basic",
       price: 5000,
       features: generateFeatures(api, "75,000", "750", "2MB"),
     },
     {
-      plan: t("Standard"),
+      plan: "standard",
       price: 15000,
       features: generateFeatures(api, "750,000", "7,500", "20MB"),
     },
     {
-      plan: t("Plus"),
+      plan: "plus",
       price: 22000,
       features: generateFeatures(api, "3,750,000", "37,500", "100MB"),
     },
     {
-      plan: t("Premium"),
+      plan: "premium",
       price: 40000,
       features: generateFeatures(api, "7,500,000", "75,000", "500MB"),
     },
@@ -98,7 +98,9 @@ const PlanCard: React.FC<PlanCardProps> = ({ api, plan, price, features }) => {
 
   return (
     <div className="w-full min-w-[300px] flex-auto rounded-lg border-2 border-slate-100 p-2 transition duration-200 hover:-translate-y-[1px] hover:border-slate-200 hover:shadow-lg sm:w-auto md:max-w-md">
-      <h2 className="mb-2 text-xl font-bold">{uppercaseFirstLetter(plan)}</h2>
+      <h2 className="mb-2 text-xl font-bold">
+        {t(uppercaseFirstLetter(plan))}
+      </h2>
       <section className="mb-4">
         <span className="font-inter text-3xl font-extrabold ">
           {price.toLocaleString()}¥
