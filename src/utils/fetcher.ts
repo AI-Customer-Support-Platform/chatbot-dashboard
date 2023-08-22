@@ -2,7 +2,6 @@ import axios, { AxiosInstance, AxiosResponse, AxiosError } from "axios";
 import i18next from "i18next";
 import toast from "react-hot-toast";
 
-console.log(i18next.t("Create"));
 interface ErrorResponse {
   message: string;
 }
