@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
 import { useNavigate, useParams } from "react-router-dom";
 
-import BackToHomeButton from "@/components/buttons/BackToHomeButton";
 import useAPI from "@/hooks/useAPI";
 import { TCollectionData } from "@/types";
 
@@ -50,10 +49,6 @@ const Chat = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-zinc-100 via-blue-100 to-white">
       <main className="container mx-auto p-4 sm:p-8">
-        <section className="mb-8">
-          <BackToHomeButton />
-        </section>
-
         <div className="mb-4 flex items-center gap-6">
           {collection ? (
             <div className="flex flex-col gap-4">

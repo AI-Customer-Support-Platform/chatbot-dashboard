@@ -4,7 +4,6 @@ import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
 
-import BackToHomeButton from "@/components/buttons/BackToHomeButton";
 import { LoadingIcon } from "@/components/icons";
 import PortalModalCenter from "@/components/portalDialog/PortalModalCenter";
 import useAPI from "@/hooks/useAPI";
@@ -87,7 +86,6 @@ const CollectionInfo: React.FC<CollectionInfoProps> = ({
   return (
     <>
       <section className="mb-8 flex gap-6">
-        <BackToHomeButton />
         {collectionData ? (
           <>
             <CustomButton
