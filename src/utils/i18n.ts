@@ -1,4 +1,4 @@
-import { languageList } from "@/config/i18n/i18n";
+import { languageList } from "@/i18n/config";
 import i18n from "i18next";
 
 export const saveLang = (lang: string) => {

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import classNames from "classnames";
-import { languageList } from "@/config/i18n/i18n";
+import { languageList } from "@/i18n/config";
 import { getLang, saveLang } from "@/utils/i18n";
 import { useTranslation } from "react-i18next";
 import { isClickOutside } from "@/utils/utils";
