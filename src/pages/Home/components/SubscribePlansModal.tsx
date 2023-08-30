@@ -1,12 +1,12 @@
-import { LoadingIcon } from "@/components/icons";
-import ModalContainer from "@/components/modal/ModalContainer";
-import { TApi, TPlan, TPlans } from "@/types";
-import useAPI from "@/hooks/useAPI";
-import { uppercaseFirstLetter } from "@/utils/utils";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { CheckIcon } from "@/components/icons";
 import { useTranslation } from "react-i18next";
+
+import { CheckIcon, LoadingIcon } from "@/components/icons";
+import ModalContainer from "@/components/modal/ModalContainer";
+import useAPI from "@/hooks/useAPI";
+import { TApi, TPlan, TPlans } from "@/types";
+import { uppercaseFirstLetter } from "@/utils/utils";
 
 interface SubscribePlansModalProps {
   api: TApi;

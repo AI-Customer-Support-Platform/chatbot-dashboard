@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosResponse, AxiosError } from "axios";
+import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
 import i18next from "i18next";
 import toast from "react-hot-toast";
 

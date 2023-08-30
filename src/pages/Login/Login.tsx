@@ -1,9 +1,10 @@
-import svgLogo from "@/assets/imgs/svgs/logo.svg";
-import SwitchLangButton from "@/components/buttons/SwitchLangButton";
-import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+
+import svgLogo from "@/assets/imgs/svgs/logo.svg";
+import SwitchLangButton from "@/components/buttons/SwitchLangButton";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Login = () => {
   const { user, loginWithRedirect } = useAuth0();

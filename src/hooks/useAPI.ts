@@ -1,13 +1,14 @@
-import fetcher from "@/utils/fetcher";
-import useAccessToken from "./useAccessToken";
 import {
   TApi,
   TCollectionData,
   TCollectionInfo,
   TPlan,
   TUserPlanDetail,
+  UserStorage,
 } from "@/types";
-import { UserStorage } from "@/types";
+import fetcher from "@/utils/fetcher";
+
+import useAccessToken from "./useAccessToken";
 
 const useAPI = () => {
   const { getAccessToken } = useAccessToken();

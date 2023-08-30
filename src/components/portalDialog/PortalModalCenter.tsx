@@ -1,7 +1,6 @@
-import React, { useCallback, useRef, useState } from "react";
-import { createPortal } from "react-dom";
-import { useEffect } from "react";
 import classNames from "classnames";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 interface PortalModalCenterProps {
   children: React.ReactNode;

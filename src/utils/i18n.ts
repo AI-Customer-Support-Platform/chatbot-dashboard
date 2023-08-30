@@ -1,5 +1,6 @@
-import { languageList } from "@/i18n/config";
 import i18n from "i18next";
+
+import { languageList } from "@/i18n/config";
 
 export const saveLang = (lang: string) => {
   localStorage.setItem("website_lang", lang);

@@ -1,8 +1,10 @@
-import PortalModalCenter from "@/components/portalDialog/PortalModalCenter";
 import { useState } from "react";
-import DeleteDocumentModal from "./DeleteDocumentModal";
-import { TDocument } from "@/types";
 import { useTranslation } from "react-i18next";
+
+import PortalModalCenter from "@/components/portalDialog/PortalModalCenter";
+import { TDocument } from "@/types";
+
+import DeleteDocumentModal from "./DeleteDocumentModal";
 
 interface DocumentCardProps {
   collection_id: string;

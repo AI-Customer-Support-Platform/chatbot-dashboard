@@ -1,9 +1,11 @@
-import { useEffect, useRef, useState } from "react";
 import classNames from "classnames";
+import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+
 import { languageList } from "@/i18n/config";
 import { getLang, saveLang } from "@/utils/i18n";
-import { useTranslation } from "react-i18next";
 import { isClickOutside } from "@/utils/utils";
+
 import { TriangleIcon } from "../icons";
 
 const SwitchLangButton = () => {

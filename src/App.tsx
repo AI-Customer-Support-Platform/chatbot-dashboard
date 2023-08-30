@@ -1,11 +1,12 @@
-import { useAuth0 } from "@auth0/auth0-react";
-import { Outlet, ScrollRestoration } from "react-router-dom";
-import { useLocation } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
-import useInjectChatbot from "./hooks/useInjectChatbot";
 import { useEffect } from "react";
-import { initLang } from "./utils/i18n";
+import { Toaster } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
+import { Outlet, ScrollRestoration, useLocation } from "react-router-dom";
+
+import { useAuth0 } from "@auth0/auth0-react";
+
+import useInjectChatbot from "./hooks/useInjectChatbot";
+import { initLang } from "./utils/i18n";
 
 const App = () => {
   const { isAuthenticated, isLoading } = useAuth0();

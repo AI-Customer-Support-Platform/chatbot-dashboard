@@ -1,8 +1,9 @@
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+
 import { LoadingIcon } from "@/components/icons";
 import ModalContainer from "@/components/modal/ModalContainer";
 import useAPI from "@/hooks/useAPI";
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
 
 interface DeleteDocumentModalProps {
   refresh: () => void;

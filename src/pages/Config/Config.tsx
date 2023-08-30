@@ -1,9 +1,11 @@
-import useAPI from "@/hooks/useAPI";
-import { useEffect, useState, useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+
+import useAPI from "@/hooks/useAPI";
+import { TCollectionData } from "@/types";
+
 import CollectionInfo from "./components/CollectionInfo";
 import Documents from "./components/Documents";
-import { TCollectionData } from "@/types";
 
 const Config = () => {
   const [isLoading, setIsLoading] = useState(false);

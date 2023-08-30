@@ -1,6 +1,7 @@
-import { useAuth0 } from "@auth0/auth0-react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
+
+import { useAuth0 } from "@auth0/auth0-react";
 
 const useAccessToken = () => {
   const { getAccessTokenSilently } = useAuth0();

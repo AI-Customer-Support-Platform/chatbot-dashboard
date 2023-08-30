@@ -1,15 +1,17 @@
-import { useEffect, useState, useCallback } from "react";
-import CollectionCard from "./CollectionCard";
-import Skeleton from "react-loading-skeleton";
-import useAPI from "@/hooks/useAPI";
-import PortalModalCenter from "@/components/portalDialog/PortalModalCenter";
-import CreateCollectionModal from "./CreateCollectionModal";
-import CreateButton from "@/components/buttons/CreateButton";
-import { TCollectionData } from "@/types";
-import TitleWithRefreshButton from "@/components/TitleWithRefreshButton";
-import { useAuth0 } from "@auth0/auth0-react";
+import { useCallback, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
+import Skeleton from "react-loading-skeleton";
+
+import CreateButton from "@/components/buttons/CreateButton";
+import PortalModalCenter from "@/components/portalDialog/PortalModalCenter";
+import TitleWithRefreshButton from "@/components/TitleWithRefreshButton";
+import useAPI from "@/hooks/useAPI";
+import { TCollectionData } from "@/types";
+import { useAuth0 } from "@auth0/auth0-react";
+
+import CollectionCard from "./CollectionCard";
+import CreateCollectionModal from "./CreateCollectionModal";
 
 const Collections = () => {
   const [isLoading, setIsLoading] = useState(false);

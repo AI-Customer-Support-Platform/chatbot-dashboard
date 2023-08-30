@@ -1,10 +1,11 @@
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+
 import { LoadingIcon } from "@/components/icons";
 import ModalContainer from "@/components/modal/ModalContainer";
-import { TCollectionData } from "@/types";
 import useAPI from "@/hooks/useAPI";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import { TCollectionData } from "@/types";
 
 interface DeleteCollectionModalProps {
   collection: TCollectionData | undefined;

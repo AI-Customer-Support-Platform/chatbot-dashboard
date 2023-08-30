@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
-import Skeleton from "react-loading-skeleton";
-import PortalModalCenter from "@/components/portalDialog/PortalModalCenter";
-import CreateButton from "@/components/buttons/CreateButton";
-import UploadCollectionModal from "./UploadDocumentModal";
-import DocumentCard from "./DocumentCard";
-import { TCollectionData, TDocument } from "@/types";
-import TitleWithRefreshButton from "@/components/TitleWithRefreshButton";
-import FileSpaceInfo from "./FileSpaceInfo";
 import { useTranslation } from "react-i18next";
+import Skeleton from "react-loading-skeleton";
+
+import CreateButton from "@/components/buttons/CreateButton";
+import PortalModalCenter from "@/components/portalDialog/PortalModalCenter";
+import TitleWithRefreshButton from "@/components/TitleWithRefreshButton";
+import { TCollectionData, TDocument } from "@/types";
+
+import DocumentCard from "./DocumentCard";
+import FileSpaceInfo from "./FileSpaceInfo";
+import UploadCollectionModal from "./UploadDocumentModal";
 
 interface DocumentsProps {
   collection: TCollectionData | undefined;

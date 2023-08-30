@@ -1,11 +1,13 @@
-import useAPI from "@/hooks/useAPI";
-import { useEffect, useState, useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
 import { useNavigate, useParams } from "react-router-dom";
-import CodeField from "./components/CodeField";
-import { TCollectionData } from "@/types";
+
 import BackToHomeButton from "@/components/buttons/BackToHomeButton";
-import { useTranslation } from "react-i18next";
+import useAPI from "@/hooks/useAPI";
+import { TCollectionData } from "@/types";
+
+import CodeField from "./components/CodeField";
 
 const Chat = () => {
   const [isChecking, setIsChecking] = useState(false);

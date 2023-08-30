@@ -1,13 +1,15 @@
-import ProgressBar from "@/components/ProgressBar";
-import PortalModalCenter from "@/components/portalDialog/PortalModalCenter";
 import classNames from "classnames";
 import { useState } from "react";
-import SubscribePlansModal from "./SubscribePlansModal";
-import { TApiDetails, TApi } from "@/types";
-import { uppercaseFirstLetter, formatDate } from "../../../utils/utils";
-import useAPI from "@/hooks/useAPI";
-import { LoadingIcon } from "@/components/icons";
 import { useTranslation } from "react-i18next";
+
+import { LoadingIcon } from "@/components/icons";
+import PortalModalCenter from "@/components/portalDialog/PortalModalCenter";
+import ProgressBar from "@/components/ProgressBar";
+import useAPI from "@/hooks/useAPI";
+import { TApi, TApiDetails } from "@/types";
+
+import { formatDate, uppercaseFirstLetter } from "../../../utils/utils";
+import SubscribePlansModal from "./SubscribePlansModal";
 
 interface APIItemProps {
   name: TApi;

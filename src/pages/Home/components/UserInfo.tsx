@@ -1,6 +1,7 @@
+import { useTranslation } from "react-i18next";
+
 import SwitchLangButton from "@/components/buttons/SwitchLangButton";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useTranslation } from "react-i18next";
 
 const UserInfo = () => {
   const { user, logout } = useAuth0();

@@ -1,5 +1,6 @@
-import CodeBlock from "@/components/CodeBlock";
 import { useTranslation } from "react-i18next";
+
+import CodeBlock from "@/components/CodeBlock";
 
 interface CodeFieldProps {
   collectionId: string;

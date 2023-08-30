@@ -1,7 +1,8 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import UserInfo from "./components/UserInfo";
-import Collections from "./components/Collections";
+
 import APIs from "./components/APIs";
+import Collections from "./components/Collections";
+import UserInfo from "./components/UserInfo";
 
 const Home = () => {
   const { user } = useAuth0();

@@ -1,6 +1,7 @@
 import classNames from "classnames";
-import { RefreshIcon } from "./icons";
 import { useTranslation } from "react-i18next";
+
+import { RefreshIcon } from "./icons";
 
 interface TitleWithRefreshButtonProps {
   title: string;

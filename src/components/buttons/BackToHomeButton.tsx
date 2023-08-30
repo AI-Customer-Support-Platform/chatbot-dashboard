@@ -1,6 +1,7 @@
-import { useNavigate } from "react-router-dom";
-import { ArrorBackIcon } from "../icons";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+
+import { ArrorBackIcon } from "../icons";
 
 const BackToHomeButton = () => {
   const navigate = useNavigate();

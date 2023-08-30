@@ -1,9 +1,10 @@
-import { LoadingIcon } from "@/components/icons";
-import ModalContainer from "@/components/modal/ModalContainer";
-import useAPI from "@/hooks/useAPI";
 import { useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
+
+import { LoadingIcon } from "@/components/icons";
+import ModalContainer from "@/components/modal/ModalContainer";
+import useAPI from "@/hooks/useAPI";
 
 interface CreateCollectionModalProps {
   setIsOpen: (show: boolean) => void;

@@ -1,6 +1,7 @@
-import { truncate } from "@/utils/utils";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+
+import { truncate } from "@/utils/utils";
 
 interface CollectionCardProps {
   name: string;
