@@ -1,10 +1,11 @@
-import ProgressBar from "@/components/ProgressBar";
-import useAPI from "@/hooks/useAPI";
-import { useUserStore } from "@/store";
-import { bytesToMB } from "@/utils/utils";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
+
+import ProgressBar from "@/components/ProgressBar";
+import useAPI from "@/hooks/useAPI";
+import { useRootState } from "@/state/root";
+import { bytesToMB } from "@/utils/utils";
 
 interface FileSpaceInfoProps {
   refresh: boolean;
@@ -15,7 +16,7 @@ const FileSpaceInfo: React.FC<FileSpaceInfoProps> = ({ refresh }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [needRefresh, setNeedRefresh] = useState(false);
   const { fetcherUserStorage } = useAPI();
-  const { storage, setStorage } = useUserStore();
+  const { storage, setStorage } = useRootState();
   const { t } = useTranslation();
 
   const fetchUserStorage = useCallback(async () => {

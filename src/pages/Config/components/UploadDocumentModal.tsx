@@ -1,13 +1,14 @@
-import FileInputButton from "@/components/buttons/FileInputButton";
-import { LoadingIcon } from "@/components/icons";
-import ModalContainer from "@/components/modal/ModalContainer";
-import { TCollectionData } from "@/types";
-import useAPI from "@/hooks/useAPI";
-import { useUserStore } from "@/store";
 import classNames from "classnames";
 import { useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
+
+import FileInputButton from "@/components/buttons/FileInputButton";
+import { LoadingIcon } from "@/components/icons";
+import ModalContainer from "@/components/modal/ModalContainer";
+import useAPI from "@/hooks/useAPI";
+import { useRootState } from "@/state/root";
+import { TCollectionData } from "@/types";
 
 interface UploadDocumentModalProps {
   collection: TCollectionData | undefined;
@@ -35,7 +36,7 @@ const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
   const { fetcherUploadDocument } = useAPI();
   const nameRef = useRef<HTMLInputElement>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const { storage } = useUserStore();
+  const { storage } = useRootState();
   const { t } = useTranslation();
 
   const handleFileChange = (file: File | null) => {
