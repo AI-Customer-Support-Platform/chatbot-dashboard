@@ -1,9 +1,8 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { Outlet } from "react-router-dom";
 
-const Home = () => {
+const Main = () => {
   const { user } = useAuth0();
-
   return (
     <>
       {user && (
@@ -14,4 +13,4 @@ const Home = () => {
     </>
   );
 };
-export default Home;
+export default Main;

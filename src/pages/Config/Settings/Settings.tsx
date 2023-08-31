@@ -1,21 +1,18 @@
-import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
+import UpdateCollectionInfo from "./UpdateCollectionInfo";
+import { useCallback, useEffect, useState } from "react";
 import useAPI from "@/hooks/useAPI";
 import { TCollectionData } from "@/types";
+import DeleteCollection from "./DeleteCollection";
 
-import CollectionInfo from "./components/CollectionInfo";
-import Documents from "./components/Documents";
-
-const Config = () => {
+const Settings = () => {
+  const { collectionId } = useParams();
   const [isLoading, setIsLoading] = useState(false);
   const [initLoaded, setInitLoaded] = useState(false);
-  const { collectionId } = useParams();
   const [collection, setCollection] = useState<TCollectionData | undefined>(
     undefined
   );
   const { fetcherQueryCollection } = useAPI();
-
   const fetchCollection = useCallback(async () => {
     if (!collectionId || isLoading) {
       return;
@@ -44,12 +41,14 @@ const Config = () => {
   }, [initLoaded, fetchCollection]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-zinc-100 via-blue-100 to-white">
-      <main className="container mx-auto p-4 sm:p-8">
-        <CollectionInfo refresh={fetchCollection} collectionData={collection} />
-        <Documents refresh={fetchCollection} collection={collection} />
-      </main>
-    </div>
+    <>
+      <UpdateCollectionInfo
+        refresh={fetchCollection}
+        collectionData={collection}
+      />
+
+      <DeleteCollection collectionData={collection} />
+    </>
   );
 };
-export default Config;
+export default Settings;
