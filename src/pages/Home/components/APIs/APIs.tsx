@@ -56,28 +56,26 @@ const APIs = () => {
   }, [fetchUserPlanDetails, initLoaded]);
 
   return (
-    <div className="mx-auto  w-full max-w-6xl justify-start">
-      <div className="mb-8">
-        <TitleWithRefreshButton
-          title={t("APIs")}
-          isLoading={isLoading}
-          refresh={fetchUserPlanDetails}
-        />
+    <div className="w-full">
+      <TitleWithRefreshButton
+        title={t("APIs")}
+        isLoading={isLoading}
+        refresh={fetchUserPlanDetails}
+      />
 
-        {!isLoading && user?.email_verified ? (
-          <section className="w-full">
-            <APIItem name="web" apiDetails={planDetials.web} />
-            <APIItem name="instagram" apiDetails={planDetials.instagram} />
-            <APIItem name="line" apiDetails={planDetials.line} />
-          </section>
-        ) : (
-          <section className="flex flex-col gap-2">
-            <Skeleton className="h-20 max-w-3xl rounded-full" />
-            <Skeleton className="h-20 max-w-3xl" />
-            <Skeleton className="h-20 max-w-3xl" />
-          </section>
-        )}
-      </div>
+      {!isLoading && user?.email_verified ? (
+        <section className="w-full">
+          <APIItem name="web" apiDetails={planDetials.web} />
+          <APIItem name="instagram" apiDetails={planDetials.instagram} />
+          <APIItem name="line" apiDetails={planDetials.line} />
+        </section>
+      ) : (
+        <section className="flex flex-col gap-2">
+          <Skeleton className="h-20 max-w-3xl rounded-full" />
+          <Skeleton className="h-20 max-w-3xl" />
+          <Skeleton className="h-20 max-w-3xl" />
+        </section>
+      )}
     </div>
   );
 };

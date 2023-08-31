@@ -68,8 +68,8 @@ const Collections = () => {
   }, [initLoaded, fetchCollections]);
 
   return (
-    <div>
-      <section className="mx-auto flex max-w-6xl justify-start">
+    <>
+      <section>
         <button
           onClick={handleClickCreateCollectionButton}
           className="mb-6 flex items-center rounded-md border-2  bg-black/70 px-3 py-2 font-bold text-white hover:bg-black"
@@ -87,30 +87,27 @@ const Collections = () => {
         </PortalModalCenter>
       </section>
 
-      <section>
-        <div className="mx-auto grid grid-cols-1 gap-5 md:grid-cols-2 lg:max-w-6xl lg:grid-cols-3 ">
-          {isLoading ? (
-            <>
-              <Skeleton className="h-52" />
-              <Skeleton className="h-52" />
-              <Skeleton className="h-52" />
-            </>
-          ) : (
-            <>
-              {collections.map((collection) => (
-                <CollectionCard
-                  key={collection.id}
-                  name={collection.name}
-                  description={collection?.description}
-                  collectionId={collection.id}
-                />
-              ))}
-            </>
-          )}
-        </div>
+      <section className="grid w-full grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 ">
+        {!isLoading ? (
+          <>
+            {collections.map((collection) => (
+              <CollectionCard
+                key={collection.id}
+                name={collection.name}
+                description={collection?.description}
+                collectionId={collection.id}
+              />
+            ))}
+          </>
+        ) : (
+          <>
+            <Skeleton className="h-52" />
+            <Skeleton className="h-52" />
+            <Skeleton className="h-52" />
+          </>
+        )}
       </section>
-      <section></section>
-    </div>
+    </>
   );
 };
 export default Collections;
