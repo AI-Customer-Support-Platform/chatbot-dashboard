@@ -7,6 +7,8 @@ import useAPI from "@/hooks/useAPI";
 import { TUserPlanDetail } from "@/types";
 
 import APIItem from "./APIItem";
+import { useAuth0 } from "@auth0/auth0-react";
+import toast from "react-hot-toast";
 
 const APIs = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -18,9 +20,15 @@ const APIs = () => {
   });
   const { fetcherUserPlanDetail } = useAPI();
   const { t } = useTranslation();
+  const { user } = useAuth0();
 
   const fetchUserPlanDetails = useCallback(async () => {
     if (isLoading) {
+      return;
+    }
+
+    if (!user?.email_verified) {
+      toast(`⚠️ ${t("Email Verification Required")}`);
       return;
     }
 
@@ -34,7 +42,7 @@ const APIs = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [fetcherUserPlanDetail, isLoading]);
+  }, [fetcherUserPlanDetail, isLoading, user, t]);
 
   useEffect(() => {
     if (!initLoaded) {
@@ -48,26 +56,28 @@ const APIs = () => {
   }, [fetchUserPlanDetails, initLoaded]);
 
   return (
-    <div className="mb-8">
-      <TitleWithRefreshButton
-        title={t("APIs")}
-        isLoading={isLoading}
-        refresh={fetchUserPlanDetails}
-      />
+    <div className="mx-auto  w-full max-w-6xl justify-start">
+      <div className="mb-8">
+        <TitleWithRefreshButton
+          title={t("APIs")}
+          isLoading={isLoading}
+          refresh={fetchUserPlanDetails}
+        />
 
-      {!isLoading ? (
-        <section>
-          <APIItem name="web" apiDetails={planDetials.web} />
-          <APIItem name="instagram" apiDetails={planDetials.instagram} />
-          <APIItem name="line" apiDetails={planDetials.line} />
-        </section>
-      ) : (
-        <section className="flex flex-col gap-2">
-          <Skeleton className="h-20 max-w-3xl rounded-full" />
-          <Skeleton className="h-20 max-w-3xl" />
-          <Skeleton className="h-20 max-w-3xl" />
-        </section>
-      )}
+        {!isLoading && user?.email_verified ? (
+          <section className="w-full">
+            <APIItem name="web" apiDetails={planDetials.web} />
+            <APIItem name="instagram" apiDetails={planDetials.instagram} />
+            <APIItem name="line" apiDetails={planDetials.line} />
+          </section>
+        ) : (
+          <section className="flex flex-col gap-2">
+            <Skeleton className="h-20 max-w-3xl rounded-full" />
+            <Skeleton className="h-20 max-w-3xl" />
+            <Skeleton className="h-20 max-w-3xl" />
+          </section>
+        )}
+      </div>
     </div>
   );
 };

@@ -8,7 +8,7 @@ import ProgressBar from "@/components/ProgressBar";
 import useAPI from "@/hooks/useAPI";
 import { TApi, TApiDetails } from "@/types";
 
-import { formatDate, uppercaseFirstLetter } from "../../../utils/utils";
+import { formatDate, uppercaseFirstLetter } from "@/utils/utils";
 import SubscribePlansModal from "./SubscribePlansModal";
 
 interface APIItemProps {
@@ -19,7 +19,7 @@ interface APIItemProps {
 const APIItem: React.FC<APIItemProps> = ({ name, apiDetails }) => {
   const { t } = useTranslation();
   return (
-    <div className="mb-2 flex max-w-3xl flex-col justify-between overflow-auto rounded-lg bg-white/50 p-2 transition duration-300 hover:bg-white/70 hover:shadow">
+    <div className="mb-6 flex max-w-3xl flex-col justify-between overflow-auto rounded-lg border bg-white p-2 transition hover:shadow">
       <section className="mb-2 flex justify-between gap-4">
         <span className="text-xl font-bold">
           {t(uppercaseFirstLetter(name))}

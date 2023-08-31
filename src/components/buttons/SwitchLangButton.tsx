@@ -75,7 +75,7 @@ const SwitchLangButton = () => {
       {isOpen && (
         <div
           ref={langContainerRef}
-          className="absolute top-9 rounded-[10px] border bg-slate-100 p-2 text-black shadow"
+          className="absolute top-9 z-20 rounded-[10px] border bg-slate-100 p-2 text-black shadow"
         >
           <ul className="flex flex-col gap-2">
             {languageList.map((lang) => (
