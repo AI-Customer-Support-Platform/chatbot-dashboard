@@ -1,60 +1,26 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
 
 import PortalModalCenter from "@/components/portalDialog/PortalModalCenter";
-import { TCollectionData, TDocument } from "@/types";
+import { TDocument } from "@/types";
 
 import DocumentCard from "./DocumentCard";
 import FileSpaceInfo from "./FileSpaceInfo";
 import UploadCollectionModal from "./UploadDocumentModal";
-import useAPI from "@/hooks/useAPI";
-import { useParams } from "react-router-dom";
 import CollectionInfo from "../components/CollectionInfo";
+import useCollectionData from "@/hooks/useCollectionData";
 
 const Documents = () => {
-  const { collectionId } = useParams();
-  const [isLoading, setIsLoading] = useState(false);
-  const [initLoaded, setInitLoaded] = useState(false);
-  const [collection, setCollection] = useState<TCollectionData | undefined>(
-    undefined
-  );
   const [documents, setDocuments] = useState<TDocument[]>([]);
   const [isOpenUploadDocumentModal, setIsOpenUploadDocumentModal] =
     useState(false);
   const { t } = useTranslation();
-  const { fetcherQueryCollection } = useAPI();
+  const { refresh, collectionData: collection } = useCollectionData();
 
   const handleClickUploadDocumentButton = () => {
     setIsOpenUploadDocumentModal(true);
   };
-
-  const fetchCollection = useCallback(async () => {
-    if (!collectionId || isLoading) {
-      return;
-    }
-
-    setIsLoading(true);
-    setInitLoaded(true);
-    setCollection(undefined);
-
-    const resp = await fetcherQueryCollection(collectionId);
-
-    setCollection(resp);
-    setIsLoading(false);
-  }, [collectionId, isLoading, fetcherQueryCollection]);
-
-  useEffect(() => {
-    if (!initLoaded) {
-      const timer = setTimeout(() => {
-        fetchCollection();
-      }, 0);
-
-      return () => {
-        clearTimeout(timer);
-      };
-    }
-  }, [initLoaded, fetchCollection]);
 
   useEffect(() => {
     if (!collection) {
@@ -90,7 +56,7 @@ const Documents = () => {
               {documents.map((document) => (
                 <DocumentCard
                   collection_id={collection.id}
-                  refresh={fetchCollection}
+                  refresh={refresh}
                   key={document.id}
                   document={document}
                 />
@@ -114,7 +80,7 @@ const Documents = () => {
           <UploadCollectionModal
             collection={collection}
             setIsOpen={setIsOpenUploadDocumentModal}
-            refresh={fetchCollection}
+            refresh={refresh}
           />
         </PortalModalCenter>
       </section>
