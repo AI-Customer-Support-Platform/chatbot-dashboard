@@ -1,5 +1,4 @@
-import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { truncate } from "@/utils/utils";
 
@@ -13,52 +12,20 @@ const CollectionCard: React.FC<CollectionCardProps> = ({
   description,
   collectionId,
 }) => {
-  const navigate = useNavigate();
-  const { t } = useTranslation();
-
   return (
-    <div className="flex flex-col justify-between rounded-lg bg-white/40 p-4 transition-transform duration-300 hover:-translate-y-2 hover:bg-white/60 hover:shadow-lg">
-      <section className="mb-8">
-        <h2 className="text-xl font-bold">{name}</h2>
-        {description && (
-          <p className="text-gray-500">{truncate(description, 150)}</p>
-        )}
-      </section>
-      <section>
-        <CollectionButton
-          handleClick={() => {
-            navigate(`/config/${collectionId}`);
-          }}
-          name={t("Config")}
-        />
-        <CollectionButton
-          handleClick={() => {
-            window.location.href = `/chat/${collectionId}`;
-          }}
-          name={t("Chat")}
-        />
-      </section>
-    </div>
+    <>
+      <Link to={`/config/${collectionId}`}>
+        <button className="flex h-52 w-full flex-col justify-between rounded  border border-slate-200 bg-white shadow transition duration-150 hover:border-slate-300 hover:shadow-lg">
+          <section className="mb-8 h-full overflow-hidden overflow-ellipsis p-4  text-start">
+            <h2 className="mb-2 text-2xl font-bold">{name}</h2>
+            {description && (
+              <p className="text-gray-500">{truncate(description, 250)}</p>
+            )}
+          </section>
+        </button>
+      </Link>
+    </>
   );
 };
 
-interface CollectionButtonProps {
-  name: string;
-  className?: string;
-  handleClick?: () => void;
-}
-const CollectionButton: React.FC<CollectionButtonProps> = ({
-  name,
-  className,
-  handleClick,
-}) => {
-  return (
-    <button
-      onClick={handleClick}
-      className={`mb-2 flex w-full items-center justify-center gap-2 rounded border bg-white/30 py-1 text-xl font-extralight text-black transition-transform duration-300 hover:-translate-y-[2px] hover:font-extrabold hover:opacity-90 hover:shadow-lg active:scale-105 ${className}`}
-    >
-      {name}
-    </button>
-  );
-};
 export default CollectionCard;

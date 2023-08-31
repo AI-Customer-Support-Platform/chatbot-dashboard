@@ -4,7 +4,7 @@
 
   "Loading...": "Loading...",
   "Login": "Login",
-  "Logout": "Logout",
+  "Logout": "Log out",
   "refresh": "refresh",
   "back": "back",
 
@@ -33,7 +33,7 @@
   "UnlimitedCollectionCreation": "Unlimited collection creation",
 
   "Collections": "Collections",
-  "Create": "Create",
+  "Create": "Create a new collection",
   "Config": "Config",
   "Chat": "Chat",
   "Create Collection": "Create Collection",

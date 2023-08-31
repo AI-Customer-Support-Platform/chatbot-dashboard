@@ -3,9 +3,7 @@ import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
 
-import CreateButton from "@/components/buttons/CreateButton";
 import PortalModalCenter from "@/components/portalDialog/PortalModalCenter";
-import TitleWithRefreshButton from "@/components/TitleWithRefreshButton";
 import useAPI from "@/hooks/useAPI";
 import { TCollectionData } from "@/types";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -71,26 +69,34 @@ const Collections = () => {
 
   return (
     <div>
-      <TitleWithRefreshButton
-        title={t("Collections")}
-        isLoading={isLoading}
-        refresh={fetchCollections}
-      />
+      <section className="mx-auto flex max-w-6xl justify-start">
+        <button
+          onClick={handleClickCreateCollectionButton}
+          className="mb-6 flex items-center rounded-md border-2  bg-black/70 px-3 py-2 font-bold text-white hover:bg-black"
+        >
+          {t("Create")}
+        </button>
+        <PortalModalCenter
+          show={isOpenCreateCollectionModal}
+          setIsShow={setIsOpenCreateCollectionModal}
+        >
+          <CreateCollectionModal
+            setIsOpen={setIsOpenCreateCollectionModal}
+            refresh={fetchCollections}
+          />
+        </PortalModalCenter>
+      </section>
 
       <section>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="mx-auto grid grid-cols-1 gap-5 md:grid-cols-2 lg:max-w-6xl lg:grid-cols-3 ">
           {isLoading ? (
             <>
-              <Skeleton className="h-64" />
-              <Skeleton className="h-64" />
-              <Skeleton className="h-64" />
-              <Skeleton className="h-64" />
+              <Skeleton className="h-52" />
+              <Skeleton className="h-52" />
+              <Skeleton className="h-52" />
             </>
           ) : (
             <>
-              <CreateButton
-                handleClickCreateButton={handleClickCreateCollectionButton}
-              />
               {collections.map((collection) => (
                 <CollectionCard
                   key={collection.id}
@@ -103,17 +109,7 @@ const Collections = () => {
           )}
         </div>
       </section>
-      <section>
-        <PortalModalCenter
-          show={isOpenCreateCollectionModal}
-          setIsShow={setIsOpenCreateCollectionModal}
-        >
-          <CreateCollectionModal
-            setIsOpen={setIsOpenCreateCollectionModal}
-            refresh={fetchCollections}
-          />
-        </PortalModalCenter>
-      </section>
+      <section></section>
     </div>
   );
 };
