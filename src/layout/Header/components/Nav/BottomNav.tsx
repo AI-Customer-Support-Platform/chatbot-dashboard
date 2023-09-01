@@ -9,6 +9,9 @@ const BottomNav = () => {
   const configPaths = [
     `/config/${collectionId}`,
     `/config/${collectionId}/api`,
+    `/config/${collectionId}/api/web`,
+    `/config/${collectionId}/api/line`,
+    `/config/${collectionId}/api/instagram`,
     `/config/${collectionId}/settings`,
   ];
   const isHomePath = homePaths.includes(pathname);

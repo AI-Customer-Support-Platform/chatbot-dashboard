@@ -2,11 +2,13 @@ import useCollectionData from "@/hooks/useCollectionData";
 import CollectionInfo from "../components/CollectionInfo";
 import CustomButton from "@/components/buttons/CustomButton";
 import Skeleton from "react-loading-skeleton";
+import { Link } from "react-router-dom";
 const CollectionAPI = () => {
   const { collectionData } = useCollectionData();
   const handleClickWebButton = () => {
-    window.location.href = "/chat/" + collectionData?.id;
+    window.location.href = `/config/${collectionData?.id}/api/web`;
   };
+
   return (
     <>
       <CollectionInfo collectionData={collectionData} />
@@ -20,11 +22,15 @@ const CollectionAPI = () => {
               name="Web"
               classNames="text-white bg-blue-500"
             />
-            <CustomButton name="LINE" classNames="text-white bg-green-500" />
-            <CustomButton
-              name="Instagram"
-              classNames="text-white bg-pink-500"
-            />
+            <Link to={`/config/${collectionData.id}/api/line`}>
+              <CustomButton name="LINE" classNames="text-white bg-green-500" />
+            </Link>
+            <Link to={`/config/${collectionData.id}/api/instagram`}>
+              <CustomButton
+                name="Instagram"
+                classNames="text-white bg-pink-500"
+              />
+            </Link>
           </div>
         </section>
       ) : (
@@ -33,13 +39,13 @@ const CollectionAPI = () => {
             <Skeleton className="text-xl" />
           </div>
           <div className="flex gap-4">
-            <section className="w-24">
+            <section className="w-12">
+              <Skeleton className="text-3xl" />
+            </section>
+            <section className="w-12">
               <Skeleton className="text-3xl" />
             </section>
             <section className="w-24">
-              <Skeleton className="text-3xl" />
-            </section>
-            <section className="w-36">
               <Skeleton className="text-3xl" />
             </section>
           </div>

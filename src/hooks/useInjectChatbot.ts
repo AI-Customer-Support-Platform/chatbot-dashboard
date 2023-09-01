@@ -38,9 +38,9 @@ const useInjectChatbot = (): void => {
   };
 
   useEffect(() => {
-    if (pathname.includes("/chat/")) {
+    if (pathname.includes("/web")) {
       const pathParts = pathname.split("/");
-      const collection_id = pathParts[pathParts.length - 1];
+      const collection_id = pathParts[2];
       handleSetupCollectionId(collection_id);
 
       handleInjectChatbot();
