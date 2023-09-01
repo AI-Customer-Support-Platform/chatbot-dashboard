@@ -69,11 +69,13 @@ const WebAPI = () => {
   ]);
 
   return (
-    <div className="mb-4 flex items-center gap-6">
+    <>
       {collection ? (
         <div className="flex flex-col gap-4">
           <h1 className="text-3xl font-extrabold">{collection?.name}</h1>
-          <p className="mb-8 text-base">{collection?.description}</p>
+          <p className="mb-8 border-b pb-4 text-base">
+            {collection?.description}
+          </p>
 
           {!isLoading && user?.email_verified ? (
             <section className="h-fit">
@@ -112,7 +114,7 @@ const WebAPI = () => {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

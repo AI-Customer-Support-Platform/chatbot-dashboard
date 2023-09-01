@@ -9,7 +9,7 @@ interface CollectionInfoProps {
 const CollectionInfo: React.FC<CollectionInfoProps> = ({ collectionData }) => {
   return (
     <>
-      <section className="mb-8">
+      <section className="mb-8 border-b pb-4">
         {collectionData ? (
           <div className="flex flex-col gap-2">
             <h2 className="text-3xl font-bold">{collectionData.name}</h2>
