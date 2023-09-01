@@ -7,6 +7,9 @@ import useAPI from "@/hooks/useAPI";
 import { TCollectionData } from "@/types";
 import CodeField from "./CodeField";
 import useInjectChatbot from "@/hooks/useInjectChatbot";
+import useUserPlanDetails from "@/hooks/useUserPlanDetails";
+import APIItem from "@/pages/Home/APIs/APIItem";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const WebAPI = () => {
   const [isChecking, setIsChecking] = useState(false);
@@ -19,6 +22,8 @@ const WebAPI = () => {
   const { t } = useTranslation();
   const { handleInjectChatbot, handleRemoveChatbot, handleSetupCollectionId } =
     useInjectChatbot();
+  const { isLoading, planDetials } = useUserPlanDetails();
+  const { user } = useAuth0();
 
   const handleCheckPermission = useCallback(async () => {
     if (!collectionId) {
@@ -69,6 +74,16 @@ const WebAPI = () => {
         <div className="flex flex-col gap-4">
           <h1 className="text-3xl font-extrabold">{collection?.name}</h1>
           <p className="mb-8 text-base">{collection?.description}</p>
+
+          {!isLoading && user?.email_verified ? (
+            <section className="h-fit">
+              <APIItem name="web" apiDetails={planDetials.web} />
+            </section>
+          ) : (
+            <section className="flex flex-col gap-2">
+              <Skeleton className="h-20 max-w-3xl " />
+            </section>
+          )}
 
           <p className="text-xl font-bold text-slate-500">
             {t(
