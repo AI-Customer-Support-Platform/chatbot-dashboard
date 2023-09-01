@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import useAPI from "@/hooks/useAPI";
 import { TCollectionData } from "@/types";
 import CodeField from "./CodeField";
+import useInjectChatbot from "@/hooks/useInjectChatbot";
 
 const WebAPI = () => {
   const [isChecking, setIsChecking] = useState(false);
@@ -16,6 +17,8 @@ const WebAPI = () => {
   const { fetcherQueryCollection } = useAPI();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { handleInjectChatbot, handleRemoveChatbot, handleSetupCollectionId } =
+    useInjectChatbot();
 
   const handleCheckPermission = useCallback(async () => {
     if (!collectionId) {
@@ -44,6 +47,21 @@ const WebAPI = () => {
       clearTimeout(timer);
     };
   }, [isChecking, handleCheckPermission]);
+
+  useEffect(() => {
+    if (collectionId) {
+      handleSetupCollectionId(collectionId);
+      handleInjectChatbot();
+    }
+    return () => {
+      handleRemoveChatbot();
+    };
+  }, [
+    collectionId,
+    handleInjectChatbot,
+    handleRemoveChatbot,
+    handleSetupCollectionId,
+  ]);
 
   return (
     <div className="mb-4 flex items-center gap-6">

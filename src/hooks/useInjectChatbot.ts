@@ -1,9 +1,6 @@
-import { useCallback, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useCallback } from "react";
 
-const useInjectChatbot = (): void => {
-  const pathname = useLocation().pathname;
-
+const useInjectChatbot = () => {
   const script: HTMLScriptElement = document.createElement("script");
   script.type = "module";
   script.crossOrigin = "true";
@@ -37,20 +34,11 @@ const useInjectChatbot = (): void => {
     };
   };
 
-  useEffect(() => {
-    if (pathname.includes("/web")) {
-      const pathParts = pathname.split("/");
-      const collection_id = pathParts[2];
-      handleSetupCollectionId(collection_id);
-
-      handleInjectChatbot();
-    } else {
-      handleRemoveChatbot();
-    }
-
-    // Clean up the injected script and link on unmount
-    return handleRemoveChatbot;
-  }, [pathname, handleInjectChatbot, handleRemoveChatbot]);
+  return {
+    handleInjectChatbot,
+    handleRemoveChatbot,
+    handleSetupCollectionId,
+  };
 };
 
 export default useInjectChatbot;
