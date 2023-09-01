@@ -70,21 +70,29 @@ const Collections = () => {
   return (
     <>
       <section>
-        <button
-          onClick={handleClickCreateCollectionButton}
-          className="mb-6 flex items-center rounded-md border-2  bg-black/70 px-3 py-2 font-bold text-white hover:bg-black"
-        >
-          {t("Create-long")}
-        </button>
-        <PortalModalCenter
-          show={isOpenCreateCollectionModal}
-          setIsShow={setIsOpenCreateCollectionModal}
-        >
-          <CreateCollectionModal
-            setIsOpen={setIsOpenCreateCollectionModal}
-            refresh={fetchCollections}
-          />
-        </PortalModalCenter>
+        {!isLoading ? (
+          <>
+            <button
+              onClick={handleClickCreateCollectionButton}
+              className="mb-6 flex items-center rounded-md border-2  bg-black/70 px-3 py-2 font-bold text-white hover:bg-black"
+            >
+              {t("Create-long")}
+            </button>
+            <PortalModalCenter
+              show={isOpenCreateCollectionModal}
+              setIsShow={setIsOpenCreateCollectionModal}
+            >
+              <CreateCollectionModal
+                setIsOpen={setIsOpenCreateCollectionModal}
+                refresh={fetchCollections}
+              />
+            </PortalModalCenter>
+          </>
+        ) : (
+          <div className="mb-6 w-52">
+            <Skeleton className="h-11" />
+          </div>
+        )}
       </section>
 
       <section className="grid w-full grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 ">
