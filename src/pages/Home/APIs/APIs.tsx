@@ -15,7 +15,7 @@ const APIs = () => {
   return (
     <div className="w-full">
       <TitleWithRefreshButton
-        title={t("APIs")}
+        title={t("API Usage")}
         isLoading={isLoading}
         refresh={refresh}
       />

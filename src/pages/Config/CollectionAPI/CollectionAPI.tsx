@@ -3,18 +3,22 @@ import CollectionInfo from "../components/CollectionInfo";
 import CustomButton from "@/components/buttons/CustomButton";
 import Skeleton from "react-loading-skeleton";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 const CollectionAPI = () => {
   const { collectionData } = useCollectionData();
   const handleClickWebButton = () => {
     window.location.href = `/config/${collectionData?.id}/api/web`;
   };
+  const { t } = useTranslation();
 
   return (
     <>
       <CollectionInfo collectionData={collectionData} />
       {collectionData ? (
         <section>
-          <h2 className="mb-4 text-xl">Create a chatbot for the following:</h2>
+          <h2 className="mb-4 text-xl">
+            {t("Create a chatbot for the following: ")}
+          </h2>
 
           <div className="flex gap-4">
             <CustomButton

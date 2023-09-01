@@ -79,7 +79,7 @@ const UpdateCollectionInfo: React.FC<UpdateCollectionInfoProps> = ({
   return (
     <>
       <section className="mb-6 flex flex-col gap-4">
-        <h2 className="text-3xl font-bold">Collection Info</h2>
+        <h2 className="text-3xl font-bold">{t("Collection Info")}</h2>
         <div className="flex items-center gap-6">
           {collectionInfo ? (
             <div className="max-w-sm">

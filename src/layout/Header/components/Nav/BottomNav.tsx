@@ -1,9 +1,11 @@
 import classNames from "classnames";
+import { useTranslation } from "react-i18next";
 import { Link, useLocation, useParams } from "react-router-dom";
 
 const BottomNav = () => {
   const { collectionId } = useParams();
   const pathname = useLocation().pathname;
+  const { t } = useTranslation();
 
   const homePaths = ["/", "/usage"];
   const configPaths = [
@@ -22,16 +24,16 @@ const BottomNav = () => {
       <ul className="flex items-center">
         {isHomePath && (
           <>
-            <NavItem name="Collections" path="/" />
-            <NavItem name="Usage" path="/usage" />
+            <NavItem name={t("Collections")} path="/" />
+            <NavItem name={t("Usage")} path="/usage" />
           </>
         )}
         {isConfigPath && (
           <>
-            <NavItem name="Documents" path={`/config/${collectionId}`} />
+            <NavItem name={t("Documents")} path={`/config/${collectionId}`} />
             <NavItem name="API" path={`/config/${collectionId}/api`} />
             <NavItem
-              name="Settings"
+              name={t("Settings")}
               path={`/config/${collectionId}/settings`}
             />
           </>

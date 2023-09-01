@@ -47,7 +47,7 @@ const Documents = () => {
         onClick={handleClickUploadDocumentButton}
         className="mb-6 flex items-center rounded-md border-2  bg-black/70 px-3 py-2 font-bold text-white hover:bg-black"
       >
-        {t("Upload")}
+        {t("Upload-long")}
       </button>
       <section>
         <div className="grid w-full grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 ">

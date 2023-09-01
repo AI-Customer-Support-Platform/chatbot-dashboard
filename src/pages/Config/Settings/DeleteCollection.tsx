@@ -22,7 +22,7 @@ const DeleteCollection: React.FC<DeleteCollectionProps> = ({
 
   return (
     <section className="mb-8 flex flex-col gap-4">
-      <h2 className="text-3xl font-bold">Danger Zone</h2>
+      <h2 className="text-3xl font-bold">{t("Danger Zone")}</h2>
       {collectionData ? (
         <>
           <CustomButton

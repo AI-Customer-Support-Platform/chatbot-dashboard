@@ -4,16 +4,19 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Skeleton from "react-loading-skeleton";
 import CollectionInfo from "../../components/CollectionInfo";
 import useCollectionData from "@/hooks/useCollectionData";
+import { useTranslation } from "react-i18next";
 
 const LineAPI = () => {
   const { isLoading, planDetials } = useUserPlanDetails();
   const { user } = useAuth0();
   const { collectionData } = useCollectionData();
+  const { t } = useTranslation();
+
   return (
     <>
       <CollectionInfo collectionData={collectionData} />
       <h2 className="mb-4 text-3xl font-bold">LINE API</h2>
-      <p className="mb-8 text-xl font-bold">Coming soon</p>
+      <p className="mb-8 text-xl font-bold">{t("Coming soon")}</p>
       {!isLoading && user?.email_verified ? (
         <section className="w-full">
           <APIItem name="line" apiDetails={planDetials.line} />
