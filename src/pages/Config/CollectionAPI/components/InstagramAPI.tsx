@@ -1,4 +1,9 @@
 const InstagramAPI = () => {
-  return <div>InstagramAPI</div>;
+  return (
+    <div>
+      <h2>Instagram API</h2>
+      <span>Coming soon</span>
+    </div>
+  );
 };
 export default InstagramAPI;
