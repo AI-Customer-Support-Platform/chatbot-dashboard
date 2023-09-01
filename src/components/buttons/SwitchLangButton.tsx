@@ -72,7 +72,7 @@ const SwitchLangModal = ({
         onClick={() => setShowModal(false)}
         className="fixed inset-0 z-20 h-screen w-full bg-transparent"
       ></div>
-      <div className="absolute top-9 z-20 rounded-[10px] border bg-white p-2 text-black shadow">
+      <div className="absolute top-11 z-20 rounded-[10px] border bg-white p-2 text-black shadow">
         <ul className="flex flex-col items-center gap-2">
           {languageList.map((lang) => (
             <li key={lang.code}>

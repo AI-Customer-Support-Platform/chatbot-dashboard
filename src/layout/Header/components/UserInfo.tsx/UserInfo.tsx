@@ -31,7 +31,7 @@ const UserInfoModal = ({ setShowModal }: UserInfoModalProps) => {
         onClick={() => setShowModal(false)}
         className="fixed inset-0 z-20 h-screen w-full bg-transparent"
       ></div>
-      <section className="absolute right-4 top-12 z-20 flex flex-col  gap-4 rounded-xl border bg-white bg-white/80 py-4  backdrop-blur">
+      <section className="absolute right-4 top-14 z-20 flex flex-col  gap-4 rounded-xl border bg-white bg-white/80 py-4  backdrop-blur">
         <span className="border-b px-4 pb-2">{user?.email}</span>
 
         <button
