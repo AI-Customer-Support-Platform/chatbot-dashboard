@@ -1,55 +1,26 @@
 import classNames from "classnames";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { languageList } from "@/i18n/config";
 import { getLang, saveLang } from "@/utils/i18n";
-import { isClickOutside } from "@/utils/utils";
 
-import { TriangleIcon } from "../icons";
+import { LanguageIcon, TriangleIcon } from "../icons";
 
 const SwitchLangButton = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [currentLang, setCurrentLang] = useState("en");
   const [t, i18n] = useTranslation();
-  const langContainerRef = useRef<HTMLDivElement>(null);
 
   const handleToggle = () => {
-    setIsOpen((prev) => !prev);
+    setShowModal((prev) => !prev);
   };
-
   const handleSelectLang = (langCode: string) => {
     setCurrentLang(langCode);
     saveLang(langCode);
     i18n.changeLanguage(langCode);
-    setIsOpen(false);
+    setShowModal(false);
   };
-
-  const handleClickOutside = (event: MouseEvent) => {
-    if (isClickOutside(langContainerRef, event)) {
-      setIsOpen(false);
-    }
-  };
-
-  useEffect(() => {
-    const addClickListener = () => {
-      setTimeout(() => {
-        document.addEventListener("click", handleClickOutside);
-      }, 0);
-    };
-
-    const removeClickListener = () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-
-    if (isOpen) {
-      addClickListener();
-    } else {
-      removeClickListener();
-    }
-
-    return removeClickListener;
-  }, [isOpen]);
 
   useEffect(() => {
     const lang = getLang();
@@ -61,42 +32,68 @@ const SwitchLangButton = () => {
     <div className="relative flex select-none flex-col items-center gap-1">
       <button
         onClick={handleToggle}
-        className="flex items-center gap-1 rounded-lg bg-slate-100 p-2 text-sm font-bold  text-black shadow"
+        className="flex items-center gap-1 rounded-lg border bg-white px-2 py-2 text-sm font-bold  text-black"
       >
+        <LanguageIcon width={18} height={18} />
         <span className="leading-none">{t("language")}</span>
         <div
           className={classNames("transition duration-300", {
-            "-translate-y-[1px] rotate-180": isOpen,
+            "-translate-y-[1px] rotate-180": showModal,
           })}
         >
           <TriangleIcon fill="black" />
         </div>
       </button>
-      {isOpen && (
-        <div
-          ref={langContainerRef}
-          className="absolute top-9 z-20 rounded-[10px] border bg-slate-100 p-2 text-black shadow"
-        >
-          <ul className="flex flex-col gap-2">
-            {languageList.map((lang) => (
-              <li
-                onClick={() => handleSelectLang(lang.code)}
-                key={lang.code}
-                className={classNames(
-                  "rounded-[4px] px-2 py-1 text-sm font-normal hover:cursor-pointer",
-                  {
-                    "hover:bg-slate-300/60": currentLang !== lang.code,
-                    "bg-slate-300/50": currentLang === lang.code,
-                  }
-                )}
-              >
-                {lang.name}
-              </li>
-            ))}
-          </ul>
-        </div>
+      {showModal && (
+        <SwitchLangModal
+          setShowModal={setShowModal}
+          currentLang={currentLang}
+          handleSelectLang={handleSelectLang}
+        />
       )}
     </div>
   );
 };
+
+interface SwitchLangModalProps {
+  setShowModal: (showModal: boolean) => void;
+  currentLang: string;
+  handleSelectLang: (langCode: string) => void;
+}
+
+const SwitchLangModal = ({
+  setShowModal,
+  currentLang,
+  handleSelectLang,
+}: SwitchLangModalProps) => {
+  return (
+    <>
+      <div
+        onClick={() => setShowModal(false)}
+        className="fixed inset-0 z-20 h-screen w-full bg-transparent"
+      ></div>
+      <div className="absolute top-9 z-20 rounded-[10px] border bg-white p-2 text-black shadow">
+        <ul className="flex flex-col items-center gap-2">
+          {languageList.map((lang) => (
+            <li key={lang.code}>
+              <button
+                onClick={() => handleSelectLang(lang.code)}
+                className={classNames(
+                  "rounded-[4px] px-2 py-1 text-sm font-normal hover:cursor-pointer",
+                  {
+                    "hover:bg-slate-200": currentLang !== lang.code,
+                    "bg-slate-200/70": currentLang === lang.code,
+                  }
+                )}
+              >
+                {lang.name}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
+  );
+};
+
 export default SwitchLangButton;
