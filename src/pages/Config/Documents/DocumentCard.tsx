@@ -24,7 +24,7 @@ const DocumentCard: React.FC<DocumentCardProps> = ({
     setIsOpenDeleteDocumentModal(true);
   };
   return (
-    <div className="flex h-48 flex-col justify-between overflow-hidden overflow-ellipsis rounded-lg border bg-white shadow transition hover:shadow-md ">
+    <div className="flex h-32 flex-col justify-between overflow-hidden overflow-ellipsis rounded-lg border bg-white shadow transition hover:shadow-md ">
       <section className="overflow-auto p-2">
         <h2 className="text-xl">{document?.file_name}</h2>
       </section>
