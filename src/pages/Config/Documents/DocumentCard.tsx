@@ -5,6 +5,7 @@ import { TDocument } from "@/types";
 
 import DeleteDocumentModal from "./DeleteDocumentModal";
 import { DeleteIcon } from "@/components/icons";
+import { calculateTimeDifference } from "@/utils/utils";
 
 interface DocumentCardProps {
   collection_id: string;
@@ -27,7 +28,10 @@ const DocumentCard: React.FC<DocumentCardProps> = ({
       <section className="overflow-auto p-2">
         <h2 className="text-xl">{document?.file_name}</h2>
       </section>
-      <section className="flex justify-end p-2">
+      <section className="flex items-end justify-between p-2">
+        <span className="text-slate-500">
+          {calculateTimeDifference(document.created_at)} ago
+        </span>
         <button
           className="text-red-300 hover:text-red-600"
           onClick={handleClickDeleteDocumentButton}

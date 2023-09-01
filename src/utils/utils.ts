@@ -1,5 +1,25 @@
 import i18next from "i18next";
 
+export const calculateTimeDifference = (time: string) => {
+  const postDate = new Date(time);
+  const currentDate = new Date();
+  const timezoneOffsetMinutes = currentDate.getTimezoneOffset() * 60 * 1000;
+
+  const timeDiff =
+    currentDate.getTime() - postDate.getTime() + timezoneOffsetMinutes;
+  const minutesDiff = Math.floor(timeDiff / (1000 * 60));
+  const hoursDiff = Math.floor(timeDiff / (1000 * 60 * 60));
+  const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+
+  if (minutesDiff < 60) {
+    return `${minutesDiff}m`;
+  } else if (hoursDiff < 24) {
+    return `${hoursDiff}h`;
+  } else {
+    return `${daysDiff}d`;
+  }
+};
+
 export const truncate = (text: string, maxLength = 40) => {
   if (text.length <= maxLength) {
     return text;

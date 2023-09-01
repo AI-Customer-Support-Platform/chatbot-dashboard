@@ -96,6 +96,7 @@ const Collections = () => {
                 name={collection.name}
                 description={collection?.description}
                 collectionId={collection.id}
+                updateTime={collection.updated_at}
               />
             ))}
           </>
