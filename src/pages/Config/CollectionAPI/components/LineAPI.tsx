@@ -142,7 +142,7 @@ const LineAPI = () => {
               />
               <CustomButton
                 classNames="text-white"
-                name="copy"
+                name={t("Copy")}
                 handleClick={handleClickCopyWebhookURL}
               />
             </div>
@@ -153,7 +153,7 @@ const LineAPI = () => {
               className="mb-1 font-bold"
               htmlFor="line_channel_access_token"
             >
-              Channel Access Token
+              {t("Channel access token")}
             </label>
             <textarea
               onChange={(event) => {
@@ -165,7 +165,7 @@ const LineAPI = () => {
               rows={3}
               className="rounded border border-slate-300 bg-slate-50 p-1 outline-2 focus-within:bg-white focus-within:outline focus-within:outline-blue-500"
               id="line_channel_access_token"
-              placeholder={t("Copy and paste your Channel Access Token here")}
+              placeholder={t("Copy and paste your Channel access token here")}
               value={collectionInfo?.line_channel_access_token || ""}
             ></textarea>
           </section>
