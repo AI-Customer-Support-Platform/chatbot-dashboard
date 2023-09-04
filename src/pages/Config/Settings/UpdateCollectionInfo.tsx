@@ -40,9 +40,7 @@ const UpdateCollectionInfo: React.FC<UpdateCollectionInfoProps> = ({
       return;
     }
 
-    const { name, description, fallback_msg } = collectionInfo;
-
-    if (name.trim() === "") {
+    if (collectionInfo.name.trim() === "") {
       toast(`⚠️ ${t("Name is required")}`);
       return;
     }
@@ -50,8 +48,9 @@ const UpdateCollectionInfo: React.FC<UpdateCollectionInfoProps> = ({
     try {
       setIsLoading(true);
 
+      const { description, fallback_msg } = collectionInfo;
       const updatedInfo = {
-        name,
+        ...collectionInfo,
         ...(fallback_msg === "" ? {} : { fallback_msg }),
         ...(description === "" ? {} : { description }),
       };
@@ -67,13 +66,34 @@ const UpdateCollectionInfo: React.FC<UpdateCollectionInfoProps> = ({
     }
   };
 
+  const setCollectionInfoFromData = (data: TCollectionData) => {
+    const {
+      name,
+      description,
+      fallback_msg,
+      line_channel_access_token,
+      line_language,
+    } = data;
+    setCollectionInfo({
+      name,
+      description,
+      fallback_msg,
+      line_channel_access_token,
+      line_language,
+    });
+  };
+
   const handleClickCancelUpdateButton = () => {
-    setIsCollectionInfoChanged(false);
-    setCollectionInfo(collectionData);
+    if (collectionData) {
+      setIsCollectionInfoChanged(false);
+      setCollectionInfoFromData(collectionData);
+    }
   };
 
   useEffect(() => {
-    setCollectionInfo(collectionData);
+    if (collectionData) {
+      setCollectionInfoFromData(collectionData);
+    }
   }, [collectionData]);
 
   return (
