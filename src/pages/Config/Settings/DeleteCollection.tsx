@@ -1,10 +1,12 @@
-import Skeleton from "react-loading-skeleton";
-import PortalModalCenter from "@/components/portalDialog/PortalModalCenter";
-import DeleteCollectionModal from "./DeleteCollectionModal";
-import CustomButton from "@/components/buttons/CustomButton";
 import { useState } from "react";
-import { TCollectionData } from "@/types";
 import { useTranslation } from "react-i18next";
+import Skeleton from "react-loading-skeleton";
+
+import CustomButton from "@/components/buttons/CustomButton";
+import PortalModalCenter from "@/components/portalDialog/PortalModalCenter";
+import { TCollectionData } from "@/types";
+
+import DeleteCollectionModal from "./DeleteCollectionModal";
 
 interface DeleteCollectionProps {
   collectionData: TCollectionData | undefined;

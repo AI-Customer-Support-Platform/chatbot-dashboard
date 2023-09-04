@@ -1,6 +1,7 @@
-import UpdateCollectionInfo from "./UpdateCollectionInfo";
-import DeleteCollection from "./DeleteCollection";
 import useCollectionData from "@/hooks/useCollectionData";
+
+import DeleteCollection from "./DeleteCollection";
+import UpdateCollectionInfo from "./UpdateCollectionInfo";
 
 const Settings = () => {
   const { refresh, collectionData } = useCollectionData();

@@ -4,12 +4,13 @@ import Skeleton from "react-loading-skeleton";
 import { useNavigate, useParams } from "react-router-dom";
 
 import useAPI from "@/hooks/useAPI";
-import { TCollectionData } from "@/types";
-import CodeField from "./CodeField";
 import useInjectChatbot from "@/hooks/useInjectChatbot";
 import useUserPlanDetails from "@/hooks/useUserPlanDetails";
 import APIItem from "@/pages/Home/APIs/APIItem";
+import { TCollectionData } from "@/types";
 import { useAuth0 } from "@auth0/auth0-react";
+
+import CodeField from "./CodeField";
 
 const WebAPI = () => {
   const [isChecking, setIsChecking] = useState(false);

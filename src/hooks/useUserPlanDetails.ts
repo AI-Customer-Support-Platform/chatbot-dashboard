@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
+
 import useAPI from "@/hooks/useAPI";
 import { TUserPlanDetail } from "@/types";
-
 import { useAuth0 } from "@auth0/auth0-react";
-import toast from "react-hot-toast";
+
 const useUserPlanDetails = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [initLoaded, setInitLoaded] = useState(false);

@@ -1,9 +1,12 @@
-import useCollectionData from "@/hooks/useCollectionData";
-import CollectionInfo from "../components/CollectionInfo";
-import CustomButton from "@/components/buttons/CustomButton";
+import { useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
 import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+
+import CustomButton from "@/components/buttons/CustomButton";
+import useCollectionData from "@/hooks/useCollectionData";
+
+import CollectionInfo from "../components/CollectionInfo";
+
 const CollectionAPI = () => {
   const { collectionData } = useCollectionData();
   const handleClickWebButton = () => {

@@ -1,5 +1,6 @@
-import { useAuth0 } from "@auth0/auth0-react";
 import { Outlet } from "react-router-dom";
+
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Main = () => {
   const { user } = useAuth0();

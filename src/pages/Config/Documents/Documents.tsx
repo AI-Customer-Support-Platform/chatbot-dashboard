@@ -3,13 +3,13 @@ import { useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
 
 import PortalModalCenter from "@/components/portalDialog/PortalModalCenter";
+import useCollectionData from "@/hooks/useCollectionData";
 import { TDocument } from "@/types";
 
+import CollectionInfo from "../components/CollectionInfo";
 import DocumentCard from "./DocumentCard";
 import FileSpaceInfo from "./FileSpaceInfo";
 import UploadCollectionModal from "./UploadDocumentModal";
-import CollectionInfo from "../components/CollectionInfo";
-import useCollectionData from "@/hooks/useCollectionData";
 
 const Documents = () => {
   const [documents, setDocuments] = useState<TDocument[]>([]);

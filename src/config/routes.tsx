@@ -1,18 +1,16 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import App from "@/App";
-import { Login, NotFound } from "@/pages";
-
-import APIs from "@/pages/Home/APIs/APIs";
-
 import Main from "@/layout/Main/Main";
-import Collections from "@/pages/Home/Collections/Collections";
+import { Login, NotFound } from "@/pages";
+import CollectionAPI from "@/pages/Config/CollectionAPI/CollectionAPI";
+import InstagramAPI from "@/pages/Config/CollectionAPI/components/InstagramAPI";
+import LineAPI from "@/pages/Config/CollectionAPI/components/LineAPI";
+import WebAPI from "@/pages/Config/CollectionAPI/components/WebAPI";
 import Documents from "@/pages/Config/Documents/Documents";
 import Settings from "@/pages/Config/Settings/Settings";
-import CollectionAPI from "@/pages/Config/CollectionAPI/CollectionAPI";
-import WebAPI from "@/pages/Config/CollectionAPI/components/WebAPI";
-import LineAPI from "@/pages/Config/CollectionAPI/components/LineAPI";
-import InstagramAPI from "@/pages/Config/CollectionAPI/components/InstagramAPI";
+import APIs from "@/pages/Home/APIs/APIs";
+import Collections from "@/pages/Home/Collections/Collections";
 
 const router = createBrowserRouter([
   {

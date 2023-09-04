@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+
 import svgFavicon from "@/assets/favicon.svg";
 import SwitchLangButton from "@/components/buttons/SwitchLangButton";
+
 import UserInfo from "../UserInfo.tsx/UserInfo";
 
 const TopNav = () => {

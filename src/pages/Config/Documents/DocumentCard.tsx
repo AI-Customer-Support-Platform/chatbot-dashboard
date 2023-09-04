@@ -1,11 +1,11 @@
 import { useState } from "react";
 
+import { DeleteIcon } from "@/components/icons";
 import PortalModalCenter from "@/components/portalDialog/PortalModalCenter";
 import { TDocument } from "@/types";
+import { calculateTimeDifference } from "@/utils/utils";
 
 import DeleteDocumentModal from "./DeleteDocumentModal";
-import { DeleteIcon } from "@/components/icons";
-import { calculateTimeDifference } from "@/utils/utils";
 
 interface DocumentCardProps {
   collection_id: string;

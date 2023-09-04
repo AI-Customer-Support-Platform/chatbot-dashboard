@@ -1,10 +1,12 @@
+import { useTranslation } from "react-i18next";
+import Skeleton from "react-loading-skeleton";
+
+import useCollectionData from "@/hooks/useCollectionData";
 import useUserPlanDetails from "@/hooks/useUserPlanDetails";
 import APIItem from "@/pages/Home/APIs/APIItem";
 import { useAuth0 } from "@auth0/auth0-react";
-import Skeleton from "react-loading-skeleton";
+
 import CollectionInfo from "../../components/CollectionInfo";
-import useCollectionData from "@/hooks/useCollectionData";
-import { useTranslation } from "react-i18next";
 
 const InstagramAPI = () => {
   const { isLoading, planDetials } = useUserPlanDetails();

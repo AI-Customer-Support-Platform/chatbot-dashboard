@@ -1,7 +1,9 @@
-import { useParams } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
 import useAPI from "@/hooks/useAPI";
 import { TCollectionData } from "@/types";
+
 const useCollectionData = () => {
   const { collectionId } = useParams();
   const [isLoading, setIsLoading] = useState(false);

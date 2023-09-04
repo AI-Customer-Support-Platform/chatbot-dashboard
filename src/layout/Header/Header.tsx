@@ -1,5 +1,5 @@
-import TopNav from "./components/Nav/TopNav";
 import BottomNav from "./components/Nav/BottomNav";
+import TopNav from "./components/Nav/TopNav";
 
 const Header = () => {
   return (

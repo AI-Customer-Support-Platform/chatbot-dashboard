@@ -2,10 +2,10 @@ import { useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
 
 import TitleWithRefreshButton from "@/components/TitleWithRefreshButton";
+import useUserPlanDetails from "@/hooks/useUserPlanDetails";
+import { useAuth0 } from "@auth0/auth0-react";
 
 import APIItem from "./APIItem";
-import { useAuth0 } from "@auth0/auth0-react";
-import useUserPlanDetails from "@/hooks/useUserPlanDetails";
 
 const APIs = () => {
   const { t } = useTranslation();

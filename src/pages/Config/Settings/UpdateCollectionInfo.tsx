@@ -4,11 +4,10 @@ import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
 
+import CustomButton from "@/components/buttons/CustomButton";
 import { LoadingIcon } from "@/components/icons";
 import useAPI from "@/hooks/useAPI";
 import { TCollectionData, TCollectionInfo } from "@/types";
-
-import CustomButton from "@/components/buttons/CustomButton";
 
 interface UpdateCollectionInfoProps {
   refresh: () => void;
