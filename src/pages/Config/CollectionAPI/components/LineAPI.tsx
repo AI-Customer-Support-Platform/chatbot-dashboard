@@ -122,8 +122,9 @@ const LineAPI = () => {
           <Skeleton className="h-20 max-w-3xl" />
         </section>
       )}
-      <div className=" mb-6 max-w-3xl rounded-lg border bg-white p-4">
-        {collectionData && (
+
+      {collectionData ? (
+        <div className=" mb-6 max-w-3xl rounded-lg border bg-white p-4">
           <section className="mb-4 flex max-w-3xl flex-col">
             <label className="mb-1 font-bold" htmlFor="line-webhook">
               {t("LINE bot Webhook URL:")}
@@ -136,7 +137,6 @@ const LineAPI = () => {
                 readOnly
                 value={getLineWebhookURL()}
                 onClick={(event) => {
-                  // select the text
                   event.currentTarget.select();
                 }}
               />
@@ -147,65 +147,73 @@ const LineAPI = () => {
               />
             </div>
           </section>
-        )}
-        <section className="mb-4 flex max-w-3xl flex-col">
-          <label className="mb-1 font-bold" htmlFor="line_channel_access_token">
-            Channel Access Token
-          </label>
-          <textarea
-            onChange={(event) => {
-              handleInputChange(
-                event.target.value,
-                "line_channel_access_token"
-              );
-            }}
-            rows={3}
-            className="rounded border border-slate-300 bg-slate-50 p-1 outline-2 focus-within:bg-white focus-within:outline focus-within:outline-blue-500"
-            id="line_channel_access_token"
-            placeholder={t("Copy and paste your Channel Access Token here")}
-            value={collectionInfo?.line_channel_access_token || ""}
-          ></textarea>
-        </section>
-        <section className="flex items-baseline gap-3">
-          <label className="mb-1 font-bold" htmlFor="line_bot_lang">
-            {t("Language settings for the LINE bot:")}
-          </label>
-          <select
-            className="h-8 cursor-pointer rounded border bg-white p-1"
-            id="line_bot_lang"
-            value={collectionInfo?.line_language || "ja"}
-            onChange={(event) => {
-              handleInputChange(event.target.value, "line_language");
-            }}
-          >
-            <option value="en">English</option>
-            <option value="ja">日本語</option>
-          </select>
-        </section>
 
-        {isCollectionInfoChanged && (
-          <section className="mt-4 flex gap-4">
-            {!isUpdateInfoLoading ? (
-              <>
-                <CustomButton
-                  handleClick={handleClickUpdate}
-                  name={t("Save")}
-                  classNames="text-white bg-green-600"
-                />
-                <CustomButton
-                  handleClick={handleClickCancelUpdateButton}
-                  name={t("Cancel")}
-                  classNames="text-white"
-                />
-              </>
-            ) : (
-              <div className="animate-spin">
-                <LoadingIcon />
-              </div>
-            )}
+          <section className="mb-4 flex max-w-3xl flex-col">
+            <label
+              className="mb-1 font-bold"
+              htmlFor="line_channel_access_token"
+            >
+              Channel Access Token
+            </label>
+            <textarea
+              onChange={(event) => {
+                handleInputChange(
+                  event.target.value,
+                  "line_channel_access_token"
+                );
+              }}
+              rows={3}
+              className="rounded border border-slate-300 bg-slate-50 p-1 outline-2 focus-within:bg-white focus-within:outline focus-within:outline-blue-500"
+              id="line_channel_access_token"
+              placeholder={t("Copy and paste your Channel Access Token here")}
+              value={collectionInfo?.line_channel_access_token || ""}
+            ></textarea>
           </section>
-        )}
-      </div>
+          <section className="flex items-baseline gap-3">
+            <label className="mb-1 font-bold" htmlFor="line_bot_lang">
+              {t("Language settings for the LINE bot:")}
+            </label>
+            <select
+              className="h-8 cursor-pointer rounded border bg-white p-1"
+              id="line_bot_lang"
+              value={collectionInfo?.line_language || "ja"}
+              onChange={(event) => {
+                handleInputChange(event.target.value, "line_language");
+              }}
+            >
+              <option value="en">English</option>
+              <option value="ja">日本語</option>
+            </select>
+          </section>
+
+          {isCollectionInfoChanged && (
+            <section className="mt-4 flex gap-4">
+              {!isUpdateInfoLoading ? (
+                <>
+                  <CustomButton
+                    handleClick={handleClickUpdate}
+                    name={t("Save")}
+                    classNames="text-white bg-green-600"
+                  />
+                  <CustomButton
+                    handleClick={handleClickCancelUpdateButton}
+                    name={t("Cancel")}
+                    classNames="text-white"
+                  />
+                </>
+              ) : (
+                <div className="animate-spin">
+                  <LoadingIcon />
+                </div>
+              )}
+            </section>
+          )}
+        </div>
+      ) : (
+        <section className="mb-6 h-64 max-w-3xl">
+          <Skeleton className="h-64" />
+        </section>
+      )}
 
       <section>
         <ReactMarkdown
