@@ -1,5 +1,6 @@
 import "./assets/index.css";
 import "react-loading-skeleton/dist/skeleton.css";
+import "github-markdown-css";
 
 import React from "react";
 import ReactDOM from "react-dom/client";

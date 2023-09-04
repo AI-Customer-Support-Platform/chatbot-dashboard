@@ -57,6 +57,11 @@
   "Create a chatbot for the following: ": "以下の用途に合わせてチャットボットを作成します: ",
   "Coming soon": "近日公開",
 
+  "Save": "保存",
+  "Language settings for the LINE bot:": "LINEボットの言語設定:",
+  "LINE bot Webhook URL:": "LINEボットのWebhook URL:",
+  "Copy and paste your Channel Access Token here": "Channel Access Tokenをコピーして貼り付けてください:",
+
   "Settings": "設定",
   "Collection Info": "コレクション情報",
   "Danger Zone": "危険ゾーン",

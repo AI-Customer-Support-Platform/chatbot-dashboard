@@ -8,6 +8,17 @@
   }
 }
 
+@layer components {
+  .markdown-body {
+    ul {
+      @apply list-disc;
+    }
+    ol {
+      @apply list-decimal;
+    }
+  }
+}
+
 .grecaptcha-badge {
   visibility: hidden;
 }

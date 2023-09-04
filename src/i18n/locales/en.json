@@ -57,6 +57,11 @@
   "Create a chatbot for the following: ": "Create a chatbot for the following: ",
   "Coming soon": "Coming soon",
 
+  "Save": "Save",
+  "Language settings for the LINE bot:": "Language settings for the LINE bot:",
+  "LINE bot Webhook URL:": "LINE bot Webhook URL:",
+  "Copy and paste your Channel Access Token here": "Copy and paste your Channel Access Token here",
+
   "Settings": "Settings",
   "Collection Info": "Collection Info",
   "Danger Zone": "Danger Zone",

@@ -1,5 +1,27 @@
 import i18next from "i18next";
 
+export const copyTextToClipboard = (text: string): boolean => {
+  // Create a text area element to temporarily hold the text
+  const textArea = document.createElement("textarea");
+  textArea.value = text;
+
+  // Make the text area invisible and append it to the document
+  textArea.style.position = "fixed";
+  textArea.style.top = "0";
+  textArea.style.left = "0";
+  textArea.style.opacity = "0";
+  document.body.appendChild(textArea);
+
+  // Select and copy the text to the clipboard
+  textArea.select();
+  const copied = document.execCommand("copy");
+
+  // Remove the text area from the document
+  document.body.removeChild(textArea);
+
+  return copied;
+};
+
 export const calculateTimeDifference = (time: string) => {
   const postDate = new Date(time);
   const currentDate = new Date();
