@@ -2,6 +2,7 @@ import {
   TApi,
   TCollectionData,
   TCollectionInfo,
+  TDocumentSplitsResp,
   TPlan,
   TUserPlanDetail,
   UserStorage,
@@ -197,6 +198,75 @@ const useAPI = () => {
     });
   };
 
+  const fetcherQueryDocumentSplits = async (
+    collection_id: string,
+    question: string
+  ): Promise<TDocumentSplitsResp> => {
+    const token = await getAccessToken();
+
+    return fetcher.post(
+      `/query/${collection_id}`,
+      {
+        queries: [
+          {
+            query: question,
+
+            top_k: 4,
+          },
+        ],
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  };
+
+  const fetcherUpdateDocumentSplit = async (
+    collectionId: string,
+    text: string,
+    splitId: string
+  ) => {
+    const token = await getAccessToken();
+
+    return fetcher.post(
+      `/upsert/${collectionId}`,
+      {
+        documents: [
+          {
+            text,
+            id: splitId,
+          },
+        ],
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  };
+
+  const fetcherDeleteDocumentSplit = async (
+    collectionId: string,
+    splitId: string
+  ) => {
+    const token = await getAccessToken();
+
+    return fetcher.post(
+      `/delete/${collectionId}`,
+      {
+        ids: [splitId],
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  };
+
   return {
     fetcherQueryCollections,
     fetcherCreateCollection,
@@ -209,6 +279,9 @@ const useAPI = () => {
     fetcherSubscribePlan,
     fetcherManagePlan,
     fetcherUserStorage,
+    fetcherQueryDocumentSplits,
+    fetcherUpdateDocumentSplit,
+    fetcherDeleteDocumentSplit,
   };
 };
 export default useAPI;

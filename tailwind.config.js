@@ -7,6 +7,7 @@ export default {
     extend: {
       backgroundColor: {
         primary: "#fafafa",
+        gray: "#f7f8fa",
       },
       fontFamily: {
         lato: ["Lato", ...defaultTheme.fontFamily.sans],

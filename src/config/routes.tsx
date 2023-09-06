@@ -7,6 +7,7 @@ import CollectionAPI from "@/pages/Config/CollectionAPI/CollectionAPI";
 import InstagramAPI from "@/pages/Config/CollectionAPI/components/InstagramAPI";
 import LineAPI from "@/pages/Config/CollectionAPI/components/LineAPI";
 import WebAPI from "@/pages/Config/CollectionAPI/components/WebAPI";
+import Correction from "@/pages/Config/Correction/Correction";
 import Documents from "@/pages/Config/Documents/Documents";
 import Settings from "@/pages/Config/Settings/Settings";
 import APIs from "@/pages/Home/APIs/APIs";
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
           {
             path: "",
             element: <Documents />,
+          },
+          {
+            path: "correction",
+            element: <Correction />,
           },
           {
             path: "api",

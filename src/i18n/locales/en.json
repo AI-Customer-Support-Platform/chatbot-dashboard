@@ -54,6 +54,17 @@
   "Delete Document": "Delete Document",
   "Are you sure you want to delete the document?": "Are you sure you want to delete the document?",
 
+  "Correction": "Correction",
+  "Question": "Question",
+  "Enter your question here": "Enter your question here",
+  "Query": "Query",
+  "Matched splits": "Matched splits",
+  "Score": "Score",
+  "Are you sure you want to delete the split?": "Are you sure you want to delete the split?",
+  "Update": "Update",
+  "Split content is required": "Split content is required",
+  "Enter a question-answer pair here": "Enter a question-answer pair here",
+
   "Create a chatbot for the following: ": "Create a chatbot for the following: ",
   "Coming soon": "Coming soon",
 
