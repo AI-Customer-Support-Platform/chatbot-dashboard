@@ -17,7 +17,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
   const percent = progressPercentage > 100 ? 100 : progressPercentage;
   const formattedPercentage = progressPercentage.toFixed(1);
   return (
-    <div className="bg-gray-200 dark:bg-gray-700 w-full rounded-full">
+    <div className="bg-gray-200 dark:bg-gray-700 w-full rounded-full border">
       <div
         className={classNames(
           "rounded-full p-0.5  text-sm font-bold leading-none text-blue-100",
