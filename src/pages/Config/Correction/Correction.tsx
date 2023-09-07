@@ -1,37 +1,46 @@
 import classNames from "classnames";
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
-import Skeleton from "react-loading-skeleton";
 
 import CustomButton from "@/components/buttons/CustomButton";
-import { LoadingIcon } from "@/components/icons";
-import useAPI from "@/hooks/useAPI";
-import useCollectionData from "@/hooks/useCollectionData";
-import { TDocumentSplit } from "@/types";
+import { CloseIcon, ConfigIcon, LoadingIcon } from "@/components/icons";
+import { TDocumentSplit, TDocumentSplitsResp } from "@/types";
 
-import CollectionInfo from "../components/CollectionInfo";
-import Split from "./Split";
+import Word from "./Word";
+import ConfigAPIURL from "./ConfigAPIURL";
+import fetcher from "@/utils/fetcher";
 
 const Correction = () => {
-  const { collectionData } = useCollectionData();
-  const [question, setQuestion] = useState("");
-  const { fetcherQueryDocumentSplits } = useAPI();
-  const [documentSplits, setDocumentSplits] = useState<TDocumentSplit[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const { t } = useTranslation();
+  const [word, setWord] = useState("");
+  const [matchedWords, setMatchedWords] = useState<TDocumentSplit[]>([]);
 
-  const fetchQueryDocumentSplits = async () => {
-    if (!collectionData || question.trim() === "") {
+  const [isLoading, setIsLoading] = useState(false);
+  const [showConfig, setShowConfig] = useState(false);
+
+  const fetcherQueryWords = async (
+    word: string
+  ): Promise<TDocumentSplitsResp> => {
+    const collection_id = localStorage.getItem("collection-id");
+    const top_k = localStorage.getItem("display-count");
+
+    return fetcher.post(`/query/${collection_id}`, {
+      queries: [
+        {
+          query: word,
+          top_k,
+        },
+      ],
+    });
+  };
+
+  const fetchQueryWords = async () => {
+    if (word.trim() === "") {
       return;
     }
 
     try {
       setIsLoading(true);
-      const resp = await fetcherQueryDocumentSplits(
-        collectionData?.id,
-        question
-      );
-      setDocumentSplits(resp.results[0].results);
+      const resp = await fetcherQueryWords(word);
+      setMatchedWords(resp.results[0].results);
     } catch (error) {
       console.error(error);
     } finally {
@@ -39,7 +48,7 @@ const Correction = () => {
     }
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (
       !isLoading &&
       e.key === "Enter" &&
@@ -47,39 +56,49 @@ const Correction = () => {
       !e.nativeEvent.isComposing
     ) {
       e.preventDefault();
-      fetchQueryDocumentSplits();
+      fetchQueryWords();
     }
   };
 
   return (
-    <div>
-      <CollectionInfo collectionData={collectionData} />
-      {collectionData ? (
+    <main className="mx-auto flex max-w-6xl flex-col p-4 sm:p-8">
+      <div>
+        <section className="mb-4">
+          <section className="m-4 mb-4 flex justify-center">
+            <button title="config" onClick={() => setShowConfig(!showConfig)}>
+              {showConfig ? (
+                <CloseIcon className="text-slate-500" />
+              ) : (
+                <ConfigIcon />
+              )}
+            </button>
+          </section>
+          {showConfig && <ConfigAPIURL />}
+        </section>
         <section className="mb-6 flex w-full flex-col items-start rounded-lg border bg-white p-2 transition hover:shadow-md">
-          <label className="mb-1 font-bold" htmlFor="question">
-            {t("Question")}
+          <label className="mb-1 font-bold" htmlFor="word">
+            Word
           </label>
 
-          <textarea
-            rows={2}
+          <input
             className={classNames(
               "mb-2 w-full rounded border bg-gray p-1 outline-2 focus-within:bg-white focus-within:outline focus-within:outline-blue-500"
             )}
-            placeholder={t("Enter your question here")}
+            placeholder="Enter a word here"
             onChange={(event) => {
-              setQuestion(event.target.value);
+              setWord(event.target.value);
             }}
             onKeyDown={handleKeyDown}
-            id="question"
-            value={question}
+            id="word"
+            value={word}
           />
 
           {!isLoading ? (
             <>
               <CustomButton
-                name={t("Query")}
+                name="Query"
                 classNames="text-white"
-                handleClick={fetchQueryDocumentSplits}
+                handleClick={fetchQueryWords}
               />
             </>
           ) : (
@@ -88,29 +107,19 @@ const Correction = () => {
             </div>
           )}
         </section>
-      ) : (
-        <>
-          <Skeleton className="h-32" />
-        </>
-      )}
 
-      {documentSplits.length !== 0 && (
-        <section>
-          <h2 className="mb-2 text-xl font-bold">{t("Matched splits")}</h2>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            {documentSplits.map((documentSplit) => {
-              return (
-                <Split
-                  documentSplit={documentSplit}
-                  refresh={fetchQueryDocumentSplits}
-                  key={documentSplit.id}
-                />
-              );
-            })}
-          </div>
-        </section>
-      )}
-    </div>
+        {matchedWords.length !== 0 && (
+          <section>
+            <h2 className="mb-2 text-xl font-bold">Matched words</h2>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              {matchedWords.map((matchedWord) => {
+                return <Word matchedWord={matchedWord} key={matchedWord.id} />;
+              })}
+            </div>
+          </section>
+        )}
+      </div>
+    </main>
   );
 };
 export default Correction;

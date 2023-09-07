@@ -6,6 +6,40 @@ interface SVGProps extends React.SVGProps<SVGSVGElement> {
   gradientId?: string;
 }
 
+export const ConfigIcon = (props: SVGProps) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="32"
+      height="32"
+      viewBox="0 0 48 48"
+      {...props}
+    >
+      <g fill="none" stroke="#888888" strokeLinejoin="round" strokeWidth="4">
+        <path d="m24 4l-6 6h-8v8l-6 6l6 6v8h8l6 6l6-6h8v-8l6-6l-6-6v-8h-8l-6-6Z" />
+        <path d="M24 30a6 6 0 1 0 0-12a6 6 0 0 0 0 12Z" />
+      </g>
+    </svg>
+  );
+};
+
+export const CloseIcon = (props: SVGProps) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="32"
+      height="32"
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <path
+        fill="currentColor"
+        d="M12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8m0-18C6.47 2 2 6.47 2 12s4.47 10 10 10s10-4.47 10-10S17.53 2 12 2m2.59 6L12 10.59L9.41 8L8 9.41L10.59 12L8 14.59L9.41 16L12 13.41L14.59 16L16 14.59L13.41 12L16 9.41L14.59 8Z"
+      />
+    </svg>
+  );
+};
+
 export const LanguageIcon = (props: SVGProps) => {
   return (
     <svg
@@ -84,23 +118,6 @@ export const CheckIcon = (props: SVGProps) => {
       <path
         fill="currentColor"
         d="M9 16.17L5.53 12.7a.996.996 0 1 0-1.41 1.41l4.18 4.18c.39.39 1.02.39 1.41 0L20.29 7.71a.996.996 0 1 0-1.41-1.41L9 16.17z"
-      />
-    </svg>
-  );
-};
-
-export const CloseIcon = (props: SVGProps) => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="32"
-      height="32"
-      viewBox="0 0 24 24"
-      {...props}
-    >
-      <path
-        fill="currentColor"
-        d="M18.3 5.71a.996.996 0 0 0-1.41 0L12 10.59L7.11 5.7A.996.996 0 1 0 5.7 7.11L10.59 12L5.7 16.89a.996.996 0 1 0 1.41 1.41L12 13.41l4.89 4.89a.996.996 0 1 0 1.41-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4z"
       />
     </svg>
   );

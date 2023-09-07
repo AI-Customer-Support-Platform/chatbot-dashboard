@@ -7,7 +7,7 @@ interface ErrorResponse {
 }
 
 const fetcher: AxiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_APP_BASE_URL,
+  baseURL: localStorage.getItem("base-url") || "",
 });
 
 fetcher.interceptors.response.use(
