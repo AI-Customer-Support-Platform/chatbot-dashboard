@@ -9,6 +9,7 @@ import LineAPI from "@/pages/Config/CollectionAPI/components/LineAPI";
 import WebAPI from "@/pages/Config/CollectionAPI/components/WebAPI";
 import Correction from "@/pages/Config/Correction/Correction";
 import Documents from "@/pages/Config/Documents/Documents";
+import UploadSegments from "@/pages/Config/Documents/UploadSegments";
 import Settings from "@/pages/Config/Settings/Settings";
 import APIs from "@/pages/Home/APIs/APIs";
 import Collections from "@/pages/Home/Collections/Collections";
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
             element: <Settings />,
           },
         ],
+      },
+      {
+        path: "/config/:collectionId/:documentId/segments",
+        element: <UploadSegments />,
       },
       {
         path: "login",

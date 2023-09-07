@@ -3,13 +3,14 @@ import { useTranslation } from "react-i18next";
 import { Link, useLocation, useParams } from "react-router-dom";
 
 const BottomNav = () => {
-  const { collectionId } = useParams();
+  const { collectionId, documentId } = useParams();
   const pathname = useLocation().pathname;
   const { t } = useTranslation();
 
   const homePaths = ["/", "/usage"];
   const configPaths = [
     `/config/${collectionId}`,
+    `/config/${collectionId}/${documentId}/segments`,
     `/config/${collectionId}/correction`,
     `/config/${collectionId}/api`,
     `/config/${collectionId}/api/web`,
@@ -21,7 +22,7 @@ const BottomNav = () => {
   const isConfigPath = configPaths.includes(pathname);
 
   return isHomePath || isConfigPath ? (
-    <nav className="sticky top-0 z-10 w-full border-b border-slate-300/90 bg-white/70 p-2 px-6 backdrop-blur-lg">
+    <nav className="sticky top-0 z-10 w-full overflow-auto border-b border-slate-300/90 bg-white/70 p-2 px-6 backdrop-blur-lg">
       <ul className="flex items-center">
         {isHomePath && (
           <>

@@ -248,6 +248,34 @@ const useAPI = () => {
     );
   };
 
+  const fetcherUploadDocumentSegments = async (
+    collectionId: string,
+    segments: string[],
+
+    sourceId: string
+  ) => {
+    const token = await getAccessToken();
+    const documents = segments.map((segment) => ({
+      text: segment,
+      metadata: {
+        source: "file",
+        source_id: sourceId,
+      },
+    }));
+
+    return fetcher.post(
+      `/upsert/${collectionId}`,
+      {
+        documents,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  };
+
   const fetcherDeleteDocumentSplit = async (
     collectionId: string,
     splitId: string
@@ -281,6 +309,7 @@ const useAPI = () => {
     fetcherUserStorage,
     fetcherQueryDocumentSplits,
     fetcherUpdateDocumentSplit,
+    fetcherUploadDocumentSegments,
     fetcherDeleteDocumentSplit,
   };
 };

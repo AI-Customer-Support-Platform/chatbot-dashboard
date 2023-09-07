@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 import { DeleteIcon } from "@/components/icons";
 import PortalModalCenter from "@/components/portalDialog/PortalModalCenter";
@@ -32,23 +33,30 @@ const DocumentCard: React.FC<DocumentCardProps> = ({
         <span className="text-slate-500">
           {calculateTimeDifference(document.created_at)} ago
         </span>
-        <button
-          className="text-red-300 hover:text-red-600"
-          onClick={handleClickDeleteDocumentButton}
-        >
-          <DeleteIcon />
-        </button>
-        <PortalModalCenter
-          show={isOpenDeleteDocumentModal}
-          setIsShow={setIsOpenDeleteDocumentModal}
-        >
-          <DeleteDocumentModal
-            refresh={refresh}
-            setIsOpen={setIsOpenDeleteDocumentModal}
-            collection_id={collection_id}
-            document_id={document.id}
-          />
-        </PortalModalCenter>
+        <div className="flex items-end gap-4 border">
+          <section>
+            <Link to={`${document.id}/segments`}>segments</Link>
+          </section>
+          <section className="flex items-end">
+            <button
+              className="text-red-300 hover:text-red-600"
+              onClick={handleClickDeleteDocumentButton}
+            >
+              <DeleteIcon />
+            </button>
+            <PortalModalCenter
+              show={isOpenDeleteDocumentModal}
+              setIsShow={setIsOpenDeleteDocumentModal}
+            >
+              <DeleteDocumentModal
+                refresh={refresh}
+                setIsOpen={setIsOpenDeleteDocumentModal}
+                collection_id={collection_id}
+                document_id={document.id}
+              />
+            </PortalModalCenter>
+          </section>
+        </div>
       </section>
     </div>
   );
