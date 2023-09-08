@@ -1,11 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 
 import useAPI from "@/hooks/useAPI";
 import { TCollectionData } from "@/types";
 
 const useCollectionData = () => {
-  const { collectionId } = useParams();
+  const collectionId = localStorage.getItem("collection-id");
   const [isLoading, setIsLoading] = useState(false);
   const [initLoaded, setInitLoaded] = useState(false);
   const [collection, setCollection] = useState<TCollectionData | undefined>(

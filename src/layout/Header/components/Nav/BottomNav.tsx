@@ -3,45 +3,20 @@ import { useTranslation } from "react-i18next";
 import { Link, useLocation, useParams } from "react-router-dom";
 
 const BottomNav = () => {
-  const { collectionId, documentId } = useParams();
+  const { documentId } = useParams();
   const pathname = useLocation().pathname;
   const { t } = useTranslation();
 
-  const homePaths = ["/", "/usage"];
-  const configPaths = [
-    `/config/${collectionId}`,
-    `/config/${collectionId}/${documentId}/segments`,
-    `/config/${collectionId}/correction`,
-    `/config/${collectionId}/api`,
-    `/config/${collectionId}/api/web`,
-    `/config/${collectionId}/api/line`,
-    `/config/${collectionId}/api/instagram`,
-    `/config/${collectionId}/settings`,
-  ];
+  const homePaths = [`/`, `/${documentId}/segments`, `/correction`];
   const isHomePath = homePaths.includes(pathname);
-  const isConfigPath = configPaths.includes(pathname);
 
-  return isHomePath || isConfigPath ? (
+  return isHomePath ? (
     <nav className="sticky top-0 z-10 w-full overflow-auto border-b border-slate-300/90 bg-white/70 p-2 px-6 backdrop-blur-lg">
       <ul className="flex items-center">
         {isHomePath && (
           <>
-            <NavItem name={t("Collections")} path="/" />
-            <NavItem name={t("Usage")} path="/usage" />
-          </>
-        )}
-        {isConfigPath && (
-          <>
-            <NavItem name={t("Documents")} path={`/config/${collectionId}`} />
-            <NavItem
-              name={t("Correction")}
-              path={`/config/${collectionId}/correction`}
-            />
-            <NavItem name="API" path={`/config/${collectionId}/api`} />
-            <NavItem
-              name={t("Settings")}
-              path={`/config/${collectionId}/settings`}
-            />
+            <NavItem name={t("Documents")} path="/" />
+            <NavItem name={t("Correction")} path="/correction" />
           </>
         )}
       </ul>

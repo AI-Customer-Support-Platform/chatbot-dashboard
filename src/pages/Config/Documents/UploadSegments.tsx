@@ -9,7 +9,6 @@ import useAPI from "@/hooks/useAPI";
 import useCollectionData from "@/hooks/useCollectionData";
 import { TDocument } from "@/types";
 
-import CollectionInfo from "../components/CollectionInfo";
 import SegmentCard from "./SegmentCard";
 
 const UploadSegments = () => {
@@ -94,9 +93,6 @@ A: Git
   return (
     <>
       <main className="flex flex-col p-4 sm:p-8">
-        <section className="mx-auto w-full max-w-6xl">
-          <CollectionInfo collectionData={collectionData} />
-        </section>
         <section className="mx-auto mb-4 flex w-full max-w-6xl flex-wrap gap-2">
           <span>{t("Manually upload segments into")}: </span>
           {collectionData ? (

@@ -7,7 +7,6 @@ import FileInputButton from "@/components/buttons/FileInputButton";
 import { LoadingIcon } from "@/components/icons";
 import ModalContainer from "@/components/modal/ModalContainer";
 import useAPI from "@/hooks/useAPI";
-import { useRootState } from "@/state/root";
 import { TCollectionData } from "@/types";
 
 interface UploadDocumentModalProps {
@@ -36,7 +35,6 @@ const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
   const { fetcherUploadDocument } = useAPI();
   const nameRef = useRef<HTMLInputElement>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const { storage } = useRootState();
   const { t } = useTranslation();
 
   const handleFileChange = (file: File | null) => {
@@ -44,14 +42,8 @@ const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
       return;
     }
 
-    const { size, name } = file;
+    const { name } = file;
     const fileExtension = name.split(".").pop()?.toLowerCase();
-
-    if (size > storage.remaining_space) {
-      toast(`⚠️ ${t("Not enough space")}`);
-      setSelectedFile(null);
-      return;
-    }
 
     const isSupportedFileType =
       fileExtension && supportedFileTypes.includes(fileExtension);

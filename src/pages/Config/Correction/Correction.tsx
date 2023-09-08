@@ -9,7 +9,6 @@ import useAPI from "@/hooks/useAPI";
 import useCollectionData from "@/hooks/useCollectionData";
 import { TDocumentSegment } from "@/types";
 
-import CollectionInfo from "../components/CollectionInfo";
 import SegmentCard from "./SegmentCard";
 
 const Correction = () => {
@@ -55,7 +54,6 @@ const Correction = () => {
 
   return (
     <div>
-      <CollectionInfo collectionData={collectionData} />
       {collectionData ? (
         <section className="mb-6 flex w-full flex-col items-start rounded-lg border bg-white p-2 transition hover:shadow-md">
           <label className="mb-1 font-bold" htmlFor="question">

@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
 
 import svgFavicon from "@/assets/favicon.svg";
+import ConfigButton from "@/components/buttons/ConfigButton";
 import SwitchLangButton from "@/components/buttons/SwitchLangButton";
-
-import UserInfo from "../UserInfo.tsx/UserInfo";
 
 const TopNav = () => {
   return (
@@ -14,8 +13,8 @@ const TopNav = () => {
         </Link>
       </section>
       <section className="flex gap-4">
+        <ConfigButton />
         <SwitchLangButton />
-        <UserInfo />
       </section>
     </nav>
   );

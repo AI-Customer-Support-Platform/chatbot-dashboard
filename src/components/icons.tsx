@@ -6,6 +6,23 @@ interface SVGProps extends React.SVGProps<SVGSVGElement> {
   gradientId?: string;
 }
 
+export const ConfigIcon = (props: SVGProps) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="32"
+      height="32"
+      viewBox="0 0 48 48"
+      {...props}
+    >
+      <g fill="none" stroke="#888" strokeLinejoin="round" strokeWidth="4">
+        <path d="m24 4l-6 6h-8v8l-6 6l6 6v8h8l6 6l6-6h8v-8l6-6l-6-6v-8h-8l-6-6Z" />
+        <path d="M24 30a6 6 0 1 0 0-12a6 6 0 0 0 0 12Z" />
+      </g>
+    </svg>
+  );
+};
+
 export const LanguageIcon = (props: SVGProps) => {
   return (
     <svg

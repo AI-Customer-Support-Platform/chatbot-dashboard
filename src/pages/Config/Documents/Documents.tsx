@@ -6,9 +6,7 @@ import PortalModalCenter from "@/components/portalDialog/PortalModalCenter";
 import useCollectionData from "@/hooks/useCollectionData";
 import { TDocument } from "@/types";
 
-import CollectionInfo from "../components/CollectionInfo";
 import DocumentCard from "./DocumentCard";
-import FileSpaceInfo from "./FileSpaceInfo";
 import UploadCollectionModal from "./UploadDocumentModal";
 
 const Documents = () => {
@@ -16,18 +14,18 @@ const Documents = () => {
   const [isOpenUploadDocumentModal, setIsOpenUploadDocumentModal] =
     useState(false);
   const { t } = useTranslation();
-  const { refresh, collectionData: collection } = useCollectionData();
+  const { refresh, collectionData } = useCollectionData();
 
   const handleClickUploadDocumentButton = () => {
     setIsOpenUploadDocumentModal(true);
   };
 
   useEffect(() => {
-    if (!collection) {
+    if (!collectionData) {
       return;
     }
 
-    const _documents = [...collection.documents];
+    const _documents = [...collectionData.documents];
 
     _documents.sort((a, b) => {
       return (
@@ -36,14 +34,11 @@ const Documents = () => {
     });
 
     setDocuments(_documents);
-  }, [collection]);
+  }, [collectionData]);
 
   return (
     <div>
-      <CollectionInfo collectionData={collection} />
-      <FileSpaceInfo refresh={!collection} />
-
-      {collection ? (
+      {collectionData ? (
         <button
           onClick={handleClickUploadDocumentButton}
           className="mb-6 flex items-center rounded-md border-2  bg-black/70 px-3 py-2 font-bold text-white hover:bg-black"
@@ -59,11 +54,11 @@ const Documents = () => {
       )}
       <section>
         <div className="grid w-full grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 ">
-          {collection ? (
+          {collectionData ? (
             <>
               {documents.map((document) => (
                 <DocumentCard
-                  collection_id={collection.id}
+                  collection_id={collectionData.id}
                   refresh={refresh}
                   key={document.id}
                   document={document}
@@ -86,7 +81,7 @@ const Documents = () => {
           allowClickOutside={true}
         >
           <UploadCollectionModal
-            collection={collection}
+            collection={collectionData}
             setIsOpen={setIsOpenUploadDocumentModal}
             refresh={refresh}
           />
