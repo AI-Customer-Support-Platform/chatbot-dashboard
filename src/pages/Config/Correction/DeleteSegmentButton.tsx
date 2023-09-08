@@ -2,16 +2,16 @@ import { useState } from "react";
 
 import { DeleteIcon } from "@/components/icons";
 
-import DeleteSplitModal from "./DeleteSplitModal";
+import DeleteSegmentModal from "./DeleteSegmentModal";
 
-interface DeleteSplitButtonProps {
+interface DeleteSegmentButtonProps {
   refresh: () => void;
-  splitId: string;
+  segmentId: string;
 }
 
-const DeleteSplitButton: React.FC<DeleteSplitButtonProps> = ({
+const DeleteSegmentButton: React.FC<DeleteSegmentButtonProps> = ({
   refresh,
-  splitId,
+  segmentId,
 }) => {
   const [showModal, setShowModal] = useState(false);
 
@@ -25,14 +25,14 @@ const DeleteSplitButton: React.FC<DeleteSplitButtonProps> = ({
       </button>
 
       {showModal && (
-        <DeleteSplitModal
+        <DeleteSegmentModal
           setShowModal={setShowModal}
           refresh={refresh}
-          splitId={splitId}
+          segmentId={segmentId}
         />
       )}
     </div>
   );
 };
 
-export default DeleteSplitButton;
+export default DeleteSegmentButton;

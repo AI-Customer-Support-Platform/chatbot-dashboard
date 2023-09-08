@@ -2,7 +2,7 @@ import {
   TApi,
   TCollectionData,
   TCollectionInfo,
-  TDocumentSplitsResp,
+  TDocumentSegmentsResp,
   TPlan,
   TUserPlanDetail,
   UserStorage,
@@ -198,10 +198,10 @@ const useAPI = () => {
     });
   };
 
-  const fetcherQueryDocumentSplits = async (
+  const fetcherQueryDocumentSegments = async (
     collection_id: string,
     question: string
-  ): Promise<TDocumentSplitsResp> => {
+  ): Promise<TDocumentSegmentsResp> => {
     const token = await getAccessToken();
 
     return fetcher.post(
@@ -223,10 +223,10 @@ const useAPI = () => {
     );
   };
 
-  const fetcherUpdateDocumentSplit = async (
+  const fetcherUpdateDocumentSegment = async (
     collectionId: string,
     text: string,
-    splitId: string
+    segmentId: string
   ) => {
     const token = await getAccessToken();
 
@@ -236,7 +236,7 @@ const useAPI = () => {
         documents: [
           {
             text,
-            id: splitId,
+            id: segmentId,
           },
         ],
       },
@@ -276,16 +276,16 @@ const useAPI = () => {
     );
   };
 
-  const fetcherDeleteDocumentSplit = async (
+  const fetcherDeleteDocumentSegment = async (
     collectionId: string,
-    splitId: string
+    segmentId: string
   ) => {
     const token = await getAccessToken();
 
     return fetcher.post(
       `/delete/${collectionId}`,
       {
-        ids: [splitId],
+        ids: [segmentId],
       },
       {
         headers: {
@@ -307,10 +307,10 @@ const useAPI = () => {
     fetcherSubscribePlan,
     fetcherManagePlan,
     fetcherUserStorage,
-    fetcherQueryDocumentSplits,
-    fetcherUpdateDocumentSplit,
+    fetcherQueryDocumentSegments,
+    fetcherUpdateDocumentSegment,
     fetcherUploadDocumentSegments,
-    fetcherDeleteDocumentSplit,
+    fetcherDeleteDocumentSegment,
   };
 };
 export default useAPI;

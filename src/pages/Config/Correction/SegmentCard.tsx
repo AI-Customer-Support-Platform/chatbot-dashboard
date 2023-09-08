@@ -7,47 +7,50 @@ import { useParams } from "react-router-dom";
 import CustomButton from "@/components/buttons/CustomButton";
 import { LoadingIcon } from "@/components/icons";
 import useAPI from "@/hooks/useAPI";
-import { TDocumentSplit } from "@/types";
+import { TDocumentSegment } from "@/types";
 
-import DeleteSplitButton from "./DeleteSplitButton";
+import DeleteSegmentButton from "./DeleteSegmentButton";
 
-interface SplitProps {
-  documentSplit: TDocumentSplit;
+interface SegmentCardProps {
+  documentSegment: TDocumentSegment;
   refresh: () => void;
 }
 
-const Split: React.FC<SplitProps> = ({ documentSplit, refresh }) => {
-  const [splitContent, setSplitContent] = useState(documentSplit.text);
-  const [isSplitContentChanged, setIsSplitContentChanged] = useState(false);
+const SegmentCard: React.FC<SegmentCardProps> = ({
+  documentSegment,
+  refresh,
+}) => {
+  const [segmentContent, setSegmentContent] = useState(documentSegment.text);
+  const [isSegmentContentChanged, setIsSegmentContentChanged] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation();
-  const { fetcherUpdateDocumentSplit } = useAPI();
+  const { fetcherUpdateDocumentSegment } = useAPI();
   const { collectionId } = useParams();
 
-  const handleSplitContentChange = (value: string) => {
-    setSplitContent(value);
-    setIsSplitContentChanged(true);
+  const handleSegmentContentChange = (value: string) => {
+    setSegmentContent(value);
+    setIsSegmentContentChanged(true);
   };
 
-  const handleUpdateSplit = async () => {
-    if (!collectionId || !documentSplit.id) {
+  const handleUpdateSegment = async () => {
+    if (!collectionId || !documentSegment.id) {
       return;
     }
 
-    if (splitContent.trim() === "") {
-      toast(`⚠️ ${t("Split content is required")}`);
+    if (segmentContent.trim() === "") {
+      toast(`⚠️ ${t("Segment content is required")}`);
       return;
     }
 
     try {
       setIsLoading(true);
-      await fetcherUpdateDocumentSplit(
+      await fetcherUpdateDocumentSegment(
         collectionId,
-        splitContent,
-        documentSplit.id
+        segmentContent,
+        documentSegment.id
       );
       refresh();
-      setIsSplitContentChanged(false);
+      setIsSegmentContentChanged(false);
     } catch (error) {
       console.error(error);
     } finally {
@@ -56,18 +59,18 @@ const Split: React.FC<SplitProps> = ({ documentSplit, refresh }) => {
   };
 
   const handleClickCancelUpdateButton = () => {
-    setSplitContent(documentSplit.text);
-    setIsSplitContentChanged(false);
+    setSegmentContent(documentSegment.text);
+    setIsSegmentContentChanged(false);
   };
 
   useEffect(() => {
-    setSplitContent(documentSplit.text);
-  }, [documentSplit]);
+    setSegmentContent(documentSegment.text);
+  }, [documentSegment]);
 
   return (
     <div className="rounded-lg border bg-white p-2 transition hover:shadow-md">
       <span className="mb-2 block">
-        {t("Score") + ": "} {documentSplit.score.toFixed(4)}
+        {t("Score") + ": "} {documentSegment.score.toFixed(4)}
       </span>
 
       <section className="mb-2">
@@ -77,25 +80,25 @@ const Split: React.FC<SplitProps> = ({ documentSplit, refresh }) => {
             "w-full rounded border bg-gray p-2 outline-2 focus-within:bg-white focus-within:outline focus-within:outline-blue-500",
             {
               "border border-red-500 bg-red-100 focus-within:outline-red-500":
-                isSplitContentChanged && splitContent.trim() === "",
+                isSegmentContentChanged && segmentContent.trim() === "",
             }
           )}
           onChange={(event) => {
-            handleSplitContentChange(event.target.value);
+            handleSegmentContentChange(event.target.value);
           }}
           placeholder={t("Enter a question-answer pair here")}
-          value={splitContent}
+          value={segmentContent}
         />
       </section>
 
       <section className="flex justify-between">
         <div>
-          {isSplitContentChanged && (
+          {isSegmentContentChanged && (
             <section className="flex gap-4">
               {!isLoading ? (
                 <>
                   <CustomButton
-                    handleClick={handleUpdateSplit}
+                    handleClick={handleUpdateSegment}
                     name={t("Update")}
                     classNames="text-white bg-green-600"
                   />
@@ -113,9 +116,9 @@ const Split: React.FC<SplitProps> = ({ documentSplit, refresh }) => {
             </section>
           )}
         </div>
-        <DeleteSplitButton refresh={refresh} splitId={documentSplit.id} />
+        <DeleteSegmentButton refresh={refresh} segmentId={documentSegment.id} />
       </section>
     </div>
   );
 };
-export default Split;
+export default SegmentCard;

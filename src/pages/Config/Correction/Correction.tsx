@@ -7,31 +7,33 @@ import CustomButton from "@/components/buttons/CustomButton";
 import { LoadingIcon } from "@/components/icons";
 import useAPI from "@/hooks/useAPI";
 import useCollectionData from "@/hooks/useCollectionData";
-import { TDocumentSplit } from "@/types";
+import { TDocumentSegment } from "@/types";
 
 import CollectionInfo from "../components/CollectionInfo";
-import Split from "./Split";
+import SegmentCard from "./SegmentCard";
 
 const Correction = () => {
   const { collectionData } = useCollectionData();
   const [question, setQuestion] = useState("");
-  const { fetcherQueryDocumentSplits } = useAPI();
-  const [documentSplits, setDocumentSplits] = useState<TDocumentSplit[]>([]);
+  const { fetcherQueryDocumentSegments } = useAPI();
+  const [documentSegments, setDocumentSegments] = useState<TDocumentSegment[]>(
+    []
+  );
   const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation();
 
-  const fetchQueryDocumentSplits = async () => {
+  const fetchQueryDocumentSegments = async () => {
     if (!collectionData || question.trim() === "") {
       return;
     }
 
     try {
       setIsLoading(true);
-      const resp = await fetcherQueryDocumentSplits(
+      const resp = await fetcherQueryDocumentSegments(
         collectionData?.id,
         question
       );
-      setDocumentSplits(resp.results[0].results);
+      setDocumentSegments(resp.results[0].results);
     } catch (error) {
       console.error(error);
     } finally {
@@ -47,7 +49,7 @@ const Correction = () => {
       !e.nativeEvent.isComposing
     ) {
       e.preventDefault();
-      fetchQueryDocumentSplits();
+      fetchQueryDocumentSegments();
     }
   };
 
@@ -79,7 +81,7 @@ const Correction = () => {
               <CustomButton
                 name={t("Query")}
                 classNames="text-white"
-                handleClick={fetchQueryDocumentSplits}
+                handleClick={fetchQueryDocumentSegments}
               />
             </>
           ) : (
@@ -94,16 +96,16 @@ const Correction = () => {
         </>
       )}
 
-      {documentSplits.length !== 0 && (
+      {documentSegments.length !== 0 && (
         <section>
-          <h2 className="mb-2 text-xl font-bold">{t("Matched splits")}</h2>
+          <h2 className="mb-2 text-xl font-bold">{t("Matched segments")}</h2>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            {documentSplits.map((documentSplit) => {
+            {documentSegments.map((documentSegment) => {
               return (
-                <Split
-                  documentSplit={documentSplit}
-                  refresh={fetchQueryDocumentSplits}
-                  key={documentSplit.id}
+                <SegmentCard
+                  documentSegment={documentSegment}
+                  refresh={fetchQueryDocumentSegments}
+                  key={documentSegment.id}
                 />
               );
             })}

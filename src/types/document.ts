@@ -5,7 +5,7 @@ export type TDocument = {
   created_at: string;
 };
 
-export type TDocumentSplit = {
+export type TDocumentSegment = {
   id: string;
   text: string;
   metadata: {
@@ -14,9 +14,9 @@ export type TDocumentSplit = {
   score: number;
 };
 
-export type TDocumentSplitsResp = {
+export type TDocumentSegmentsResp = {
   results: {
     query: string;
-    results: TDocumentSplit[];
+    results: TDocumentSegment[];
   }[];
 };
