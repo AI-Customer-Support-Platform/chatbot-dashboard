@@ -22,14 +22,22 @@ const Correction = () => {
     const collection_id = localStorage.getItem("collection-id");
     const top_k = localStorage.getItem("display-count");
 
-    return fetcher.post(`/query/${collection_id}`, {
-      queries: [
-        {
-          query: word,
-          top_k,
+    return fetcher.post(
+      `/query/${collection_id}`,
+      {
+        queries: [
+          {
+            query: word,
+            top_k,
+          },
+        ],
+      },
+      {
+        headers: {
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTExNjIzOTAyMn0.dxXcGF5oPXlVnR26X_yxcl9KcdCPOEN07Si_oaJoSgE`,
         },
-      ],
-    });
+      }
+    );
   };
 
   const fetchQueryWords = async () => {
