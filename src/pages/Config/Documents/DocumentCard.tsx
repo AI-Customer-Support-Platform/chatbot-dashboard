@@ -33,9 +33,9 @@ const DocumentCard: React.FC<DocumentCardProps> = ({
         <span className="text-slate-500">
           {calculateTimeDifference(document.created_at)} ago
         </span>
-        <div className="flex items-end gap-4 border">
-          <section>
-            <Link to={`${document.id}/segments`}>segments</Link>
+        <div className="flex items-end gap-4">
+          <section className="rounded-md border bg-stone-500 px-1 text-white hover:bg-stone-600">
+            <Link to={`${document.id}/segments`}>Add segments</Link>
           </section>
           <section className="flex items-end">
             <button
