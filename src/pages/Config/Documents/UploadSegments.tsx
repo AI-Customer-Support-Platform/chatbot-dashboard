@@ -1,6 +1,5 @@
 import classNames from "classnames";
-import i18next from "i18next";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
 import { useNavigate, useParams } from "react-router-dom";
@@ -13,8 +12,20 @@ import { TDocument } from "@/types";
 import CollectionInfo from "../components/CollectionInfo";
 import SegmentCard from "./SegmentCard";
 
-const presetSegments = `${i18next.t("Examples of segments:")}
-${i18next.t("Please separate different segments with at least one blank line.")}
+const UploadSegments = () => {
+  const navigate = useNavigate();
+  const { documentId, collectionId } = useParams();
+  const [document, setDocument] = useState<TDocument | undefined>(undefined);
+  const { collectionData } = useCollectionData();
+  const [segmentsInput, setSegmentsInput] = useState<string>("");
+  const [segments, setSegments] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const { fetcherUploadDocumentSegments } = useAPI();
+  const { t } = useTranslation();
+
+  const getPresetSegments = useCallback(() => {
+    return `${t("Examples of segments:")}
+${t("Please separate different segments with at least one blank line.")}
 
 Q: What is the capital of Japan?
 A: Tokyo
@@ -29,17 +40,7 @@ Q: Name a popular version control system used in software development.
 A: Git
 
 `;
-
-const UploadSegments = () => {
-  const navigate = useNavigate();
-  const { documentId, collectionId } = useParams();
-  const [document, setDocument] = useState<TDocument | undefined>(undefined);
-  const { collectionData } = useCollectionData();
-  const [segmentsInput, setSegmentsInput] = useState<string>(presetSegments);
-  const [segments, setSegments] = useState<string[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const { fetcherUploadDocumentSegments } = useAPI();
-  const { t } = useTranslation();
+  }, [t]);
 
   const handleSegmentsInputChange = (input: string) => {
     setSegmentsInput(input);
@@ -87,8 +88,8 @@ const UploadSegments = () => {
   }, [documentId, collectionData, navigate]);
 
   useEffect(() => {
-    handleSegmentsInputChange(presetSegments);
-  }, []);
+    handleSegmentsInputChange(getPresetSegments());
+  }, [getPresetSegments]);
 
   return (
     <>
@@ -133,7 +134,7 @@ const UploadSegments = () => {
                   handleSegmentsInputChange(event.target.value)
                 }
                 value={segmentsInput}
-                placeholder={presetSegments}
+                placeholder={getPresetSegments()}
               />
             </div>
 
