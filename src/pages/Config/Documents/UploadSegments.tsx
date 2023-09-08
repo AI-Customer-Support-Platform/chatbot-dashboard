@@ -10,12 +10,30 @@ import { TDocument } from "@/types";
 import CollectionInfo from "../components/CollectionInfo";
 import SegmentCard from "./SegmentCard";
 
+const presetSegments = `Examples:
+Please separate different segments with at least one blank line.
+
+
+Q: What is the capital of Japan?
+A: Tokyo
+
+Q: Who wrote the famous play "Romeo and Juliet"?
+A: William Shakespeare
+
+Q: What programming language is commonly used for front-end development?
+A: JavaScript
+
+Q: Name a popular version control system used in software development.
+A: Git
+
+`;
+
 const UploadSegments = () => {
   const navigate = useNavigate();
   const { documentId, collectionId } = useParams();
   const [document, setDocument] = useState<TDocument | undefined>(undefined);
   const { collectionData } = useCollectionData();
-  const [segmentsInput, setSegmentsInput] = useState<string>("");
+  const [segmentsInput, setSegmentsInput] = useState<string>(presetSegments);
   const [segments, setSegments] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const { fetcherUploadDocumentSegments } = useAPI();
@@ -65,6 +83,10 @@ const UploadSegments = () => {
     }
   }, [documentId, collectionData, navigate]);
 
+  useEffect(() => {
+    handleSegmentsInputChange(presetSegments);
+  }, []);
+
   return (
     <>
       <main className="flex flex-col p-4 sm:p-8">
@@ -72,7 +94,7 @@ const UploadSegments = () => {
           <CollectionInfo collectionData={collectionData} />
         </section>
         <section className="mx-auto mb-4 flex w-full max-w-6xl flex-wrap gap-2">
-          <span>Manually import segments into: </span>
+          <span>Manually upload segments into: </span>
           <span className="font-bold">{document?.file_name}</span>
         </section>
 
@@ -101,6 +123,7 @@ const UploadSegments = () => {
                 handleSegmentsInputChange(event.target.value)
               }
               value={segmentsInput}
+              placeholder={presetSegments}
             />
           </div>
 
