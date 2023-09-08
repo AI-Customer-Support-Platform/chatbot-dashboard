@@ -1,5 +1,8 @@
 import classNames from "classnames";
+import i18next from "i18next";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import Skeleton from "react-loading-skeleton";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { LoadingIcon } from "@/components/icons";
@@ -9,11 +12,9 @@ import { TDocument } from "@/types";
 
 import CollectionInfo from "../components/CollectionInfo";
 import SegmentCard from "./SegmentCard";
-import Skeleton from "react-loading-skeleton";
 
-const presetSegments = `Examples:
-Please separate different segments with at least one blank line.
-
+const presetSegments = `${i18next.t("Examples of segments:")}
+${i18next.t("Please separate different segments with at least one blank line.")}
 
 Q: What is the capital of Japan?
 A: Tokyo
@@ -38,6 +39,7 @@ const UploadSegments = () => {
   const [segments, setSegments] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const { fetcherUploadDocumentSegments } = useAPI();
+  const { t } = useTranslation();
 
   const handleSegmentsInputChange = (input: string) => {
     setSegmentsInput(input);
@@ -95,7 +97,7 @@ const UploadSegments = () => {
           <CollectionInfo collectionData={collectionData} />
         </section>
         <section className="mx-auto mb-4 flex w-full max-w-6xl flex-wrap gap-2">
-          <span>Manually upload segments into: </span>
+          <span>{t("Manually upload segments into")}: </span>
           {collectionData ? (
             <span className="font-bold">{document?.file_name}</span>
           ) : (
@@ -110,14 +112,14 @@ const UploadSegments = () => {
             <div className="flex h-[85vh] w-full flex-col gap-2 rounded-lg border bg-white p-2">
               <section className="flex justify-between">
                 <label htmlFor="input" className="text-lg font-bold">
-                  Input
+                  {t("Input")}
                 </label>
                 {segmentsInput.trim() !== "" && (
                   <button
                     className="rounded border-2 px-1 hover:bg-slate-50"
                     onClick={handleEmptySegments}
                   >
-                    empty
+                    {t("Empty")}
                   </button>
                 )}
               </section>
@@ -138,13 +140,13 @@ const UploadSegments = () => {
             <div className="flex h-[85vh] flex-col gap-2 overflow-hidden rounded-lg border bg-white p-2">
               <section className="flex justify-between">
                 <label htmlFor="output" className="text-lg font-bold">
-                  Output
+                  {t("Output")}
                 </label>
                 {segments.length > 0 && (
                   <>
                     <span>
                       <span className="font-bold">{segments.length}</span>{" "}
-                      segments
+                      {t("segments")}
                     </span>
                     {!isLoading ? (
                       <>
@@ -152,7 +154,7 @@ const UploadSegments = () => {
                           className="rounded-lg border bg-blue-500 px-2 font-bold text-white hover:bg-blue-600"
                           onClick={handleClickUploadSegmentsButton}
                         >
-                          Upload
+                          {t("Upload")}
                         </button>
                       </>
                     ) : (

@@ -53,6 +53,16 @@
   "Delete": "Delete",
   "Delete Document": "Delete Document",
   "Are you sure you want to delete the document?": "Are you sure you want to delete the document?",
+  "Add segments manually": "Add segments manually",
+
+  "Manually upload segments into": "Manually upload segments into",
+  "Input": "Input",
+  "Output": "Output",
+  "Empty": "Empty",
+  "segments": "segments",
+  "This segment is too long. Please split it into smaller sections.": "This segment is too long. Please split it into smaller sections.",
+  "Examples of segments:": "Examples of segments:",
+  "Please separate different segments with at least one blank line.": "Please separate different segments with at least one blank line.",
 
   "Correction": "Correction",
   "Question": "Question",

@@ -53,6 +53,16 @@
   "Delete": "削除",
   "Delete Document": "ドキュメントを削除",
   "Are you sure you want to delete the document?": "本当にドキュメントを削除しますか？",
+  "Add segments manually": "セグメントを手動で追加",
+
+  "Manually upload segments into": "手動でセグメントをアップロード",
+  "Input": "入力",
+  "Output": "出力",
+  "Empty": "空",
+  "segments": "セグメント",
+  "This segment is too long. Please split it into smaller sections.": "このセグメントは長すぎます。小さなセクションに分割してください。",
+  "Examples of segments:": "セグメントの例:",
+  "Please separate different segments with at least one blank line.": "異なるセグメントは少なくとも1行の空白行で区切ってください。",
 
   "Correction": "修正",
   "Question": "質問",

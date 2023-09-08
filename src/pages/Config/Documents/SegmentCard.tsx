@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { useTranslation } from "react-i18next";
 
 import { getTokenCount } from "@/utils/tokenizer";
 
@@ -8,6 +9,8 @@ interface SegmentCardProps {
 }
 const SegmentCard: React.FC<SegmentCardProps> = ({ order, segment }) => {
   const tokenCount = getTokenCount(segment);
+  const { t } = useTranslation();
+
   return (
     <div className="mb-4 flex items-center rounded-lg border bg-stone-200 shadow ">
       <section className="flex w-fit items-center justify-center px-1">
@@ -22,7 +25,9 @@ const SegmentCard: React.FC<SegmentCardProps> = ({ order, segment }) => {
       >
         {tokenCount > 900 && (
           <span className="font-bold text-red-600">
-            This segment is too long. Please split it into smaller sections.
+            {t(
+              "This segment is too long. Please split it into smaller sections."
+            )}
           </span>
         )}
         <pre>{segment}</pre>
