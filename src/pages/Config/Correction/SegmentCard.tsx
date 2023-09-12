@@ -2,7 +2,6 @@ import classNames from "classnames";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
 
 import CustomButton from "@/components/buttons/CustomButton";
 import { LoadingIcon } from "@/components/icons";
@@ -25,7 +24,7 @@ const SegmentCard: React.FC<SegmentCardProps> = ({
   const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation();
   const { fetcherUpdateDocumentSegment } = useAPI();
-  const { collectionId } = useParams();
+  const collectionId = localStorage.getItem("collection-id");
 
   const handleSegmentContentChange = (value: string) => {
     setSegmentContent(value);

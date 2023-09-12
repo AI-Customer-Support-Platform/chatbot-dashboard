@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
 
 import CustomButton from "@/components/buttons/CustomButton";
 import { LoadingIcon } from "@/components/icons";
@@ -17,7 +16,7 @@ const DeleteSegmentModal = ({
   refresh,
   segmentId,
 }: DeleteSegmentModalProps) => {
-  const { collectionId } = useParams();
+  const collectionId = localStorage.getItem("collection-id");
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
   const { fetcherDeleteDocumentSegment } = useAPI();

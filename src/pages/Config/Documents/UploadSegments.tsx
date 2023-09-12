@@ -13,7 +13,8 @@ import SegmentCard from "./SegmentCard";
 
 const UploadSegments = () => {
   const navigate = useNavigate();
-  const { documentId, collectionId } = useParams();
+  const collectionId = localStorage.getItem("collection-id");
+  const { documentId } = useParams();
   const [document, setDocument] = useState<TDocument | undefined>(undefined);
   const { collectionData } = useCollectionData();
   const [segmentsInput, setSegmentsInput] = useState<string>("");
