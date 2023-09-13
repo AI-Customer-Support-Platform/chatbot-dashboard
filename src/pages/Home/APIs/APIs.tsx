@@ -23,8 +23,8 @@ const APIs = () => {
       {!isLoading && user?.email_verified ? (
         <section className="w-full">
           <APIItem name="web" apiDetails={planDetials.web} />
-          <APIItem name="instagram" apiDetails={planDetials.instagram} />
           <APIItem name="line" apiDetails={planDetials.line} />
+          <APIItem name="instagram" apiDetails={planDetials.instagram} />
         </section>
       ) : (
         <section className="flex flex-col gap-2">
