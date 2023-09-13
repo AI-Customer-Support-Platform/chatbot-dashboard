@@ -1,18 +1,16 @@
 import classNames from "classnames";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import Skeleton from "react-loading-skeleton";
 
 import CustomButton from "@/components/buttons/CustomButton";
 import { LoadingIcon } from "@/components/icons";
 import useAPI from "@/hooks/useAPI";
-import useCollectionData from "@/hooks/useCollectionData";
 import { TDocumentSegment } from "@/types";
 
 import SegmentCard from "./SegmentCard";
 
 const Correction = () => {
-  const { collectionData } = useCollectionData();
+  const collectionId = localStorage.getItem("collection-id");
   const [question, setQuestion] = useState("");
   const { fetcherQueryDocumentSegments } = useAPI();
   const [documentSegments, setDocumentSegments] = useState<TDocumentSegment[]>(
@@ -22,16 +20,13 @@ const Correction = () => {
   const { t } = useTranslation();
 
   const fetchQueryDocumentSegments = async () => {
-    if (!collectionData || question.trim() === "") {
+    if (!collectionId || question.trim() === "") {
       return;
     }
 
     try {
       setIsLoading(true);
-      const resp = await fetcherQueryDocumentSegments(
-        collectionData?.id,
-        question
-      );
+      const resp = await fetcherQueryDocumentSegments(collectionId, question);
       setDocumentSegments(resp.results[0].results);
     } catch (error) {
       console.error(error);
@@ -54,45 +49,39 @@ const Correction = () => {
 
   return (
     <div>
-      {collectionData ? (
-        <section className="mb-6 flex w-full flex-col items-start rounded-lg border bg-white p-2 transition hover:shadow-md">
-          <label className="mb-1 font-bold" htmlFor="question">
-            {t("Question")}
-          </label>
+      <section className="mb-6 flex w-full flex-col items-start rounded-lg border bg-white p-2 transition hover:shadow-md">
+        <label className="mb-1 font-bold" htmlFor="question">
+          {t("Question")}
+        </label>
 
-          <textarea
-            rows={2}
-            className={classNames(
-              "mb-2 w-full rounded border bg-gray p-1 outline-2 focus-within:bg-white focus-within:outline focus-within:outline-blue-500"
-            )}
-            placeholder={t("Enter your question here")}
-            onChange={(event) => {
-              setQuestion(event.target.value);
-            }}
-            onKeyDown={handleKeyDown}
-            id="question"
-            value={question}
-          />
-
-          {!isLoading ? (
-            <>
-              <CustomButton
-                name={t("Query")}
-                classNames="text-white"
-                handleClick={fetchQueryDocumentSegments}
-              />
-            </>
-          ) : (
-            <div className="animate-spin">
-              <LoadingIcon />
-            </div>
+        <textarea
+          rows={2}
+          className={classNames(
+            "mb-2 w-full rounded border bg-gray p-1 outline-2 focus-within:bg-white focus-within:outline focus-within:outline-blue-500"
           )}
-        </section>
-      ) : (
-        <>
-          <Skeleton className="h-32" />
-        </>
-      )}
+          placeholder={t("Enter your question here")}
+          onChange={(event) => {
+            setQuestion(event.target.value);
+          }}
+          onKeyDown={handleKeyDown}
+          id="question"
+          value={question}
+        />
+
+        {!isLoading ? (
+          <>
+            <CustomButton
+              name={t("Query")}
+              classNames="text-white"
+              handleClick={fetchQueryDocumentSegments}
+            />
+          </>
+        ) : (
+          <div className="animate-spin">
+            <LoadingIcon />
+          </div>
+        )}
+      </section>
 
       {documentSegments.length !== 0 && (
         <section>
