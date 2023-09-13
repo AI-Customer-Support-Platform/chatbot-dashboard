@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 
 import { DeleteIcon } from "@/components/icons";
 import PortalModalCenter from "@/components/portalDialog/PortalModalCenter";
@@ -21,7 +19,6 @@ const DocumentCard: React.FC<DocumentCardProps> = ({
 }) => {
   const [isOpenDeleteDocumentModal, setIsOpenDeleteDocumentModal] =
     useState(false);
-  const { t } = useTranslation();
 
   const handleClickDeleteDocumentButton = () => {
     setIsOpenDeleteDocumentModal(true);
@@ -36,11 +33,12 @@ const DocumentCard: React.FC<DocumentCardProps> = ({
           {calculateTimeDifference(document.created_at)} ago
         </span>
         <div className="flex items-end gap-4">
-          <section className="rounded-md border bg-stone-500 px-1 text-white hover:bg-stone-600">
+          {/* <section className="rounded-md border bg-stone-500 px-1 text-white hover:bg-stone-600">
             <Link to={`${document.id}/segments`}>
               {t("Add segments manually")}
             </Link>
-          </section>
+          </section> */}
+
           <section className="flex items-end">
             <button
               className="text-red-300 hover:text-red-600"

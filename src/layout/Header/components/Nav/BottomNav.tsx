@@ -11,7 +11,7 @@ const BottomNav = () => {
   const configPaths = [
     `/config/${collectionId}`,
     `/config/${collectionId}/${documentId}/segments`,
-    `/config/${collectionId}/correction`,
+    // `/config/${collectionId}/correction`,
     `/config/${collectionId}/api`,
     `/config/${collectionId}/api/web`,
     `/config/${collectionId}/api/line`,
@@ -33,10 +33,10 @@ const BottomNav = () => {
         {isConfigPath && (
           <>
             <NavItem name={t("Documents")} path={`/config/${collectionId}`} />
-            <NavItem
+            {/* <NavItem
               name={t("Correction")}
               path={`/config/${collectionId}/correction`}
-            />
+            /> */}
             <NavItem name="API" path={`/config/${collectionId}/api`} />
             <NavItem
               name={t("Settings")}

@@ -7,9 +7,7 @@ import CollectionAPI from "@/pages/Config/CollectionAPI/CollectionAPI";
 import InstagramAPI from "@/pages/Config/CollectionAPI/components/InstagramAPI";
 import LineAPI from "@/pages/Config/CollectionAPI/components/LineAPI";
 import WebAPI from "@/pages/Config/CollectionAPI/components/WebAPI";
-import Correction from "@/pages/Config/Correction/Correction";
 import Documents from "@/pages/Config/Documents/Documents";
-import UploadSegments from "@/pages/Config/Documents/UploadSegments";
 import Settings from "@/pages/Config/Settings/Settings";
 import APIs from "@/pages/Home/APIs/APIs";
 import Collections from "@/pages/Home/Collections/Collections";
@@ -41,10 +39,10 @@ const router = createBrowserRouter([
             path: "",
             element: <Documents />,
           },
-          {
-            path: "correction",
-            element: <Correction />,
-          },
+          // {
+          //   path: "correction",
+          //   element: <Correction />,
+          // },
           {
             path: "api",
             element: <CollectionAPI />,
@@ -67,10 +65,10 @@ const router = createBrowserRouter([
           },
         ],
       },
-      {
-        path: "/config/:collectionId/:documentId/segments",
-        element: <UploadSegments />,
-      },
+      // {
+      //   path: "/config/:collectionId/:documentId/segments",
+      //   element: <UploadSegments />,
+      // },
       {
         path: "login",
         element: <Login />,
