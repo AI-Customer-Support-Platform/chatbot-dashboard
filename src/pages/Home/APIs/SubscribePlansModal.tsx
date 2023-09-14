@@ -87,7 +87,11 @@ const PlanCard: React.FC<PlanCardProps> = ({ api, plan, price, features }) => {
 
     try {
       setIsLoading(true);
-      const response = await fetcherSubscribePlan(api, plan, window.origin);
+      const response = await fetcherSubscribePlan(
+        api,
+        plan,
+        window.location.href
+      );
       window.location.href = response.url;
     } catch (error) {
       toast.error(t("Something went wrong"));
