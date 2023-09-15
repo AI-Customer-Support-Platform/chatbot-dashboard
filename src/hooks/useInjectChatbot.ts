@@ -4,11 +4,11 @@ const useInjectChatbot = () => {
   const script: HTMLScriptElement = document.createElement("script");
   script.type = "module";
   script.crossOrigin = "true";
-  script.src = "https://chatbot-web-dev.vercel.app/chatgptb.js";
+  script.src = import.meta.env.VITE_CHATBOT_JS_URL;
 
   const link: HTMLLinkElement = document.createElement("link");
   link.rel = "stylesheet";
-  link.href = "https://chatbot-web-dev.vercel.app/chatgptb.css";
+  link.href = import.meta.env.VITE_CHATBOT_CSS_URL;
 
   const handleInjectChatbot = useCallback((): void => {
     const head = document.head;
