@@ -129,7 +129,7 @@ const UnOrSubscribeButton: React.FC<SubscribeButtonProps> = ({
         <>
           <button
             onClick={handleClickSubsribe}
-            className="rounded-lg border bg-white px-1 text-sm text-slate-500 transition duration-200 hover:scale-105 hover:border-2 hover:border-blue-400 hover:font-bold hover:text-blue-500 active:scale-110 "
+            className="rounded-lg border border-blue-400 bg-white px-1 text-sm text-blue-500 transition duration-200 hover:scale-105 hover:border-2 hover:font-bold active:scale-110 "
           >
             {t("Subscribe")}
           </button>
