@@ -33,6 +33,7 @@
   "Plus": "Plus",
   "Premium": "Premium",
   "month": "month",
+  "After subscribing to a plan, it will temporarily not be possible to change the plan type.": "After subscribing to a plan, it will temporarily not be possible to change the plan type.",
 
   "AccessToApi": "Access to {{api}} API",
   "TokensAllocated": "{{tokens}} tokens allocated",

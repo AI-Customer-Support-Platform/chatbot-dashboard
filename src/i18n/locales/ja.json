@@ -33,6 +33,7 @@
   "Plus": "スタンダードプラン",
   "Premium": "プレミアムプラン",
   "month": "月",
+  "After subscribing to a plan, it will temporarily not be possible to change the plan type.": "プランを購読した後、一時的にプランの種類を変更することはできません。",
 
   "AccessToApi": "{{api}} APIにアクセス",
   "TokensAllocated": "{{tokens}} トークン割り当て",

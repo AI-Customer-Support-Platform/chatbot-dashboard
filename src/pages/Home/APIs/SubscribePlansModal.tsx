@@ -60,6 +60,13 @@ const SubscribePlansModal: React.FC<SubscribePlansModalProps> = ({
       title={uppercaseFirstLetter(api) + ` API ` + t("Plans")}
       setIsShow={setIsShow}
     >
+      <section className="mb-2">
+        <p className="font-bold text-red-600">
+          {t(
+            "After subscribing to a plan, it will temporarily not be possible to change the plan type."
+          )}
+        </p>
+      </section>
       <section className="flex flex-wrap justify-center gap-4 font-lato">
         {plans.map((plan) => (
           <PlanCard key={plan.plan} api={api} {...plan} />
@@ -105,6 +112,7 @@ const PlanCard: React.FC<PlanCardProps> = ({ api, plan, price, features }) => {
       <h2 className="mb-2 text-xl font-bold">
         {t(uppercaseFirstLetter(plan))}
       </h2>
+
       <section className="mb-4">
         <span className="font-inter text-3xl font-extrabold ">
           {price.toLocaleString()}¥
