@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
-import { Link } from "react-router-dom";
 
 import CustomButton from "@/components/buttons/CustomButton";
 import useCollectionData from "@/hooks/useCollectionData";
@@ -29,7 +28,7 @@ const CollectionAPI = () => {
               name="Web"
               classNames="text-white bg-blue-500"
             />
-            <Link to={`/config/${collectionData.id}/api/line`}>
+            {/* <Link to={`/config/${collectionData.id}/api/line`}>
               <CustomButton name="LINE" classNames="text-white bg-green-500" />
             </Link>
             <Link to={`/config/${collectionData.id}/api/instagram`}>
@@ -37,7 +36,7 @@ const CollectionAPI = () => {
                 name="Instagram"
                 classNames="text-white bg-pink-500"
               />
-            </Link>
+            </Link> */}
           </div>
         </section>
       ) : (
@@ -49,12 +48,12 @@ const CollectionAPI = () => {
             <section className="w-12">
               <Skeleton className="text-3xl" />
             </section>
-            <section className="w-12">
+            {/* <section className="w-12">
               <Skeleton className="text-3xl" />
             </section>
             <section className="w-24">
               <Skeleton className="text-3xl" />
-            </section>
+            </section> */}
           </div>
         </section>
       )}
